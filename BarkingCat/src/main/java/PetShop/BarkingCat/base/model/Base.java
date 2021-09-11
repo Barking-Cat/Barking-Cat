@@ -22,7 +22,7 @@ abstract public class Base {
     }
 
     @PreUpdate
-    public void update() {
+    private void update() {
         this.updatedDateTime = LocalDateTime.now();
     }
 }
