@@ -1,6 +1,6 @@
 package PetShop.BarkingCat.member.model;
 
-import PetShop.BarkingCat.base.Base;
+import PetShop.BarkingCat.base.model.Base;
 
 import javax.persistence.*;
 
@@ -9,7 +9,8 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Member extends Base {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
 
@@ -18,4 +19,13 @@ public abstract class Member extends Base {
     private String password;
 
     private String phone;
+
+    public Member() {
+    }
+
+    public Member(String email, String password, String phone) {
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+    }
 }

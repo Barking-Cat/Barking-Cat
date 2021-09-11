@@ -1,7 +1,7 @@
 package PetShop.BarkingCat.Board.model;
 
 
-import PetShop.BarkingCat.base.Base;
+import PetShop.BarkingCat.base.model.Base;
 
 import javax.persistence.*;
 
@@ -11,11 +11,12 @@ import static javax.persistence.FetchType.LAZY;
 public class Comment extends Base {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")
     private Long id;
 
     @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "board_id")
     private Board board;
 
     private Long memberId;

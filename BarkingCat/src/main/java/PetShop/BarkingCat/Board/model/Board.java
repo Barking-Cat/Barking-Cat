@@ -1,9 +1,10 @@
 package PetShop.BarkingCat.Board.model;
 
-import PetShop.BarkingCat.base.AnimalType;
-import PetShop.BarkingCat.base.Base;
-import PetShop.BarkingCat.base.Region;
-import PetShop.BarkingCat.base.Sex;
+import PetShop.BarkingCat.base.infra.Money;
+import PetShop.BarkingCat.base.model.enums.AnimalType;
+import PetShop.BarkingCat.base.model.Base;
+import PetShop.BarkingCat.base.model.enums.Region;
+import PetShop.BarkingCat.base.model.enums.Sex;
 
 import javax.persistence.*;
 
@@ -14,12 +15,14 @@ import static javax.persistence.FetchType.LAZY;
 
 @Entity
 public class Board extends Base {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "board_id")
     private Long id;
 
     @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "category_id")
     private Category category;
 
     private Long memberId;
@@ -37,14 +40,15 @@ public class Board extends Base {
     @Enumerated(EnumType.STRING)
     private Sex sex;
 
-    private BigDecimal price;
+    private Money price;
 
     private LocalDateTime dueDate;
 
-    @Embedded
-    private Photos photos;
+    public Board() {
 
-    public Board(Category category, Long memberId, String title, String content, Region region, AnimalType animalType, Sex sex, BigDecimal price) {
+    }
+
+    public Board(Category category, Long memberId, String title, String content, Region region, AnimalType animalType, Sex sex, Money price) {
         this.category = category;
         this.memberId = memberId;
         this.title = title;

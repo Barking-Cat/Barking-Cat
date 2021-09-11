@@ -1,16 +1,14 @@
 package PetShop.BarkingCat.Board.model;
 
-import PetShop.BarkingCat.base.Base;
+import PetShop.BarkingCat.base.model.Base;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Category extends Base {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
     private Long id;
 

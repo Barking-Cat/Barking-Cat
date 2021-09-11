@@ -1,4 +1,4 @@
-package PetShop.BarkingCat.base;
+package PetShop.BarkingCat.base.model;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PreUpdate;
