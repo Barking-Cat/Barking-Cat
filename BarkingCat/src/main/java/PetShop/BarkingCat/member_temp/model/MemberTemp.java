@@ -1,6 +1,8 @@
 package PetShop.BarkingCat.member_temp.model;
 
 import PetShop.BarkingCat.base.model.Base;
+import PetShop.BarkingCat.member.model.NormalMember;
+import lombok.Builder;
 
 import javax.persistence.*;
 
@@ -27,5 +29,9 @@ public abstract class MemberTemp extends Base {
         this.email = email;
         this.password = password;
         this.phone = phone;
+    }
+
+    protected NormalMember createNormalMember(String name) {
+        return new NormalMember(email, password, phone, name);
     }
 }
