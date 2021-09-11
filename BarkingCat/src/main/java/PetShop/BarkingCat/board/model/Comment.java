@@ -1,4 +1,4 @@
-package PetShop.BarkingCat.Board.model;
+package PetShop.BarkingCat.board.model;
 
 
 import PetShop.BarkingCat.base.model.Base;

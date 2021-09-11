@@ -1,4 +1,4 @@
-package PetShop.BarkingCat.Board.model;
+package PetShop.BarkingCat.board.model;
 
 import PetShop.BarkingCat.base.infra.Money;
 import PetShop.BarkingCat.base.model.enums.AnimalType;
@@ -8,7 +8,6 @@ import PetShop.BarkingCat.base.model.enums.Sex;
 
 import javax.persistence.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static javax.persistence.FetchType.LAZY;
