@@ -15,7 +15,10 @@ public class RequestForm {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "board_id")
     private Board board;
+
+    private Long writer_id;
 
     @Enumerated(EnumType.STRING)
     private Earning earning;
