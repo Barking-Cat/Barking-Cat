@@ -1,0 +1,5 @@
+package PetShop.BarkingCat.base;
+
+public enum Earn {
+    ONEHUNDRED,TWOHUNDRED,THREEHUNDRED,FOURHUNDRED,FIVEHUNDRED
+}
