@@ -20,5 +20,7 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         cache: gradle
+    - name: Grant execute permission for gradlew
+      run: chmod +x BarkingCat/gradlew
     - name: Build with Gradle
       run: BarkingCat/gradlew buildchmod
