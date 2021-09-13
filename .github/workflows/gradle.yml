@@ -22,5 +22,7 @@ jobs:
         cache: gradle
     - name: Enter Repository
       run: cd BarkingCat/
+    - name: Show Current
+      run: ls
     - name: Build with Gradle
       run: ./gradlew build
