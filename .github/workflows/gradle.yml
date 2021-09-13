@@ -27,5 +27,9 @@ jobs:
         cd BarkingCat
         sudo ./gradlew build
     - name: Build Docker Image
-      run: |
-        run: docker build --tag app .
+      uses: mr-smithers-excellent/docker-build-push@v5
+      with:
+        image: rkdals213/barking-cat
+        registry: docker.io
+        username: ${{ secrets.DOCKER_ID }}
+        password: ${{ secrets.DOCKER_PW }}
