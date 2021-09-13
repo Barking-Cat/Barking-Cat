@@ -21,7 +21,7 @@ jobs:
         distribution: 'adopt'
         cache: gradle
     - name: Enter Repository
-      run: cd BarkingCat/
+      run: cd BarkingCat/BarkingCat
     - name: Show Current
       run: ls
     - name: Build with Gradle
