@@ -26,3 +26,13 @@ jobs:
       run: |
         cd BarkingCat
         sudo ./gradlew build
+    - name: Build Docker Image
+      run: |
+        cd BarkingCat
+        run: docker build --tag app .
+    - name: Upload to Registry
+      uses: rkdals213/barking-cat@master
+      with:
+        name: rkdals213/barking-cat
+        username: rkdals213
+        password: matthew21
