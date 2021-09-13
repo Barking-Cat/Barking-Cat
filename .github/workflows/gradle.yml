@@ -33,6 +33,6 @@ jobs:
       with:
         image: rkdals213/barking-cat
         registry: docker.io
-        tag: rkdals213/barking-cat
+        tags: rkdals213/barking-cat
         username: ${{ secrets.DOCKER_ID }}
         password: ${{ secrets.DOCKER_PW }}
