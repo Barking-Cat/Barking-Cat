@@ -20,6 +20,8 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         cache: gradle
+    - name: Enter Repository
+      run: cd BarkingCat/
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
