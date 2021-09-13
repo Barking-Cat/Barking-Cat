@@ -34,5 +34,5 @@ jobs:
       uses: rkdals213/barking-cat@master
       with:
         name: rkdals213/barking-cat
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-        ssh-passphrase: ${{ secrets.SSH_PASSPHRASE }}
+        ssh-private-key: ${{ secrets.DOCKER_ID }}
+        ssh-passphrase: ${{ secrets.DOCKER_PW }}
