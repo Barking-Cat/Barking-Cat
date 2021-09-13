@@ -28,5 +28,4 @@ jobs:
         sudo ./gradlew build
     - name: Build Docker Image
       run: |
-        cd BarkingCat
         run: docker build --tag app .
