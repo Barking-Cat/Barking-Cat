@@ -25,4 +25,4 @@ jobs:
     - name: Build with Gradle
       run: |
         cd BarkingCat
-        sudo ./gradlew buildchmod
+        sudo ./gradlew build
