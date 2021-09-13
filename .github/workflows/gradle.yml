@@ -20,11 +20,5 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         cache: gradle
-    - name: Show Current
-      run: ls
-    - name: Enter Repository
-      run: cd BarkingCat
-    - name: Show Current2
-      run: ls
     - name: Build with Gradle
-      run: ./gradlew build
+      run: BarkingCat/gradlew buildchmod
