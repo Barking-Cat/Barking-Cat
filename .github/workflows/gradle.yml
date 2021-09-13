@@ -20,9 +20,11 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         cache: gradle
-    - name: Enter Repository
-      run: cd BarkingCat/BarkingCat
     - name: Show Current
+      run: ls
+    - name: Enter Repository
+      run: cd BarkingCat
+    - name: Show Current2
       run: ls
     - name: Build with Gradle
       run: ./gradlew build
