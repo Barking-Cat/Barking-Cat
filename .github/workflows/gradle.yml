@@ -33,5 +33,5 @@ jobs:
       with:
         image: rkdals213/barking-cat
         registry: docker.io
-        username: rkdals213
-        password: matthew21
+        username: ${{ secrets.DOCKER_ID }}
+        password: ${{ secrets.DOCKER_PW }}
