@@ -22,7 +22,7 @@ jobs:
         cache: gradle
     - name: Grant execute permission for gradlew
       run: chmod +x BarkingCat/gradlew
-    - name: Clear Build
-      run: sudo BarkingCat/gradle clean
     - name: Build with Gradle
-      run: sudo BarkingCat/gradlew buildchmod
+      run: |
+        cd BarkingCat
+        sudo ./gradlew buildchmod
