@@ -30,9 +30,3 @@ jobs:
       run: |
         cd BarkingCat
         run: docker build --tag app .
-    - name: Upload to Registry
-      uses: rkdals213/barking-cat@master
-      with:
-        name: rkdals213/barking-cat
-        ssh-private-key: ${{ secrets.DOCKER_ID }}
-        ssh-passphrase: ${{ secrets.DOCKER_PW }}
