@@ -50,7 +50,6 @@ jobs:
           password: ${{ secrets.DOCKER_PW }}
       - name: Docker run
         run: |
-          chmod 777 /var/run/docker.sock
           sudo docker ps -q --filter "name=rkdals213/barking-cat" | grep -q . && docker stop rkdals213/barking-cat && docker rm -fv rkdals213/barking-cat
           sudo docker run -d -p 8080:8080 --name rkdals213/barking-cat --restart always rkdals213/barking-cat:latest
     
