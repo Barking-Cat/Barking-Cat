@@ -8,6 +8,6 @@ public class TestController {
 
     @GetMapping("/heartbeat")
     public String heartbeat() {
-        return "HI7";
+        return "HI8";
     }
 }
