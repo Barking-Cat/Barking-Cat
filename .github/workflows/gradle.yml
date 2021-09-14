@@ -50,6 +50,6 @@ jobs:
           password: ${{ secrets.DOCKER_PW }}
       - name: Docker run
         run: |
-          docker ps -q --filter "name=barking-cat" | grep -q . && docker stop barking-cat && docker rm -fv barking-cat
+          docker stop barking-cat && docker rm -fv barking-cat
           docker run -d -p 8080:8080 --name barking-cat --restart always rkdals213/barking-cat:latest
           
