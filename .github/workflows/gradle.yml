@@ -34,6 +34,28 @@ jobs:
         registry: docker.io
         username: ${{ secrets.DOCKER_ID }}
         password: ${{ secrets.DOCKER_PW }}
+    - name: Set up MySQL
+        # You may pin to the exact commit or the version.
+        # uses: mirromutth/mysql-action@de1fba8b3f90ce8db80f663a7043be3cf3231248
+      uses: mirromutth/mysql-action@v1.1
+      with:
+        # The port of host
+        host port: 3306
+        # The port of container
+        container port: 3306
+        # --character-set-server - The character set of MySQL server
+        character set server: utf8mb4
+        # --collation-server - The character collation of MySQL server
+        collation server: utf8mb4_general_ci
+        # Version of MySQL to use
+        mysql version: latest
+        # MYSQL_ROOT_PASSWORD - root superuser password
+        mysql root password: 1234
+        # MYSQL_DATABASE - name for the default database that is created
+
+    
+    
+    
         
   deploy:
     needs: CI
