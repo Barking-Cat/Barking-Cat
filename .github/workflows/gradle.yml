@@ -11,6 +11,8 @@ jobs:
   CI:
     env:
       working-directory: ./BarkingCat
+      DB_ID: ${{secrets.DB_ID}}
+      DB_PW: ${{secrets.DB_PW}}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -25,7 +27,7 @@ jobs:
     - name: Build with Gradle
       run: |
         cd BarkingCat
-        sudo ./gradlew build -Dspring.datasource.username=${{secrets.DB_ID}} -Dspring.datasource.password=${{secrets.DB_PW}}
+        sudo ./gradlew build
     - name: Build Docker Image
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
