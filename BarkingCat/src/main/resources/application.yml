@@ -1,4 +1,7 @@
 spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://database-2.cnplc5iklrxo.ap-northeast-2.rds.amazonaws.com:3306/barking-cat?autoReconnect=true&useUnicode=true&characterEncoding=utf8
   jpa:
     show-sql: true
     properties:
