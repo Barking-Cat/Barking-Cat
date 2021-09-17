@@ -26,9 +26,16 @@ jobs:
     - name: Setup MySQL
       uses: mirromutth/mysql-action@v1.1
       with:
-        mysql database: ${{secrets.DB_URL}}
-        mysql user: ${{secrets.DB_ID}}
-        mysql password: ${{secrets.DB_PW}}
+        # The port of host
+        host port: 3306
+        container port: 3306
+        character set server: utf8mb4
+        collation server: utf8mb4_general_ci
+        mysql version: latest
+        mysql root password: spring.datasource.password=${{secrets.DB_PW}}
+        mysql database: spring.datasource.url=${{secrets.DB_URL}}
+        mysql user: spring.datasource.username=${{secrets.DB_ID}}
+        mysql password: spring.datasource.password=${{secrets.DB_PW}}
     - name: Grant execute permission for gradlew
       run: chmod +x BarkingCat/gradlew
     - name: Build with Gradle
