@@ -33,9 +33,7 @@ jobs:
         collation server: utf8mb4_general_ci
         mysql version: latest
         mysql root password: spring.datasource.password=${{secrets.DB_PW}}
-        mysql database: spring.datasource.url=${{secrets.DB_URL}}
-        mysql user: spring.datasource.username=${{secrets.DB_ID}}
-        mysql password: spring.datasource.password=${{secrets.DB_PW}}
+        mysql database: spring.datasource.url=${{secrets.DB_URL}}        
     - name: Grant execute permission for gradlew
       run: chmod +x BarkingCat/gradlew
     - name: Build with Gradle
