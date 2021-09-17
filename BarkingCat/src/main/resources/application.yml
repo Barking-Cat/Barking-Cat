@@ -1,4 +1,9 @@
 spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ENC(Zy/m+z4TN/8hUy7uWc6C4tepso7fF2RXjVQLxvTO2rFqyIQoFiTjxbrwGsSY2RARKM1w/UZvlAJbvnusob3jGYU4Ufa+dfCLWxhzwvJktyMuoH2vJNYz9rBNs0irewDFF0MPJ+ZuCOxkRBaY7GTnMAF7nV11fDJGL2sAKpb4Iv/WNvTKLuw3U6Y7VUoLU67MQp7FTnLBunxv/mPr5bnykA==)
+    username: ENC(Ek4G/hiS2C/RHfJiB7ZX0g==)
+    password: ENC(hwleFLGEiBbjWDdbujY6/a4mcEf1kPuF)
   jpa:
     show-sql: true
     properties:
@@ -17,3 +22,7 @@ logging:
 server:
   servlet:
     context-path: /api
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
