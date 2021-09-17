@@ -11,6 +11,7 @@ jobs:
   CI:
     env:
       working-directory: ./BarkingCat
+      DB_URL: ${{secrets.DB_URL}}
       DB_ID: ${{secrets.DB_ID}}
       DB_PW: ${{secrets.DB_PW}}
     runs-on: ubuntu-latest
