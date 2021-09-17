@@ -12,7 +12,7 @@ jobs:
     env:
       working-directory: ./BarkingCat
       DB_ID: spring.datasource.username=${{secrets.DB_ID}}
-      DB_PW: spring.datasource.username=${{secrets.DB_PW}}
+      DB_PW: spring.datasource.password=${{secrets.DB_PW}}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
