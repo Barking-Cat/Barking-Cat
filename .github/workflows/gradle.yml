@@ -29,7 +29,7 @@ jobs:
       run: |
         cd BarkingCat
         sudo ./gradlew -D spring.datasource.username=${{secrets.DB_ID}} -D spring.datasource.password=${{secrets.DB_PW}} wrapper
-        sudi ./gradlew build
+        sudo ./gradlew build
     - name: Build Docker Image
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
