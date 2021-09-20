@@ -1,10 +1,10 @@
 package PetShop.BarkingCat.board.model;
 
 import PetShop.BarkingCat.base.infra.Money;
-import PetShop.BarkingCat.base.model.enums.AnimalType;
+import PetShop.BarkingCat.base.model.constants.AnimalType;
 import PetShop.BarkingCat.base.model.Base;
-import PetShop.BarkingCat.base.model.enums.Region;
-import PetShop.BarkingCat.base.model.enums.Sex;
+import PetShop.BarkingCat.base.model.constants.Region;
+import PetShop.BarkingCat.base.model.constants.Sex;
 
 import javax.persistence.*;
 

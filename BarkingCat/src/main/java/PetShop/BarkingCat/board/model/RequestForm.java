@@ -1,7 +1,7 @@
 package PetShop.BarkingCat.board.model;
 
-import PetShop.BarkingCat.base.model.enums.Earning;
-import PetShop.BarkingCat.base.model.enums.Region;
+import PetShop.BarkingCat.base.model.constants.Earning;
+import PetShop.BarkingCat.base.model.constants.Region;
 import PetShop.BarkingCat.base.model.Residence;
 
 import javax.persistence.*;
