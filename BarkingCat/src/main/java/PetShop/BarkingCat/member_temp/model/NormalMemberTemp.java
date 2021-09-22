@@ -1,6 +1,7 @@
 package PetShop.BarkingCat.member_temp.model;
 
 import PetShop.BarkingCat.member.model.NormalMember;
+import lombok.Builder;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -14,12 +15,15 @@ public class NormalMemberTemp extends MemberTemp {
     protected NormalMemberTemp() {
     }
 
-    public NormalMemberTemp(String email, String password, String phone, String name) {
-        super(email, password, phone);
+    @Builder
+    public NormalMemberTemp(Long id, String email, String password, String phone, String name) {
+        super(id, email, password, phone);
         this.name = name;
     }
 
     public NormalMember createNormalMember() {
-        return super.createNormalMember(name);
+        return super.buildNormalMember()
+                .name(name)
+                .build();
     }
 }

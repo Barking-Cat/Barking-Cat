@@ -23,7 +23,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.4'
 	implementation 'org.springframework.boot:spring-boot-starter-web:2.5.4'
 	implementation group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot-starter', version: '3.0.4'
-	implementation 'com.querydsl:querydsl-jpa'
+	implementation 'com.querydsl:querydsl-jpa:5.0.0'
+	implementation 'com.querydsl:querydsl-apt'
+	implementation group: 'com.querydsl', name: 'querydsl-core', version: '5.0.0'
 	compileOnly 'org.projectlombok:lombok:1.18.20'
 	runtimeOnly 'com.h2database:h2:1.4.200'
 	runtimeOnly 'mysql:mysql-connector-java:8.0.25'
@@ -49,4 +51,11 @@ configurations {
 }
 compileQuerydsl {
 	options.annotationProcessorPath = configurations.querydsl
+}
+project.afterEvaluate {
+	project.tasks.compileQuerydsl.options.compilerArgs = [
+			"-proc:only",
+			"-processor", project.querydsl.processors() +
+					',lombok.launch.AnnotationProcessorHider$AnnotationProcessor'
+	]
 }

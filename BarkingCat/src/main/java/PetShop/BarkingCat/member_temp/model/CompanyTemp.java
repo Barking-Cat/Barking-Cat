@@ -1,5 +1,7 @@
 package PetShop.BarkingCat.member_temp.model;
 
+import lombok.Builder;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -14,8 +16,9 @@ public class CompanyTemp extends MemberTemp {
     protected CompanyTemp() {
     }
 
-    public CompanyTemp(String email, String password, String phone, String businessNumber, String businessName) {
-        super(email, password, phone);
+    @Builder
+    public CompanyTemp(Long id, String email, String password, String phone, String businessNumber, String businessName) {
+        super(id, email, password, phone);
         this.businessNumber = businessNumber;
         this.businessName = businessName;
     }

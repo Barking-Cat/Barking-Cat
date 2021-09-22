@@ -28,4 +28,11 @@ public abstract class Member extends Base {
         this.password = password;
         this.phone = phone;
     }
+
+    public Member(Long id, String email, String password, String phone) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+    }
 }

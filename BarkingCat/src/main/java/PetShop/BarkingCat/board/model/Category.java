@@ -1,6 +1,7 @@
 package PetShop.BarkingCat.board.model;
 
 import PetShop.BarkingCat.base.model.Base;
+import lombok.Builder;
 
 import javax.persistence.*;
 
@@ -17,7 +18,9 @@ public class Category extends Base {
     protected Category() {
     }
 
-    public Category(String name) {
+    @Builder
+    public Category(Long id, String name) {
+        this.id = id;
         this.name = name;
     }
 }

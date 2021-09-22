@@ -14,7 +14,7 @@ class MemberTempTest {
     @DisplayName("임시저장된 NormalMember로 진짜 NormalMember 만들기 성공")
     void createNormalMemberWithNormalMemberTemp() {
         //given
-        NormalMemberTemp normalMemberTemp = aNormalMemberTemp();
+        NormalMemberTemp normalMemberTemp = aNormalMemberTemp().build();
 
         //when
         NormalMember normalMember = normalMemberTemp.createNormalMember();
