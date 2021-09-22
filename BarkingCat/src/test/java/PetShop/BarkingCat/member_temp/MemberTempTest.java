@@ -5,7 +5,7 @@ import PetShop.BarkingCat.member_temp.model.NormalMemberTemp;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static PetShop.BarkingCat.member_temp.Fixtures.aNormalMemberTemp;
+import static PetShop.BarkingCat.fixtures.MemberFixture.aNormalMemberTemp;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MemberTempTest {
