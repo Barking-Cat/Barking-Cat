@@ -2,6 +2,7 @@ package PetShop.BarkingCat.board.model;
 
 
 import PetShop.BarkingCat.base.model.Base;
+import lombok.Builder;
 
 import javax.persistence.*;
 
@@ -26,6 +27,7 @@ public class Comment extends Base {
     protected Comment() {
     }
 
+    @Builder
     public Comment(Board board, Long memberId, String content) {
         this.board = board;
         this.memberId = memberId;

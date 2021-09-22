@@ -1,5 +1,7 @@
 package PetShop.BarkingCat.member.model;
 
+import lombok.Builder;
+
 import javax.persistence.Entity;
 
 @Entity
@@ -13,8 +15,9 @@ public class Shelter extends Member {
 
     }
 
-    public Shelter(String email, String password, String phone, String shelterNumber, String businessName) {
-        super(email, password, phone);
+    @Builder
+    public Shelter(Long id, String email, String password, String phone, String shelterNumber, String businessName) {
+        super(id, email, password, phone);
         this.shelterNumber = shelterNumber;
         this.businessName = businessName;
     }

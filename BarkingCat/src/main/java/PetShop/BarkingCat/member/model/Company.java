@@ -16,8 +16,8 @@ public class Company extends Member {
     }
 
     @Builder
-    public Company(String email, String password, String phone, String businessNumber, String businessName) {
-        super(email, password, phone);
+    public Company(Long id, String email, String password, String phone, String businessNumber, String businessName) {
+        super(id, email, password, phone);
         this.businessNumber = businessNumber;
         this.businessName = businessName;
     }
