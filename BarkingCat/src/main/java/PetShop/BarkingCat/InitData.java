@@ -100,6 +100,7 @@ public class InitData {
 
             RequestForm requestForm = RequestForm.builder()
                     .board(board)
+                    .writerId(1L)
                     .earning(Earning.FOUR_HUNDRED)
                     .residence(new Residence(Residence.ResidenceType.OWNER, 40))
                     .roommateNumber(3)
