@@ -1,12 +1,17 @@
 package PetShop.BarkingCat.base.infra;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Embeddable
 public class Title implements Serializable {
-    private final String title;
+    private String title;
 
     private final static int BASE_LENGTH = 5;
+
+    public Title() {
+    }
 
     public Title(String title) {
         validateTitle(title);

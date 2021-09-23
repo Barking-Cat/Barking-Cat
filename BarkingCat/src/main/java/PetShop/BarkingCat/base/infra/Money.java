@@ -1,15 +1,24 @@
 package PetShop.BarkingCat.base.infra;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Function;
 
+@Embeddable
 public class Money implements Serializable {
     public static final Money ZERO = Money.wons(0);
 
-    private final BigDecimal amount;
+    private BigDecimal amount;
+
+    public Money() {
+    }
+
+    Money(BigDecimal amount) {
+        this.amount = amount;
+    }
 
     public static Money wons(long amount) {
         return new Money(BigDecimal.valueOf(amount));
@@ -23,10 +32,6 @@ public class Money implements Serializable {
         return bags.stream()
                 .map(monetary)
                 .reduce(Money.ZERO, Money::plus);
-    }
-
-    Money(BigDecimal amount) {
-        this.amount = amount;
     }
 
     public Money plus(Money amount) {
@@ -53,7 +58,7 @@ public class Money implements Serializable {
         return amount.compareTo(other.amount) >= 0;
     }
 
-    public BigDecimal getAmount() {
+    public BigDecimal amount() {
         return amount;
     }
 
