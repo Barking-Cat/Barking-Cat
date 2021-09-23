@@ -45,7 +45,11 @@ jobs:
     - name: Build and analyze     
       run: |
         cd BarkingCat
-        sudo ./gradlew -B verify sonar:sonar -Dsonar.projectKey=zion830_sonar-cloud-test -Dsonar.organization=zion830-sonar-cloud-key -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
+        sudo ./gradlew -B verify sonar:sonar \
+         -Dsonar.projectKey=cat:barking \
+         -Dsonar.organization=barking-cat \
+         -Dsonar.host.url=https://sonarcloud.io \
+         -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         
   deploy:
     needs: CI
