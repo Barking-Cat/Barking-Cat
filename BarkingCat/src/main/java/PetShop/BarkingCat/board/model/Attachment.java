@@ -1,6 +1,7 @@
 package PetShop.BarkingCat.board.model;
 
 import PetShop.BarkingCat.base.model.Base;
+import lombok.Builder;
 
 import javax.persistence.*;
 
@@ -21,6 +22,7 @@ public class Attachment extends Base {
     public Attachment() {
     }
 
+    @Builder
     public Attachment(Board board, String url) {
         this.board = board;
         this.url = url;

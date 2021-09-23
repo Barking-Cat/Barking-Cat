@@ -1,28 +1,27 @@
 package PetShop.BarkingCat.base.model;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PreUpdate;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-abstract public class Base {
-
+@EntityListeners(AuditingEntityListener.class)
+abstract public class Base implements Serializable {
+    @CreatedDate
     private LocalDateTime createdDateTime;
 
+    @LastModifiedDate
     private LocalDateTime updatedDateTime;
 
     private LocalDateTime deletedDateTime;
 
-    protected Base() {
-        this.createdDateTime = LocalDateTime.now();
-    }
-
     public void delete() {
         this.deletedDateTime = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    private void update() {
-        this.updatedDateTime = LocalDateTime.now();
     }
 }

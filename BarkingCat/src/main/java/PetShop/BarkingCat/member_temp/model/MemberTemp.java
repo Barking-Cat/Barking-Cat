@@ -25,13 +25,17 @@ public abstract class MemberTemp extends Base {
     public MemberTemp() {
     }
 
-    public MemberTemp(String email, String password, String phone) {
+    public MemberTemp(Long id, String email, String password, String phone) {
+        this.id = id;
         this.email = email;
         this.password = password;
         this.phone = phone;
     }
 
-    protected NormalMember createNormalMember(String name) {
-        return new NormalMember(email, password, phone, name);
+    public NormalMember.NormalMemberBuilder buildNormalMember() {
+        return NormalMember.builder()
+                .email(email)
+                .password(password)
+                .phone(phone);
     }
 }

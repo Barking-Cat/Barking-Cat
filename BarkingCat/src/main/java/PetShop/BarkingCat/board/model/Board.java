@@ -1,13 +1,14 @@
 package PetShop.BarkingCat.board.model;
 
 import PetShop.BarkingCat.base.infra.Money;
-import PetShop.BarkingCat.base.model.enums.AnimalType;
+import PetShop.BarkingCat.base.infra.Title;
 import PetShop.BarkingCat.base.model.Base;
-import PetShop.BarkingCat.base.model.enums.Region;
-import PetShop.BarkingCat.base.model.enums.Sex;
+import PetShop.BarkingCat.base.model.constants.AnimalType;
+import PetShop.BarkingCat.base.model.constants.Region;
+import PetShop.BarkingCat.base.model.constants.Sex;
+import lombok.Builder;
 
 import javax.persistence.*;
-
 import java.time.LocalDateTime;
 
 import static javax.persistence.FetchType.LAZY;
@@ -26,7 +27,7 @@ public class Board extends Base {
 
     private Long memberId;
 
-    private String title;
+    private Title title;
 
     private String content;
 
@@ -47,7 +48,9 @@ public class Board extends Base {
 
     }
 
-    public Board(Category category, Long memberId, String title, String content, Region region, AnimalType animalType, Sex sex, Money price) {
+    @Builder
+    public Board(Long id, Category category, Long memberId, Title title, String content, Region region, AnimalType animalType, Sex sex, Money price, LocalDateTime dueDate) {
+        this.id = id;
         this.category = category;
         this.memberId = memberId;
         this.title = title;
@@ -56,5 +59,6 @@ public class Board extends Base {
         this.animalType = animalType;
         this.sex = sex;
         this.price = price;
+        this.dueDate = dueDate;
     }
 }
