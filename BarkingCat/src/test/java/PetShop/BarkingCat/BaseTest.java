@@ -1,10 +1,10 @@
 package PetShop.BarkingCat;
 
-import PetShop.BarkingCat.board.model.Board;
-import PetShop.BarkingCat.board.repository.BoardRepository;
-import PetShop.BarkingCat.config.JpaConfig;
-import PetShop.BarkingCat.member.model.NormalMember;
-import PetShop.BarkingCat.member.model.QNormalMember;
+import PetShop.BarkingCat.domain.board.model.Board;
+import PetShop.BarkingCat.domain.board.repository.BoardRepository;
+import PetShop.BarkingCat.common.config.JpaConfig;
+import PetShop.BarkingCat.domain.member.model.NormalMember;
+import PetShop.BarkingCat.domain.member.model.QNormalMember;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

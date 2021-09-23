@@ -1,19 +1,19 @@
 package PetShop.BarkingCat;
 
-import PetShop.BarkingCat.base.infra.Money;
-import PetShop.BarkingCat.board.model.Title;
-import PetShop.BarkingCat.base.model.Residence;
-import PetShop.BarkingCat.base.model.constants.AnimalType;
-import PetShop.BarkingCat.base.model.constants.Earning;
-import PetShop.BarkingCat.base.model.constants.Region;
-import PetShop.BarkingCat.base.model.constants.Sex;
-import PetShop.BarkingCat.board.model.Board;
-import PetShop.BarkingCat.board.model.Category;
-import PetShop.BarkingCat.board.model.Comment;
-import PetShop.BarkingCat.board.model.RequestForm;
-import PetShop.BarkingCat.member.model.Company;
-import PetShop.BarkingCat.member.model.NormalMember;
-import PetShop.BarkingCat.member.model.Shelter;
+import PetShop.BarkingCat.common.base.infra.Money;
+import PetShop.BarkingCat.domain.board.model.Title;
+import PetShop.BarkingCat.common.base.model.Residence;
+import PetShop.BarkingCat.common.base.model.constants.AnimalType;
+import PetShop.BarkingCat.common.base.model.constants.Earning;
+import PetShop.BarkingCat.common.base.model.constants.Region;
+import PetShop.BarkingCat.common.base.model.constants.Sex;
+import PetShop.BarkingCat.domain.board.model.Board;
+import PetShop.BarkingCat.domain.board.model.Category;
+import PetShop.BarkingCat.domain.board.model.Comment;
+import PetShop.BarkingCat.domain.board.model.RequestForm;
+import PetShop.BarkingCat.domain.member.model.Company;
+import PetShop.BarkingCat.domain.member.model.NormalMember;
+import PetShop.BarkingCat.domain.member.model.Shelter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

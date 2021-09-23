@@ -1,12 +1,12 @@
 package PetShop.BarkingCat.fixtures;
 
-import PetShop.BarkingCat.base.infra.Money;
-import PetShop.BarkingCat.board.model.Title;
-import PetShop.BarkingCat.base.model.constants.AnimalType;
-import PetShop.BarkingCat.base.model.constants.Region;
-import PetShop.BarkingCat.base.model.constants.Sex;
-import PetShop.BarkingCat.board.model.Board;
-import PetShop.BarkingCat.board.model.Category;
+import PetShop.BarkingCat.common.base.infra.Money;
+import PetShop.BarkingCat.domain.board.model.Title;
+import PetShop.BarkingCat.common.base.model.constants.AnimalType;
+import PetShop.BarkingCat.common.base.model.constants.Region;
+import PetShop.BarkingCat.common.base.model.constants.Sex;
+import PetShop.BarkingCat.domain.board.model.Board;
+import PetShop.BarkingCat.domain.board.model.Category;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
