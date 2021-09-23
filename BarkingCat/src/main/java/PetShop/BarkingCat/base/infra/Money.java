@@ -58,7 +58,7 @@ public class Money implements Serializable {
         return amount.compareTo(other.amount) >= 0;
     }
 
-    public BigDecimal getAmount() {
+    public BigDecimal amount() {
         return amount;
     }
 
