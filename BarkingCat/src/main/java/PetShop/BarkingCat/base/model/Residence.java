@@ -22,7 +22,7 @@ public class Residence {
         this.area = area;
     }
 
-    enum ResidenceType {
+    public enum ResidenceType {
         LEASE, MONTHLY_RENT, OWNER
     }
 }
