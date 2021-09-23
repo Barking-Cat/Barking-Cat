@@ -39,7 +39,8 @@ public class RequestForm {
     }
 
     @Builder
-    public RequestForm(Board board, Earning earning, Residence residence, int roommateNumber, boolean petExist, String adoptReason, Region region) {
+    public RequestForm(Long id, Board board, Earning earning, Residence residence, int roommateNumber, boolean petExist, String adoptReason, Region region) {
+        this.id = id;
         this.board = board;
         this.earning = earning;
         this.residence = residence;
