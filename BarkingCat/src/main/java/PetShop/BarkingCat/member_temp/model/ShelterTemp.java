@@ -2,9 +2,11 @@ package PetShop.BarkingCat.member_temp.model;
 
 import lombok.Builder;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("S")
 public class ShelterTemp extends MemberTemp {
 
     private String shelterNumber;
