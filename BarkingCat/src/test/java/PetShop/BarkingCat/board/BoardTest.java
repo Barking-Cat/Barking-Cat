@@ -1,6 +1,6 @@
 package PetShop.BarkingCat.board;
 
-import PetShop.BarkingCat.base.infra.Title;
+import PetShop.BarkingCat.board.model.Title;
 import PetShop.BarkingCat.fixtures.BoardFixture;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,7 @@
 package PetShop.BarkingCat.fixtures;
 
 import PetShop.BarkingCat.base.infra.Money;
-import PetShop.BarkingCat.base.infra.Title;
+import PetShop.BarkingCat.board.model.Title;
 import PetShop.BarkingCat.base.model.constants.AnimalType;
 import PetShop.BarkingCat.base.model.constants.Region;
 import PetShop.BarkingCat.base.model.constants.Sex;
