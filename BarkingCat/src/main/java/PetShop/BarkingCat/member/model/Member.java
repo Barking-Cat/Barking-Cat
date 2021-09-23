@@ -1,7 +1,6 @@
 package PetShop.BarkingCat.member.model;
 
 import PetShop.BarkingCat.base.model.Base;
-import lombok.Builder;
 
 import javax.persistence.*;
 
