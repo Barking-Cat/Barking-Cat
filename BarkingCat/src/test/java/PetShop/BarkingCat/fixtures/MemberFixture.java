@@ -1,6 +1,6 @@
 package PetShop.BarkingCat.fixtures;
 
-import PetShop.BarkingCat.member_temp.model.NormalMemberTemp;
+import PetShop.BarkingCat.domain.member_temp.model.NormalMemberTemp;
 
 public class MemberFixture {
     public static NormalMemberTemp.NormalMemberTempBuilder aNormalMemberTemp() {
