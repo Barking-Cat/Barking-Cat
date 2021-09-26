@@ -39,16 +39,20 @@ public class Board extends Base {
     @Enumerated(EnumType.STRING)
     private Sex sex;
 
+    private Integer age;
+
     private Money price;
 
     private LocalDateTime dueDate;
+
+    private Tags tags;
 
     public Board() {
 
     }
 
     @Builder
-    public Board(Long id, Category category, Long memberId, Title title, String content, Region region, AnimalType animalType, Sex sex, Money price, LocalDateTime dueDate) {
+    public Board(Long id, Category category, Long memberId, Title title, String content, Region region, AnimalType animalType, Sex sex, Integer age, Money price, LocalDateTime dueDate, Tags tags) {
         this.id = id;
         this.category = category;
         this.memberId = memberId;
@@ -57,7 +61,14 @@ public class Board extends Base {
         this.region = region;
         this.animalType = animalType;
         this.sex = sex;
+        this.age = age;
         this.price = price;
         this.dueDate = dueDate;
+        this.tags = tags;
+    }
+
+    public Board mapCategory(Category category) {
+        this.category = category;
+        return this;
     }
 }
