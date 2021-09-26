@@ -1,5 +1,6 @@
 package PetShop.BarkingCat.domain.board.service.query;
 
+import PetShop.BarkingCat.domain.board.dto.BoardDetailResponse;
 import PetShop.BarkingCat.domain.board.dto.BoardResponse;
 import PetShop.BarkingCat.domain.board.dto.FindBoardCondition;
 import PetShop.BarkingCat.domain.board.repository.BoardRepository;
@@ -19,5 +20,9 @@ public class BoardQueryService {
 
     public Page<BoardResponse> findByCondition(FindBoardCondition findBoardCondition, Pageable pageable) {
         return boardRepository.findByCondition(findBoardCondition, pageable);
+    }
+
+    public BoardDetailResponse findDetail(Long boardId) {
+        return boardRepository.findDetail(boardId);
     }
 }

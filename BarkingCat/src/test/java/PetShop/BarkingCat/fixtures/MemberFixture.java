@@ -1,14 +1,16 @@
 package PetShop.BarkingCat.fixtures;
 
-import PetShop.BarkingCat.domain.member_temp.model.NormalMemberTemp;
+import PetShop.BarkingCat.domain.member.model.Member;
+import PetShop.BarkingCat.domain.member_temp.model.MemberTemp;
 
 public class MemberFixture {
-    public static NormalMemberTemp.NormalMemberTempBuilder aNormalMemberTemp() {
-        return NormalMemberTemp.builder()
+    public static MemberTemp.MemberTempBuilder aMemberTemp() {
+        return MemberTemp.builder()
                 .id(1L)
                 .email("test@test.com")
                 .password("1q2w3e4r")
                 .phone("01000001111")
+                .memberType(Member.MemberType.NORMAL)
                 .name("TESTER");
     }
 }

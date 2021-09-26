@@ -12,7 +12,7 @@ public class Title implements Serializable {
 
     private final static int MAX_LENGTH = 150;
 
-    public Title() {
+    protected Title() {
     }
 
     public Title(String title) {

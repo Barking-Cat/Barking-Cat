@@ -1,12 +1,11 @@
 package PetShop.BarkingCat.domain.member_temp;
 
-import PetShop.BarkingCat.domain.member.model.NormalMember;
-import PetShop.BarkingCat.domain.member_temp.model.NormalMemberTemp;
+import PetShop.BarkingCat.domain.member.model.Member;
+import PetShop.BarkingCat.domain.member_temp.model.MemberTemp;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static PetShop.BarkingCat.fixtures.MemberFixture.aNormalMemberTemp;
-import static org.assertj.core.api.Assertions.assertThat;
+import static PetShop.BarkingCat.fixtures.MemberFixture.aMemberTemp;
 
 class MemberTempTest {
 
@@ -14,10 +13,10 @@ class MemberTempTest {
     @DisplayName("임시저장된 NormalMember로 진짜 NormalMember 만들기 성공")
     void createNormalMemberWithNormalMemberTemp() {
         //given
-        NormalMemberTemp normalMemberTemp = aNormalMemberTemp().build();
+        MemberTemp memberTemp = aMemberTemp().build();
 
         //when
-        NormalMember normalMember = normalMemberTemp.createNormalMember();
+        Member member = memberTemp.createMember();
 
         //then
     }
