@@ -29,7 +29,7 @@ public class JwtServiceTest {
                 //given
                 String token = jwtService.createToken(new LoginForm(), expirationDateTime);
 
-                long expired = expirationDateTime.plusSeconds(duration)
+                long expired = expirationDateTime
                         .toInstant()
                         .getEpochSecond() * 1000;
 
@@ -37,7 +37,7 @@ public class JwtServiceTest {
                 boolean result = jwtService.isUsable(token, expired);
 
                 //then
-                assertThat(result).isFalse();
+                assertThat(result).isTrue();
             }
         }
 
@@ -50,7 +50,7 @@ public class JwtServiceTest {
                 //given
                 String token = jwtService.createToken(new LoginForm(), expirationDateTime);
 
-                long expired = expirationDateTime.plusSeconds(duration)
+                long expired = expirationDateTime
                         .plusSeconds(100)
                         .toInstant()
                         .getEpochSecond() * 1000;
