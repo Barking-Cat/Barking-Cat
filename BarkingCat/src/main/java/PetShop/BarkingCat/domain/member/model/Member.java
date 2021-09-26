@@ -1,13 +1,12 @@
 package PetShop.BarkingCat.domain.member.model;
 
 import PetShop.BarkingCat.common.base.model.Base;
+import lombok.Builder;
 
 import javax.persistence.*;
 
 @Entity
-@DiscriminatorColumn(name = "dtype")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Member extends Base {
+public class Member extends Base {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,13 +19,27 @@ public abstract class Member extends Base {
 
     private String phone;
 
+    private MemberType memberType;
+
+    private String name;
+
+    private String businessNumber;
+
     public Member() {
     }
 
-    public Member(Long id, String email, String password, String phone) {
+    @Builder
+    public Member(Long id, String email, String password, String phone, MemberType memberType, String name, String businessNumber) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.phone = phone;
+        this.memberType = memberType;
+        this.name = name;
+        this.businessNumber = businessNumber;
+    }
+
+    public enum MemberType {
+        NORMAL, COMPANY, SHELTER
     }
 }

@@ -28,11 +28,11 @@ public class BoardDetailResponse {
     private final Money price;
     private final LocalDateTime dueDate;
     private final Tags tags;
-    private String memberEmail;
-    private String memberPhone;
-    private String memberName;
+    private final String memberEmail;
+    private final String memberPhone;
+    private final String memberName;
 
-    public BoardDetailResponse(Long boardId, Long categoryId, Long memberId, Title title, String content, Region region, AnimalType animalType, Sex sex, Integer age, Money price, LocalDateTime dueDate, Tags tags) {
+    public BoardDetailResponse(Long boardId, Long categoryId, Long memberId, Title title, String content, Region region, AnimalType animalType, Sex sex, Integer age, Money price, LocalDateTime dueDate, Tags tags, String memberEmail, String memberPhone, String memberName) {
         this.boardId = boardId;
         this.categoryId = categoryId;
         this.memberId = memberId;
@@ -45,6 +45,9 @@ public class BoardDetailResponse {
         this.price = price;
         this.dueDate = dueDate;
         this.tags = tags;
+        this.memberEmail = memberEmail;
+        this.memberPhone = memberPhone;
+        this.memberName = memberName;
     }
 
     public String getTitle() {

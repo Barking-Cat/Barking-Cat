@@ -9,9 +9,7 @@ import PetShop.BarkingCat.common.base.model.constants.Region;
 import PetShop.BarkingCat.common.base.model.constants.Sex;
 import PetShop.BarkingCat.domain.board.model.objects.Tags;
 import PetShop.BarkingCat.domain.board.model.objects.Title;
-import PetShop.BarkingCat.domain.member.model.Company;
-import PetShop.BarkingCat.domain.member.model.NormalMember;
-import PetShop.BarkingCat.domain.member.model.Shelter;
+import PetShop.BarkingCat.domain.member.model.Member;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,34 +40,15 @@ public class InitData {
 
         @Transactional
         public void init() {
-            NormalMember normalMember = NormalMember.builder()
+            Member member = Member.builder()
                     .email("test@naver.com")
                     .password("1q2w3e4r")
                     .phone("010-0000-0000")
+                    .memberType(Member.MemberType.NORMAL)
                     .name("Tester")
                     .build();
 
-            em.persist(normalMember);
-
-            Company company = Company.builder()
-                    .email("company@gmail.com")
-                    .password("1q2w3e4r")
-                    .phone("010-1111-1111")
-                    .businessName("Company Tester")
-                    .businessNumber("139WE9HJD0-E13")
-                    .build();
-
-            em.persist(company);
-
-            Shelter shelter = Shelter.builder()
-                    .email("shelter@nate.com")
-                    .password("1q2w3e4r")
-                    .phone("010-2222-2222")
-                    .businessName("Shelter Tester")
-                    .shelterNumber("1R93USAF-11F3913T")
-                    .build();
-
-            em.persist(shelter);
+            em.persist(member);
 
             Category category = new Category(null, "Test Category");
             em.persist(category);

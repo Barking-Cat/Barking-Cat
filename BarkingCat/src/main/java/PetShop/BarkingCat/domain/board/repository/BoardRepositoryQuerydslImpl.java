@@ -80,10 +80,15 @@ public class BoardRepositoryQuerydslImpl implements BoardRepositoryQuerydsl {
                                 board.age,
                                 board.price,
                                 board.dueDate,
-                                board.tags
+                                board.tags,
+                                member.email,
+                                member.phone,
+                                member.name
                         )
                 )
                 .from(board)
+                .join(member)
+                .on(board.memberId.eq(member.id))
                 .where(
                         isNotDeleted(),
                         boardIdEq(boardId)
