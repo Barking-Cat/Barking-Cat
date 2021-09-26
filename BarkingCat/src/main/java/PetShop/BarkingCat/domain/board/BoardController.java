@@ -25,6 +25,11 @@ public class BoardController {
         return ResponseEntity.ok(boardQueryService.findByCondition(findBoardCondition, pageable));
     }
 
+    @GetMapping("/{boardId}")
+    public ResponseEntity<?> findDetail(@PathVariable Long boardId) {
+        return ResponseEntity.ok(boardQueryService.findDetail(boardId));
+    }
+
     @PostMapping
     public ResponseEntity<?> registerBoard(@RequestBody BoardForm boardForm) {
         boardService.registerBoard(boardForm);

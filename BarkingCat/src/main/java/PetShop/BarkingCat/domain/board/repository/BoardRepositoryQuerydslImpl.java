@@ -3,6 +3,7 @@ package PetShop.BarkingCat.domain.board.repository;
 import PetShop.BarkingCat.common.base.model.constants.AnimalType;
 import PetShop.BarkingCat.common.base.model.constants.Region;
 import PetShop.BarkingCat.common.base.model.constants.Sex;
+import PetShop.BarkingCat.domain.board.dto.BoardDetailResponse;
 import PetShop.BarkingCat.domain.board.dto.BoardResponse;
 import PetShop.BarkingCat.domain.board.dto.FindBoardCondition;
 import PetShop.BarkingCat.domain.board.model.Board;
@@ -17,6 +18,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import static PetShop.BarkingCat.domain.board.model.QBoard.board;
+import static PetShop.BarkingCat.domain.member.model.QMember.member;
 
 public class BoardRepositoryQuerydslImpl implements BoardRepositoryQuerydsl {
 
@@ -62,6 +64,39 @@ public class BoardRepositoryQuerydslImpl implements BoardRepositoryQuerydsl {
                 .fetch();
 
         return new PageImpl<>(responses, pageable, responses.size());
+    }
+
+    @Override
+    public BoardDetailResponse findDetail(Long boardId) {
+        return query.select(Projections.constructor(BoardDetailResponse.class,
+                                board.id,
+                                board.category.id,
+                                board.memberId,
+                                board.title,
+                                board.content,
+                                board.region,
+                                board.animalType,
+                                board.sex,
+                                board.age,
+                                board.price,
+                                board.dueDate,
+                                board.tags
+                        )
+                )
+                .from(board)
+                .where(
+                        isNotDeleted(),
+                        boardIdEq(boardId)
+                )
+                .fetchFirst();
+    }
+
+    private BooleanExpression boardIdEq(Long boardId) {
+        if (boardId == null) {
+            return null;
+        }
+
+        return board.id.eq(boardId);
     }
 
     private BooleanExpression animalTypeEq(AnimalType animalType) {
