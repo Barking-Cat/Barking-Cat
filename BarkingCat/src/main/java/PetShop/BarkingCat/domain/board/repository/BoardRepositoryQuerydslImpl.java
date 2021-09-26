@@ -46,7 +46,8 @@ public class BoardRepositoryQuerydslImpl implements BoardRepositoryQuerydsl {
                                 board.sex,
                                 board.age,
                                 board.price,
-                                board.dueDate
+                                board.dueDate,
+                                board.tags
                         )
                 )
                 .from(board)

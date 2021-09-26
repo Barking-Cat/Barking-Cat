@@ -27,4 +27,8 @@ public class Tags {
     public Tags(List<Tag> tags) {
         this.tags = tags;
     }
+
+    public List<Tag> content() {
+        return tags;
+    }
 }
