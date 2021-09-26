@@ -1,7 +1,7 @@
 package PetShop.BarkingCat.common;
 
 import PetShop.BarkingCat.common.base.converter.TagConverter;
-import PetShop.BarkingCat.domain.board.model.Tag;
+import PetShop.BarkingCat.domain.board.model.objects.Tag;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

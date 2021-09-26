@@ -1,4 +1,4 @@
-package PetShop.BarkingCat.domain.board.model;
+package PetShop.BarkingCat.domain.board.model.objects;
 
 import java.util.Objects;
 

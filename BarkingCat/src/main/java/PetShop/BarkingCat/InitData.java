@@ -7,6 +7,8 @@ import PetShop.BarkingCat.common.base.model.constants.AnimalType;
 import PetShop.BarkingCat.common.base.model.constants.Earning;
 import PetShop.BarkingCat.common.base.model.constants.Region;
 import PetShop.BarkingCat.common.base.model.constants.Sex;
+import PetShop.BarkingCat.domain.board.model.objects.Tags;
+import PetShop.BarkingCat.domain.board.model.objects.Title;
 import PetShop.BarkingCat.domain.member.model.Company;
 import PetShop.BarkingCat.domain.member.model.NormalMember;
 import PetShop.BarkingCat.domain.member.model.Shelter;
@@ -96,7 +98,7 @@ public class InitData {
 
             em.persist(comment);
 
-            RequestForm requestForm = RequestForm.builder()
+            AdoptRequest adoptRequest = AdoptRequest.builder()
                     .board(board)
                     .writerId(1L)
                     .earning(Earning.FOUR_HUNDRED)
@@ -107,7 +109,7 @@ public class InitData {
                     .region(Region.SEOUL)
                     .build();
 
-            em.persist(requestForm);
+            em.persist(adoptRequest);
         }
     }
 }

@@ -1,6 +1,6 @@
 //package PetShop.BarkingCat.common.base.converter;
 //
-//import PetShop.BarkingCat.domain.board.model.Title;
+//import PetShop.BarkingCat.domain.board.model.objects.Title;
 //
 //import javax.persistence.AttributeConverter;
 //import javax.persistence.Converter;

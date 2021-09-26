@@ -1,6 +1,6 @@
 package PetShop.BarkingCat.common.base.converter;
 
-import PetShop.BarkingCat.domain.board.model.Tag;
+import PetShop.BarkingCat.domain.board.model.objects.Tag;
 
 import javax.persistence.AttributeConverter;
 import java.util.ArrayList;

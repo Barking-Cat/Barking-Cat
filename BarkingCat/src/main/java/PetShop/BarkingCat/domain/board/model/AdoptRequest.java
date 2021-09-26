@@ -9,11 +9,11 @@ import lombok.Builder;
 import javax.persistence.*;
 
 @Entity
-public class RequestForm extends Base {
+public class AdoptRequest extends Base {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "request_form_id")
+    @Column(name = "adopt_request_id")
     private Long id;
 
     @ManyToOne
@@ -36,11 +36,11 @@ public class RequestForm extends Base {
 
     private Region region;
 
-    public RequestForm() {
+    public AdoptRequest() {
     }
 
     @Builder
-    public RequestForm(Long id, Board board, Long writerId, Earning earning, Residence residence, int roommateNumber, boolean petExist, String adoptReason, Region region) {
+    public AdoptRequest(Long id, Board board, Long writerId, Earning earning, Residence residence, int roommateNumber, boolean petExist, String adoptReason, Region region) {
         this.id = id;
         this.board = board;
         this.writerId = writerId;

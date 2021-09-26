@@ -5,6 +5,8 @@ import PetShop.BarkingCat.common.base.model.Base;
 import PetShop.BarkingCat.common.base.model.constants.AnimalType;
 import PetShop.BarkingCat.common.base.model.constants.Region;
 import PetShop.BarkingCat.common.base.model.constants.Sex;
+import PetShop.BarkingCat.domain.board.model.objects.Tags;
+import PetShop.BarkingCat.domain.board.model.objects.Title;
 import lombok.Builder;
 
 import javax.persistence.*;
