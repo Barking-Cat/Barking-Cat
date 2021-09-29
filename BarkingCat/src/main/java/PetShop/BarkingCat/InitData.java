@@ -1,12 +1,16 @@
 package PetShop.BarkingCat;
 
 import PetShop.BarkingCat.common.base.infra.Money;
-import PetShop.BarkingCat.domain.board.model.*;
 import PetShop.BarkingCat.common.base.model.Residence;
 import PetShop.BarkingCat.common.base.model.constants.AnimalType;
 import PetShop.BarkingCat.common.base.model.constants.Earning;
 import PetShop.BarkingCat.common.base.model.constants.Region;
 import PetShop.BarkingCat.common.base.model.constants.Sex;
+import PetShop.BarkingCat.common.security.Password;
+import PetShop.BarkingCat.domain.board.model.AdoptRequest;
+import PetShop.BarkingCat.domain.board.model.Board;
+import PetShop.BarkingCat.domain.board.model.Category;
+import PetShop.BarkingCat.domain.board.model.Comment;
 import PetShop.BarkingCat.domain.board.model.objects.Tags;
 import PetShop.BarkingCat.domain.board.model.objects.Title;
 import PetShop.BarkingCat.domain.member.model.Member;
@@ -42,7 +46,7 @@ public class InitData {
         public void init() {
             Member member = Member.builder()
                     .email("test@naver.com")
-                    .password("1q2w3e4r")
+                    .password(new Password("1q2w3e4r").content())
                     .phone("010-0000-0000")
                     .memberType(Member.MemberType.NORMAL)
                     .name("Tester")
