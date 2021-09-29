@@ -1,5 +1,6 @@
 package PetShop.BarkingCat.common.security;
 
+import PetShop.BarkingCat.domain.member.model.LoginForm;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;

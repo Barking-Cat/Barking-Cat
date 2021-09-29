@@ -1,5 +1,7 @@
 package PetShop.BarkingCat.common.security;
 
+import PetShop.BarkingCat.domain.member.model.LoginForm;
+
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.Map;
