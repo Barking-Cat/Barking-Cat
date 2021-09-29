@@ -2,7 +2,6 @@ package PetShop.BarkingCat.domain.member.model;
 
 import PetShop.BarkingCat.common.base.model.Base;
 import lombok.Builder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 
@@ -43,16 +42,6 @@ public class Member extends Base {
         this.name = name;
         this.businessNumber = businessNumber;
         this.authStatus = authStatus;
-    }
-
-    public void checkPassword(String password, PasswordEncoder passwordEncoder) {
-        if (passwordIsNotEqual(password, passwordEncoder)) {
-            throw new RuntimeException("비밀번호가 일치하지 않습니다");
-        }
-    }
-
-    private boolean passwordIsNotEqual(String password, PasswordEncoder passwordEncoder) {
-        return !passwordEncoder.matches(password, this.password);
     }
 
     public enum MemberType {
