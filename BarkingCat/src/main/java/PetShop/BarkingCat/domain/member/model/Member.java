@@ -19,17 +19,21 @@ public class Member extends Base {
 
     private String phone;
 
+    @Enumerated(EnumType.STRING)
     private MemberType memberType;
 
     private String name;
 
     private String businessNumber;
 
-    public Member() {
+    @Enumerated(EnumType.STRING)
+    private AuthStatus authStatus;
+
+    protected Member() {
     }
 
     @Builder
-    public Member(Long id, String email, String password, String phone, MemberType memberType, String name, String businessNumber) {
+    public Member(Long id, String email, String password, String phone, MemberType memberType, String name, String businessNumber, AuthStatus authStatus) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -37,9 +41,14 @@ public class Member extends Base {
         this.memberType = memberType;
         this.name = name;
         this.businessNumber = businessNumber;
+        this.authStatus = authStatus;
     }
 
     public enum MemberType {
         NORMAL, COMPANY, SHELTER
+    }
+
+    public enum AuthStatus{
+        Y, N
     }
 }

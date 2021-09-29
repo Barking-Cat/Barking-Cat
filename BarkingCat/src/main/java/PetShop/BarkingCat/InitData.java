@@ -9,7 +9,10 @@ import PetShop.BarkingCat.common.base.model.constants.Region;
 import PetShop.BarkingCat.common.base.model.constants.Sex;
 import PetShop.BarkingCat.domain.board.model.objects.Tags;
 import PetShop.BarkingCat.domain.board.model.objects.Title;
+import PetShop.BarkingCat.domain.member.dto.MemberForm;
 import PetShop.BarkingCat.domain.member.model.Member;
+import PetShop.BarkingCat.domain.member.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,17 +41,23 @@ public class InitData {
         @PersistenceContext
         EntityManager em;
 
+        @Autowired private final MemberService memberService;
+
+        public InitDataService(MemberService memberService) {
+            this.memberService = memberService;
+        }
+
         @Transactional
         public void init() {
-            Member member = Member.builder()
-                    .email("test@naver.com")
-                    .password("1q2w3e4r")
-                    .phone("010-0000-0000")
-                    .memberType(Member.MemberType.NORMAL)
-                    .name("Tester")
-                    .build();
 
-            em.persist(member);
+            MemberForm memberForm = new MemberForm();
+            memberForm.setEmail("test@naver.com");
+            memberForm.setPassword("1q2w3e4r");
+            memberForm.setPhone("010-0000-0000");
+            memberForm.setMemberType(Member.MemberType.NORMAL);
+            memberForm.setName("Tester");
+
+            memberService.joinMember(memberForm);
 
             Category category = new Category(null, "Test Category");
             em.persist(category);
