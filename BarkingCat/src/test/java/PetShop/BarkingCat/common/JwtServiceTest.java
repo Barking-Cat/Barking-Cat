@@ -1,7 +1,7 @@
 package PetShop.BarkingCat.common;
 
 import PetShop.BarkingCat.common.security.JwtService;
-import PetShop.BarkingCat.common.security.LoginForm;
+import PetShop.BarkingCat.domain.member.dto.LoginForm;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
