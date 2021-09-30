@@ -14,7 +14,7 @@ import java.util.List;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     private final JwtService jwtService;
-    public final static String JWT_COOKIE_NAME = "my.test.jwt";
+    public final static String JWT_COOKIE_NAME = "barking.cat";
 
     public WebConfig(JwtService jwtService) {
         this.jwtService = jwtService;
