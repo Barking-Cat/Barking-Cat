@@ -1,4 +1,4 @@
-package PetShop.BarkingCat.domain.member.model;
+package PetShop.BarkingCat.domain.member.dto;
 
 import lombok.Data;
 

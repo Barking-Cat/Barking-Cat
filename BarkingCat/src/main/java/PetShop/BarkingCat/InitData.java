@@ -6,7 +6,6 @@ import PetShop.BarkingCat.common.base.model.constants.AnimalType;
 import PetShop.BarkingCat.common.base.model.constants.Earning;
 import PetShop.BarkingCat.common.base.model.constants.Region;
 import PetShop.BarkingCat.common.base.model.constants.Sex;
-import PetShop.BarkingCat.common.security.Password;
 import PetShop.BarkingCat.domain.board.model.AdoptRequest;
 import PetShop.BarkingCat.domain.board.model.Board;
 import PetShop.BarkingCat.domain.board.model.Category;
@@ -14,6 +13,7 @@ import PetShop.BarkingCat.domain.board.model.Comment;
 import PetShop.BarkingCat.domain.board.model.objects.Tags;
 import PetShop.BarkingCat.domain.board.model.objects.Title;
 import PetShop.BarkingCat.domain.member.model.Member;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,11 +42,17 @@ public class InitData {
         @PersistenceContext
         EntityManager em;
 
+        private final PasswordEncoder passwordEncoder;
+
+        InitDataService(PasswordEncoder passwordEncoder) {
+            this.passwordEncoder = passwordEncoder;
+        }
+
         @Transactional
         public void init() {
             Member member = Member.builder()
                     .email("test@naver.com")
-                    .password(new Password("1q2w3e4r").content())
+                    .password(passwordEncoder.encode("1q2w3e4r"))
                     .phone("010-0000-0000")
                     .memberType(Member.MemberType.NORMAL)
                     .name("Tester")

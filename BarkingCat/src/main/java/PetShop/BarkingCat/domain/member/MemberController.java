@@ -19,12 +19,10 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @PostMapping
-    public ResponseEntity<?> joinMember(@RequestBody MemberForm memberForm){
-
+    @PostMapping("/join")
+    public ResponseEntity<?> joinMember(@RequestBody MemberForm memberForm) {
         memberService.joinMember(memberForm);
 
         return ResponseEntity.ok(HttpStatus.CREATED);
-
     }
 }

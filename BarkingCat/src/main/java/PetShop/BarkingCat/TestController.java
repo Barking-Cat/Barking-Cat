@@ -2,7 +2,7 @@ package PetShop.BarkingCat;
 
 import PetShop.BarkingCat.common.security.CookieFactory;
 import PetShop.BarkingCat.common.security.JwtService;
-import PetShop.BarkingCat.domain.member.model.LoginForm;
+import PetShop.BarkingCat.domain.member.dto.LoginForm;
 import PetShop.BarkingCat.common.security.annotations.Authenticated;
 import PetShop.BarkingCat.common.security.annotations.JwtClaim;
 import org.springframework.web.bind.annotation.*;
