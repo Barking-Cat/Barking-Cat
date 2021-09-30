@@ -2,7 +2,6 @@ package PetShop.BarkingCat.domain.member;
 
 import PetShop.BarkingCat.common.security.CookieFactory;
 import PetShop.BarkingCat.domain.member.dto.LoginForm;
-import PetShop.BarkingCat.domain.member.dto.MemberForm;
 import PetShop.BarkingCat.domain.member.service.SessionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +32,7 @@ public class SessionController {
     public ResponseEntity<?> login(@RequestBody LoginForm loginForm, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         String jwt = sessionService.login(loginForm, duration);
 
-        if (jwt.equals("")) {
+        if (jwtIsEmpty(jwt)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .build();
         }
@@ -41,6 +40,10 @@ public class SessionController {
         httpServletResponse.addCookie(createCookie(jwt, httpServletRequest));
 
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
+    }
+
+    private boolean jwtIsEmpty(String jwt) {
+        return jwt.equals("");
     }
 
     private Cookie createCookie(String jwt, HttpServletRequest httpServletRequest) {
