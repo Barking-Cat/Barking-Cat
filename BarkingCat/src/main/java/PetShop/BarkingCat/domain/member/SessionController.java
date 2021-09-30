@@ -32,7 +32,7 @@ public class SessionController {
     public ResponseEntity<?> login(@RequestBody LoginForm loginForm, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         String jwt = sessionService.login(loginForm, duration);
 
-        if (jwtIsEmpty(jwt)) {
+        if (jwt.isBlank()) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .build();
         }
@@ -40,10 +40,6 @@ public class SessionController {
         httpServletResponse.addCookie(createCookie(jwt, httpServletRequest));
 
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
-    }
-
-    private boolean jwtIsEmpty(String jwt) {
-        return jwt.equals("");
     }
 
     private Cookie createCookie(String jwt, HttpServletRequest httpServletRequest) {
