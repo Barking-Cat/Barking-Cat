@@ -33,7 +33,7 @@ public class SessionController {
         String jwt = sessionService.login(loginForm, duration);
 
         if (jwt.isBlank()) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .build();
         }
 
