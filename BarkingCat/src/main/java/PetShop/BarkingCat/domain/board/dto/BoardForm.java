@@ -25,7 +25,9 @@ public class BoardForm {
 
     private Sex sex;
 
-    private int price;
+    private Integer age;
+
+    private Integer price;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dueDate;
@@ -37,6 +39,7 @@ public class BoardForm {
                 .region(region)
                 .animalType(animalType)
                 .sex(sex)
+                .age(age)
                 .price(Money.wons(price))
                 .dueDate(dueDate)
                 .build();
