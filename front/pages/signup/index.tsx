@@ -1,7 +1,9 @@
 import type { NextPage } from 'next';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './signup.module.css';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 const EMAIL_PATTERN =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -14,6 +16,14 @@ interface SignUpInput {
   phone: string;
 }
 
+interface SignUpRequest extends SignUpInput {
+  authState: boolean;
+}
+
+interface SignUpResponse {
+  data: string;
+}
+
 const SignUp: NextPage = () => {
   const {
     register,
@@ -22,7 +32,26 @@ const SignUp: NextPage = () => {
     getValues,
   } = useForm<SignUpInput>({ mode: 'all' });
 
-  const onSubmit: SubmitHandler<SignUpInput> = (data) => console.log({ data });
+  const router = useRouter();
+  const [error, setError] = useState<boolean>(false);
+
+  const onSubmit: SubmitHandler<SignUpInput> = async (formData) => {
+    try {
+      const { data } = await axios.post<SignUpRequest, SignUpResponse>(
+        '/api/member/join',
+        {
+          ...formData,
+          authState: true,
+        }
+      );
+
+      if (data === 'CREATED') {
+        router.push('/signin');
+      }
+    } catch (e) {
+      setError(true);
+    }
+  };
 
   return (
     <div>
@@ -80,6 +109,7 @@ const SignUp: NextPage = () => {
         {errors.phone && <p>{errors.phone.message}</p>}
         <button>계정 만들기</button>
       </form>
+      {error && <p>계정 만들기에 실패했습니다.</p>}
     </div>
   );
 };
