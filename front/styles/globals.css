@@ -14,3 +14,9 @@ a {
 * {
   box-sizing: border-box;
 }
+
+input,
+button {
+  display: block;
+  /* box-sizing: border-box; */
+}
