@@ -15,8 +15,6 @@ import java.time.LocalDateTime;
 public class BoardForm {
     private Long categoryId;
 
-    private Long memberId;
-
     private String title;
 
     private String content;
@@ -34,7 +32,6 @@ public class BoardForm {
 
     public Board entity() {
         return Board.builder()
-                .memberId(memberId)
                 .title(new Title(title))
                 .content(content)
                 .region(region)

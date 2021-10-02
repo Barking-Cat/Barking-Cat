@@ -1,6 +1,7 @@
 package PetShop.BarkingCat.common.security;
 
 import PetShop.BarkingCat.domain.member.dto.LoginForm;
+import PetShop.BarkingCat.domain.member.dto.MemberPayload;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
@@ -34,8 +35,8 @@ public class JwtService {
         }
     }
 
-    public String createToken(LoginForm loginForm, ZonedDateTime expirationDateTime) {
-        Payload payload = new Payload(loginForm, expirationDateTime);
+    public String createToken(MemberPayload memberPayload, ZonedDateTime expirationDateTime) {
+        Payload payload = new Payload(memberPayload, expirationDateTime);
         return createToken(payload);
     }
 
