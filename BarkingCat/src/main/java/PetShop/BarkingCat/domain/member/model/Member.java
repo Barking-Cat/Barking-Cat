@@ -52,7 +52,7 @@ public class Member extends Base {
     }
 
     private boolean passwordIsNotEqual(String password, PasswordEncoder passwordEncoder) {
-        return passwordEncoder.matches(password, this.password);
+        return !passwordEncoder.matches(password, this.password);
     }
 
     public enum MemberType {
