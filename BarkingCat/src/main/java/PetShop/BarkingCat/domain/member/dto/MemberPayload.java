@@ -4,8 +4,11 @@ import lombok.Data;
 
 @Data
 public class MemberPayload {
-    private final Long id;
-    private final String email;
+    private Long id;
+    private String email;
+
+    public MemberPayload() {
+    }
 
     public MemberPayload(Long id, String email) {
         this.id = id;
