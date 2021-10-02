@@ -17,7 +17,7 @@ public class JwtServiceTest {
     class IsUsableTest {
         private final JwtService jwtService = new JwtService();
         private final int duration = 60 * 60 * 24;
-        private final ZonedDateTime expirationDateTime = ZonedDateTime.of(LocalDateTime.of(LocalDate.of(2021, 10, 1), LocalTime.of(0, 0, 0)), ZoneId.of("Asia/Seoul"))
+        private final ZonedDateTime expirationDateTime = ZonedDateTime.of(LocalDateTime.of(LocalDate.of(2022, 10, 1), LocalTime.of(0, 0, 0)), ZoneId.of("Asia/Seoul"))
                 .plusSeconds(duration);
 
         @Nested
