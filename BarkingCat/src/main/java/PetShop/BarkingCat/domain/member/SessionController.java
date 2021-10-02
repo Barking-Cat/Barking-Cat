@@ -50,4 +50,12 @@ public class SessionController {
                 .secure("https".equals(httpServletRequest.getScheme()))
         );
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest req, HttpServletResponse res) {
+        CookieFactory.getCookie(req, JWT_COOKIE_NAME)
+                .ifPresent(cookie -> CookieFactory.removeCookie(cookie, res));
+
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+    }
 }
