@@ -1,10 +1,46 @@
-import Example from '@/components/example';
+import { PostCardItem } from 'types/api';
+import PostCards from '@/components/PostCards';
+import axios from 'axios';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { BoardResponse } from 'types/api';
 import styles from '../styles/Home.module.css';
+import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {
+  const [data, setData] = useState<PostCardItem[]>([]);
+
+  const router = useRouter();
+
+  async function fetch() {
+    const { data } = await axios.get<BoardResponse>('/api/board');
+    setData(
+      data.content.map((e) => ({
+        id: e.boardId,
+        createdDate: '2021-10-02',
+        dueDate: e.dueDate,
+        title: e.title,
+        tags: e.tags,
+        img: 'img',
+        likes: 1,
+        comments: 2,
+        reads: 3,
+      }))
+    );
+  }
+
+  useEffect(() => {
+    fetch();
+  }, []);
+
+  function handleSignInClick() {
+    router.push('/signin');
+  }
+  function handleSignUpClick() {
+    router.push('/signup');
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -14,7 +50,9 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <Example />
+        <button onClick={handleSignInClick}>로그인</button>
+        <button onClick={handleSignUpClick}>회원가입</button>
+        <PostCards items={data} />
       </main>
     </div>
   );

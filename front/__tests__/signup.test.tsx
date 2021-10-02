@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import SignUp from '.';
+import SignUp from '../pages/signup';
 
 describe('Signup Page', () => {
   it('should render signup header', () => {

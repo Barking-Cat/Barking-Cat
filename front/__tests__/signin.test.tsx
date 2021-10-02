@@ -1,11 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
-import SignIn from './index';
-
-// const server = setupServer(
-//   rest.
-// );
+import SignIn from '../pages/signin/index';
 
 describe('SignIn Page', () => {
   it('should render header', () => {
