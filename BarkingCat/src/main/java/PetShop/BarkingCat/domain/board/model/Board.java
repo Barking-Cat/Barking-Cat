@@ -78,4 +78,8 @@ public class Board extends Base {
         this.memberId = memberId;
         return this;
     }
+
+    public Long id() {
+        return this.id;
+    }
 }

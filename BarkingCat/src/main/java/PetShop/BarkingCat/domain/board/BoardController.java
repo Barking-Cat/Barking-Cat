@@ -35,7 +35,8 @@ public class BoardController {
     @PostMapping
     @Authenticated
     public ResponseEntity<?> registerBoard(@RequestBody BoardForm boardForm, @JwtClaim("info.id") Long memberId) {
-        boardService.registerBoard(boardForm, memberId);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        Long boardId = boardService.registerBoard(boardForm, memberId);
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body(boardId);
     }
 }

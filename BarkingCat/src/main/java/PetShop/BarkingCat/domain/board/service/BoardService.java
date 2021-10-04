@@ -22,7 +22,7 @@ public class BoardService {
     }
 
     @Transactional
-    public void registerBoard(BoardForm boardForm, Long memberId) {
+    public Long registerBoard(BoardForm boardForm, Long memberId) {
         Category category = categoryRepository.findById(boardForm.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("카테고리가 없습니다."));
 
@@ -33,6 +33,6 @@ public class BoardService {
                 .mapCategory(category)
                 .mapWriter(memberId);
 
-        boardRepository.save(board);
+        return boardRepository.save(board).id();
     }
 }
