@@ -1,4 +1,4 @@
-package PetShop.BarkingCat.domain.board.repository;
+package PetShop.BarkingCat.domain.board.repository.query;
 
 import PetShop.BarkingCat.common.base.model.constants.AnimalType;
 import PetShop.BarkingCat.common.base.model.constants.Region;

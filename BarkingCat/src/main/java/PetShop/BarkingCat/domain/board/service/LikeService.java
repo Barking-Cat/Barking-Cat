@@ -3,7 +3,7 @@ package PetShop.BarkingCat.domain.board.service;
 import PetShop.BarkingCat.domain.board.model.Board;
 import PetShop.BarkingCat.domain.board.model.Likes;
 import PetShop.BarkingCat.domain.board.repository.BoardRepository;
-import PetShop.BarkingCat.domain.board.repository.LikeQueryRepository;
+import PetShop.BarkingCat.domain.board.repository.query.LikeQueryRepository;
 import PetShop.BarkingCat.domain.board.repository.LikeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

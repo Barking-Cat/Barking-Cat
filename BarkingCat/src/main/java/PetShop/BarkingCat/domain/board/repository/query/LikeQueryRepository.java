@@ -1,4 +1,4 @@
-package PetShop.BarkingCat.domain.board.repository;
+package PetShop.BarkingCat.domain.board.repository.query;
 
 import PetShop.BarkingCat.domain.board.model.Likes;
 import com.querydsl.core.types.dsl.BooleanExpression;
