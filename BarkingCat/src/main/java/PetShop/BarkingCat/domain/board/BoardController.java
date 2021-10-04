@@ -29,6 +29,7 @@ public class BoardController {
 
     @GetMapping("/{boardId}")
     public ResponseEntity<?> findDetail(@PathVariable Long boardId) {
+        boardService.hit(boardId);
         return ResponseEntity.ok(boardQueryService.findDetail(boardId));
     }
 

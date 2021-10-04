@@ -49,7 +49,8 @@ public class BoardQueryRepository {
                                 board.age,
                                 board.price,
                                 board.dueDate,
-                                board.tags
+                                board.tags,
+                                board.hits
                         )
                 )
                 .from(board)
@@ -80,6 +81,7 @@ public class BoardQueryRepository {
                                 board.price,
                                 board.dueDate,
                                 board.tags,
+                                board.hits,
                                 member.email,
                                 member.phone,
                                 member.name

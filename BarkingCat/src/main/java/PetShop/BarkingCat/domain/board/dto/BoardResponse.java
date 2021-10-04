@@ -28,8 +28,9 @@ public class BoardResponse {
     private final Money price;
     private final LocalDateTime dueDate;
     private final Tags tags;
+    private final Long hits;
 
-    public BoardResponse(Long boardId, Long categoryId, Long memberId, Title title, String content, Region region, AnimalType animalType, Sex sex, Integer age, Money price, LocalDateTime dueDate, Tags tags) {
+    public BoardResponse(Long boardId, Long categoryId, Long memberId, Title title, String content, Region region, AnimalType animalType, Sex sex, Integer age, Money price, LocalDateTime dueDate, Tags tags, Long hits) {
         this.boardId = boardId;
         this.categoryId = categoryId;
         this.memberId = memberId;
@@ -42,6 +43,7 @@ public class BoardResponse {
         this.price = price;
         this.dueDate = dueDate;
         this.tags = tags;
+        this.hits = hits;
     }
 
     public String getTitle() {

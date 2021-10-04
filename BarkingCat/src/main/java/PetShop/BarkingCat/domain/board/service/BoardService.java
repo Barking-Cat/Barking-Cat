@@ -33,6 +33,14 @@ public class BoardService {
                 .mapCategory(category)
                 .mapWriter(memberId);
 
-        return boardRepository.save(board).id();
+        return boardRepository.save(board)
+                .id();
+    }
+
+    @Transactional
+    public void hit(Long boardId) {
+        boardRepository.findById(boardId)
+                .orElseThrow(() -> new RuntimeException("게시글이 존재하지 않습니다"))
+                .hit();
     }
 }
