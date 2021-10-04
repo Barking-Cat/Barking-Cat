@@ -49,6 +49,8 @@ public class Board extends Base {
 
     private Tags tags;
 
+    private Long hits;
+
     public Board() {
 
     }
@@ -67,6 +69,7 @@ public class Board extends Base {
         this.price = price;
         this.dueDate = dueDate;
         this.tags = tags;
+        this.hits = 0L;
     }
 
     public Board mapCategory(Category category) {
@@ -77,5 +80,13 @@ public class Board extends Base {
     public Board mapWriter(Long memberId) {
         this.memberId = memberId;
         return this;
+    }
+
+    public Long id() {
+        return this.id;
+    }
+
+    public void hit() {
+        hits += 1;
     }
 }

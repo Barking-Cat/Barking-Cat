@@ -29,7 +29,6 @@ public class SessionService {
 
         member.checkPassword(loginForm.getPassword(), passwordEncoder);
 
-
         return jwtService.createToken(member.createPayload(), ZonedDateTime.now()
                 .plusSeconds(duration));
     }

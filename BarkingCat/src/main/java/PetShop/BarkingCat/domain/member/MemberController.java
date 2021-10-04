@@ -22,7 +22,6 @@ public class MemberController {
     @PostMapping("/join")
     public ResponseEntity<?> joinMember(@RequestBody MemberForm memberForm) {
         memberService.joinMember(memberForm);
-
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
 }

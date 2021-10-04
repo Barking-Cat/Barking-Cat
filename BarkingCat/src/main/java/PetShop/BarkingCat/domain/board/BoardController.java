@@ -29,13 +29,15 @@ public class BoardController {
 
     @GetMapping("/{boardId}")
     public ResponseEntity<?> findDetail(@PathVariable Long boardId) {
+        boardService.hit(boardId);
         return ResponseEntity.ok(boardQueryService.findDetail(boardId));
     }
 
     @PostMapping
     @Authenticated
     public ResponseEntity<?> registerBoard(@RequestBody BoardForm boardForm, @JwtClaim("info.id") Long memberId) {
-        boardService.registerBoard(boardForm, memberId);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        Long boardId = boardService.registerBoard(boardForm, memberId);
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body(boardId);
     }
 }
