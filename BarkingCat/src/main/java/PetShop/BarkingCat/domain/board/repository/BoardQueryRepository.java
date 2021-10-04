@@ -13,6 +13,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -20,22 +21,21 @@ import java.util.List;
 import static PetShop.BarkingCat.domain.board.model.QBoard.board;
 import static PetShop.BarkingCat.domain.member.model.QMember.member;
 
-public class BoardRepositoryQuerydslImpl implements BoardRepositoryQuerydsl {
+@Repository
+public class BoardQueryRepository {
 
     private final JPAQueryFactory query;
 
-    public BoardRepositoryQuerydslImpl(JPAQueryFactory query) {
+    public BoardQueryRepository(JPAQueryFactory query) {
         this.query = query;
     }
 
-    @Override
     public List<Board> findAllNotDeleted() {
         return query.selectFrom(board)
                 .where(isNotDeleted())
                 .fetch();
     }
 
-    @Override
     public Page<BoardResponse> findByCondition(FindBoardCondition findBoardCondition, Pageable pageable) {
         List<BoardResponse> responses = query.select(Projections.constructor(BoardResponse.class,
                                 board.id,
@@ -66,7 +66,6 @@ public class BoardRepositoryQuerydslImpl implements BoardRepositoryQuerydsl {
         return new PageImpl<>(responses, pageable, responses.size());
     }
 
-    @Override
     public BoardDetailResponse findDetail(Long boardId) {
         return query.select(Projections.constructor(BoardDetailResponse.class,
                                 board.id,
