@@ -2,6 +2,7 @@ package PetShop.BarkingCat.domain.member.service;
 
 import PetShop.BarkingCat.common.security.JwtService;
 import PetShop.BarkingCat.domain.member.dto.LoginForm;
+import PetShop.BarkingCat.domain.member.model.Member;
 import PetShop.BarkingCat.domain.member.repository.MemberRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,11 +24,13 @@ public class SessionService {
     }
 
     public String login(LoginForm loginForm, int duration) {
-        memberRepository.findByEmail(loginForm.getEmail())
-                .orElseThrow()
-                .checkPassword(loginForm.getPassword(), passwordEncoder);
+        Member member = memberRepository.findByEmail(loginForm.getEmail())
+                .orElseThrow(() -> new RuntimeException("존재하지 않는 사용자입니다"));
 
-        return jwtService.createToken(loginForm, ZonedDateTime.now()
+        member.checkPassword(loginForm.getPassword(), passwordEncoder);
+
+
+        return jwtService.createToken(member.createPayload(), ZonedDateTime.now()
                 .plusSeconds(duration));
     }
 }

@@ -1,6 +1,7 @@
 package PetShop.BarkingCat.domain.member.model;
 
 import PetShop.BarkingCat.common.base.model.Base;
+import PetShop.BarkingCat.domain.member.dto.MemberPayload;
 import lombok.Builder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -61,5 +62,9 @@ public class Member extends Base {
 
     public enum AuthStatus {
         Y, N
+    }
+
+    public MemberPayload createPayload() {
+        return new MemberPayload(id, email);
     }
 }

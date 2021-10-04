@@ -1,5 +1,6 @@
 package PetShop.BarkingCat.domain.member;
 
+import PetShop.BarkingCat.common.base.exception.AuthenticationException;
 import PetShop.BarkingCat.common.security.CookieFactory;
 import PetShop.BarkingCat.domain.member.dto.LoginForm;
 import PetShop.BarkingCat.domain.member.service.SessionService;
@@ -33,8 +34,7 @@ public class SessionController {
         String jwt = sessionService.login(loginForm, duration);
 
         if (jwt.isBlank()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .build();
+            throw new AuthenticationException("토큰 생성에 실패했습니다");
         }
 
         httpServletResponse.addCookie(createCookie(jwt, httpServletRequest));

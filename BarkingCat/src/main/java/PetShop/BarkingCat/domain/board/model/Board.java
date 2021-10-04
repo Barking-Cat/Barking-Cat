@@ -73,4 +73,9 @@ public class Board extends Base {
         this.category = category;
         return this;
     }
+
+    public Board mapWriter(Long memberId) {
+        this.memberId = memberId;
+        return this;
+    }
 }

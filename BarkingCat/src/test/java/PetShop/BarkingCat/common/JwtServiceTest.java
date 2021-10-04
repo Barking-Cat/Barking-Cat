@@ -2,6 +2,7 @@ package PetShop.BarkingCat.common;
 
 import PetShop.BarkingCat.common.security.JwtService;
 import PetShop.BarkingCat.domain.member.dto.LoginForm;
+import PetShop.BarkingCat.domain.member.dto.MemberPayload;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ public class JwtServiceTest {
             @DisplayName("true를 리턴한다")
             public void isUsableTrue() {
                 //given
-                String token = jwtService.createToken(new LoginForm(), expirationDateTime);
+                String token = jwtService.createToken(new MemberPayload(), expirationDateTime);
 
                 long expired = expirationDateTime
                         .toInstant()
@@ -48,7 +49,7 @@ public class JwtServiceTest {
             @DisplayName("false를 리턴한다")
             public void isUsableFalse() {
                 //given
-                String token = jwtService.createToken(new LoginForm(), expirationDateTime);
+                String token = jwtService.createToken(new MemberPayload(), expirationDateTime);
 
                 long expired = expirationDateTime
                         .plusSeconds(100)

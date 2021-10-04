@@ -1,5 +1,7 @@
 package PetShop.BarkingCat.domain.board;
 
+import PetShop.BarkingCat.common.security.annotations.Authenticated;
+import PetShop.BarkingCat.common.security.annotations.JwtClaim;
 import PetShop.BarkingCat.domain.board.dto.BoardForm;
 import PetShop.BarkingCat.domain.board.dto.FindBoardCondition;
 import PetShop.BarkingCat.domain.board.service.BoardService;
@@ -31,8 +33,9 @@ public class BoardController {
     }
 
     @PostMapping
-    public ResponseEntity<?> registerBoard(@RequestBody BoardForm boardForm) {
-        boardService.registerBoard(boardForm);
+    @Authenticated
+    public ResponseEntity<?> registerBoard(@RequestBody BoardForm boardForm, @JwtClaim("info.id") Long memberId) {
+        boardService.registerBoard(boardForm, memberId);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
 }
