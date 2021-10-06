@@ -24,4 +24,9 @@ public class MemberTempController {
         memberTempService.join(memberForm);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
+
+    @PostMapping("/auth")
+    public ResponseEntity<?> authMember() {
+        return ResponseEntity.ok(HttpStatus.CREATED);
+    }
 }

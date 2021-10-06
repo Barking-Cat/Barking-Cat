@@ -38,6 +38,7 @@ public class MemberTemp extends Base {
         this.memberType = memberType;
         this.name = name;
         this.businessNumber = businessNumber;
+        validateBusinessNumber();
     }
 
     public Member createMember() {
@@ -49,5 +50,23 @@ public class MemberTemp extends Base {
                 .name(name)
                 .businessNumber(businessNumber)
                 .build();
+    }
+
+    private void validateBusinessNumber() {
+        if (isNormalMember()) {
+            return;
+        }
+
+        if (businessNumber.isBlank()) {
+            throw new RuntimeException("사업자번호를 입력하여야 합니다");
+        }
+    }
+
+    private boolean isNormalMember() {
+        return memberType == Member.MemberType.NORMAL;
+    }
+
+    public Member.MemberType type() {
+        return memberType;
     }
 }

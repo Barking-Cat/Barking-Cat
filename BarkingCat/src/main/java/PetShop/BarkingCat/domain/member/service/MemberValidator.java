@@ -13,12 +13,6 @@ public class MemberValidator {
         this.memberRepository = memberRepository;
     }
 
-    public void validateAuthPhoneNumber(Member.AuthStatus authStatus) {
-        if (authStatus == Member.AuthStatus.N) {
-            throw new RuntimeException("휴대폰인증을 진행해주세요.");
-        }
-    }
-
     public void validateDuplicateMember(String email) {
         Long count = memberRepository.countByEmail(email);
 

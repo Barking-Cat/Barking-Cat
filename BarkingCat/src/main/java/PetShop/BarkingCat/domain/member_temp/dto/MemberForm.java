@@ -23,7 +23,9 @@ public class MemberForm {
 
     private Member.AuthStatus authStatus;
 
-    public MemberTemp entity() {
+    public MemberTemp entity(MemberValidator memberValidator, PasswordEncoder passwordEncoder) {
+        validate(memberValidator);
+        encryptPassword(passwordEncoder);
         return MemberTemp
                 .builder()
                 .email(email)
@@ -35,9 +37,8 @@ public class MemberForm {
                 .build();
     }
 
-    public void validate(MemberValidator memberValidator) {
+    private void validate(MemberValidator memberValidator) {
         memberValidator.validateDuplicateMember(email);
-        memberValidator.validateAuthPhoneNumber(authStatus);
     }
 
     public void encryptPassword(PasswordEncoder passwordEncoder) {

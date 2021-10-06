@@ -56,7 +56,6 @@ public class InitData {
                     .name("Tester")
                     .phone("010-0000-1111")
                     .memberType(Member.MemberType.NORMAL)
-                    .authStatus(Member.AuthStatus.Y)
                     .build();
 
             em.persist(member);
