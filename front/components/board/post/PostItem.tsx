@@ -1,8 +1,8 @@
-import { PostCardItem } from 'types/api';
+import { PostElement } from 'types/api';
 
-interface PostCardProps extends PostCardItem {}
+interface PostItemProps extends PostElement {}
 
-function PostCard({
+function PostItem({
   img,
   title,
   tags,
@@ -11,7 +11,7 @@ function PostCard({
   comments,
   createdDate,
   dueDate,
-}: PostCardProps) {
+}: PostItemProps) {
   return (
     <li>
       <img src={img} alt="pet-image" />
@@ -27,4 +27,4 @@ function PostCard({
   );
 }
 
-export default PostCard;
+export default PostItem;

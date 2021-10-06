@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import { PostCardItem } from 'types/api';
-import PostCard from '.';
+import type { PostElement } from 'types/api';
+import PostItem from './PostItem';
 
-const mockData: PostCardItem = {
+const mockData: PostElement = {
   id: 1,
   img: 'http://sample-image.com',
   title: '사지말고 입양하세요.',
@@ -16,29 +16,29 @@ const mockData: PostCardItem = {
 
 describe('PostCard', () => {
   it('should render pet image', () => {
-    render(<PostCard {...mockData} />);
+    render(<PostItem {...mockData} />);
     expect(screen.getByRole('img', { name: 'pet-image' })).toBeInTheDocument();
   });
 
   it('should render post title', () => {
-    render(<PostCard {...mockData} />);
+    render(<PostItem {...mockData} />);
     expect(screen.getByRole('heading')).toBeInTheDocument();
   });
 
   it('should render post tags', () => {
-    render(<PostCard {...mockData} />);
+    render(<PostItem {...mockData} />);
     expect(screen.getAllByRole('button')).toHaveLength(mockData.tags.length);
   });
 
   it('should render post dates', () => {
-    render(<PostCard {...mockData} />);
+    render(<PostItem {...mockData} />);
     expect(
       screen.getByText(`${mockData.createdDate} ~ ${mockData.dueDate}`)
     ).toBeInTheDocument();
   });
 
   it('should render post numeric info', () => {
-    render(<PostCard {...mockData} />);
+    render(<PostItem {...mockData} />);
     expect(screen.getByLabelText('reads')).toHaveTextContent(
       mockData.reads.toString()
     );

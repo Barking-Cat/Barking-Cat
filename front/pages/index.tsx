@@ -1,5 +1,5 @@
-import { PostCardItem } from 'types/api';
-import PostCards from '@/components/PostCards';
+import { PostElement } from 'types/api';
+import { PostList } from '@/components/board/post';
 import axios from 'axios';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -9,7 +9,7 @@ import styles from '../styles/Home.module.css';
 import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {
-  const [data, setData] = useState<PostCardItem[]>([]);
+  const [data, setData] = useState<PostElement[]>([]);
 
   const router = useRouter();
 
@@ -52,7 +52,7 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <button onClick={handleSignInClick}>로그인</button>
         <button onClick={handleSignUpClick}>회원가입</button>
-        <PostCards items={data} />
+        <PostList items={data} />
       </main>
     </div>
   );

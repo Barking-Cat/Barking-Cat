@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import PostCards from '.';
-import { PostCardItem } from 'types/api';
+import PostList from './PostList';
+import { PostElement } from 'types/api';
 
-const mockData: PostCardItem[] = [
+const mockData: PostElement[] = [
   {
     id: 1,
     img: 'http://sample-image.com',
@@ -40,7 +40,7 @@ const mockData: PostCardItem[] = [
 
 describe('PostCard List', () => {
   it('should render post list', () => {
-    render(<PostCards items={mockData} />);
+    render(<PostList items={mockData} />);
     expect(screen.getAllByRole('listitem')).toHaveLength(mockData.length);
   });
 });

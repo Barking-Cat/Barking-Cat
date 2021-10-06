@@ -42,7 +42,7 @@ export interface BoardResponse {
   empty: boolean;
 }
 
-export interface PostCardItem {
+export interface PostElement {
   id: number;
   img: string;
   title: string;
