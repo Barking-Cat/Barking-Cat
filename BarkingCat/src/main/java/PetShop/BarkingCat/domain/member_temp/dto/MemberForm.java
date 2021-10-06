@@ -38,7 +38,7 @@ public class MemberForm {
     }
 
     private void validate(MemberValidator memberValidator) {
-        memberValidator.validateDuplicateMember(email);
+        memberValidator.validateEmail(email);
     }
 
     public void encryptPassword(PasswordEncoder passwordEncoder) {

@@ -1,8 +1,9 @@
 package PetShop.BarkingCat.domain.member.service;
 
-import PetShop.BarkingCat.domain.member.model.Member;
 import PetShop.BarkingCat.domain.member.repository.MemberRepository;
 import org.springframework.stereotype.Component;
+
+import java.util.regex.Pattern;
 
 @Component
 public class MemberValidator {
@@ -13,12 +14,31 @@ public class MemberValidator {
         this.memberRepository = memberRepository;
     }
 
-    public void validateDuplicateMember(String email) {
+    private static final String REGEX = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
+
+    public void validateEmail(String email) {
+        validateDuplicateEmail(email);
+        validateEmailPatter(email);
+    }
+
+    private void validateDuplicateEmail(String email) {
         Long count = memberRepository.countByEmail(email);
 
         if (memberIsPresent(count)) {
             throw new RuntimeException("이미 등록된 회원이메일 입니다.");
         }
+    }
+
+    private void validateEmailPatter(String email) {
+        if (emailNotMatchWithPattern(email)) {
+            throw new RuntimeException("이메일 형식이 맞지 않습니다");
+        }
+    }
+
+    private boolean emailNotMatchWithPattern(String email) {
+        return !Pattern.compile(REGEX)
+                .matcher(email)
+                .matches();
     }
 
     private boolean memberIsPresent(Long count) {
