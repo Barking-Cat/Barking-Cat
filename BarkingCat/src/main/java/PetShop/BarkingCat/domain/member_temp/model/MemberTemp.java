@@ -3,6 +3,7 @@ package PetShop.BarkingCat.domain.member_temp.model;
 import PetShop.BarkingCat.common.base.model.Base;
 import PetShop.BarkingCat.domain.member.model.Member;
 import lombok.Builder;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 

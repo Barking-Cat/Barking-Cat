@@ -4,10 +4,7 @@ import PetShop.BarkingCat.domain.member_temp.dto.MemberForm;
 import PetShop.BarkingCat.domain.member_temp.service.MemberTempService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/member")
@@ -26,7 +23,8 @@ public class MemberTempController {
     }
 
     @PostMapping("/auth")
-    public ResponseEntity<?> authMember() {
-        return ResponseEntity.ok(HttpStatus.CREATED);
+    public ResponseEntity<?> authMember(@RequestParam Long memberTempId) {
+        memberTempService.auth(memberTempId);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 }

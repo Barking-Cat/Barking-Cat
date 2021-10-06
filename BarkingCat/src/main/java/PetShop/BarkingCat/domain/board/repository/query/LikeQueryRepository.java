@@ -22,12 +22,12 @@ public class LikeQueryRepository {
                 .where(
                         boardIdEq(boardId),
                         memberIdEq(memberId),
-                        isDeleted()
+                        isNotDeleted()
                 )
                 .fetchFirst() != null;
     }
 
-    private BooleanExpression isDeleted() {
+    private BooleanExpression isNotDeleted() {
         return likes.deletedDateTime.isNull();
     }
 
@@ -44,7 +44,7 @@ public class LikeQueryRepository {
                 .where(
                         boardIdEq(boardId),
                         memberIdEq(memberId),
-                        isDeleted()
+                        isNotDeleted()
                 )
                 .orderBy(likes.id.desc())
                 .fetchFirst();
