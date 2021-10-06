@@ -21,8 +21,4 @@ public class MemberService {
         this.passwordEncoder = passwordEncoder;
         this.memberValidator = memberValidator;
     }
-
-    @Transactional
-    public void joinMember(MemberForm memberForm) {
-    }
 }
