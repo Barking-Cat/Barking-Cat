@@ -1,6 +1,6 @@
 package PetShop.BarkingCat.domain.member.service;
 
-import PetShop.BarkingCat.domain.member.dto.MemberForm;
+import PetShop.BarkingCat.domain.member_temp.dto.MemberForm;
 import PetShop.BarkingCat.domain.member.model.Member;
 import PetShop.BarkingCat.domain.member.repository.MemberRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,10 +24,5 @@ public class MemberService {
 
     @Transactional
     public void joinMember(MemberForm memberForm) {
-        memberForm.validate(memberValidator);
-        memberForm.encryptPassword(passwordEncoder);
-
-        Member member = memberForm.entity();
-        memberRepository.save(member);
     }
 }
