@@ -20,6 +20,8 @@ public class MemberValidator {
 
     private static final String REGEX = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
 
+    private static final Pattern PATTERN = Pattern.compile(REGEX);
+
     public void validateEmail(String email) {
         validateDuplicateEmail(email);
         validateEmailPatter(email);
@@ -46,8 +48,7 @@ public class MemberValidator {
     }
 
     private boolean emailNotMatchWithPattern(String email) {
-        return !Pattern.compile(REGEX)
-                .matcher(email)
+        return !PATTERN.matcher(email)
                 .matches();
     }
 
