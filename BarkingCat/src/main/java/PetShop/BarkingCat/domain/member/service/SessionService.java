@@ -2,9 +2,9 @@ package PetShop.BarkingCat.domain.member.service;
 
 import PetShop.BarkingCat.common.security.JwtService;
 import PetShop.BarkingCat.domain.member.dto.LoginForm;
+import PetShop.BarkingCat.domain.member.member_temp.repository.query.MemberTempQueryRepository;
 import PetShop.BarkingCat.domain.member.model.Member;
 import PetShop.BarkingCat.domain.member.repository.MemberRepository;
-import PetShop.BarkingCat.domain.member.member_temp.repository.query.MemberTempQueryRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -43,9 +43,10 @@ public class SessionService {
     }
 
     private void findMemberTemp(String email) {
-        memberTempQueryRepository.findByEmailNotDeleted(email)
-                .ifPresent(member1 -> {
-                    throw new RuntimeException("아직 승인되지 않은 계정입니다");
-                });
+        boolean exists = memberTempQueryRepository.existsByEmailNotDeleted(email);
+
+        if (exists) {
+            throw new RuntimeException("아직 승인되지 않은 계정입니다");
+        }
     }
 }

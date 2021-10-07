@@ -24,19 +24,18 @@ public class MemberTempQueryRepository {
                                 memberTempIdEq(memberTempId),
                                 notDeleted()
                         )
-                        .fetchFirst()
+                        .fetchOne()
         );
     }
 
-    public Optional<MemberTemp> findByEmailNotDeleted(String email) {
-        return Optional.ofNullable(
-                query.selectFrom(memberTemp)
-                        .where(
-                                emailEq(email),
-                                notDeleted()
-                        )
-                        .fetchOne()
-        );
+    public boolean existsByEmailNotDeleted(String email) {
+        return query.selectOne()
+                .from(memberTemp)
+                .where(
+                        emailEq(email),
+                        notDeleted()
+                )
+                .fetchFirst() != null;
     }
 
     private BooleanExpression emailEq(String email) {

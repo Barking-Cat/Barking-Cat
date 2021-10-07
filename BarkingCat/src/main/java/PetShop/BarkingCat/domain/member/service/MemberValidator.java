@@ -1,5 +1,6 @@
 package PetShop.BarkingCat.domain.member.service;
 
+import PetShop.BarkingCat.domain.member.member_temp.repository.query.MemberTempQueryRepository;
 import PetShop.BarkingCat.domain.member.repository.MemberRepository;
 import org.springframework.stereotype.Component;
 
@@ -10,8 +11,11 @@ public class MemberValidator {
 
     private final MemberRepository memberRepository;
 
-    public MemberValidator(MemberRepository memberRepository) {
+    private final MemberTempQueryRepository memberTempQueryRepository;
+
+    public MemberValidator(MemberRepository memberRepository, MemberTempQueryRepository memberTempQueryRepository) {
         this.memberRepository = memberRepository;
+        this.memberTempQueryRepository = memberTempQueryRepository;
     }
 
     private static final String REGEX = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
@@ -25,7 +29,13 @@ public class MemberValidator {
         Long count = memberRepository.countByEmail(email);
 
         if (memberIsPresent(count)) {
-            throw new RuntimeException("이미 등록된 회원이메일 입니다.");
+            throw new RuntimeException("이미 등록된 회원이메일 입니다");
+        }
+
+        boolean exists = memberTempQueryRepository.existsByEmailNotDeleted(email);
+
+        if (exists) {
+            throw new RuntimeException("승인 대기중인 이메일입니다");
         }
     }
 
