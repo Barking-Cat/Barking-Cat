@@ -24,6 +24,19 @@ public class MemberTempQueryRepository {
                 .fetchFirst();
     }
 
+    public MemberTemp findByEmailNotDeleted(String email) {
+        return query.selectFrom(memberTemp)
+                .where(
+                        emailEq(email),
+                        notDeleted()
+                )
+                .fetchFirst();
+    }
+
+    private BooleanExpression emailEq(String email) {
+        return memberTemp.email.eq(email);
+    }
+
     private BooleanExpression notDeleted() {
         return memberTemp.deletedDateTime.isNull();
     }
