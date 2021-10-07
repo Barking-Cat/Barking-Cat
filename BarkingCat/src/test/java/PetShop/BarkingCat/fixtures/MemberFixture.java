@@ -1,7 +1,7 @@
 package PetShop.BarkingCat.fixtures;
 
 import PetShop.BarkingCat.domain.member.model.Member;
-import PetShop.BarkingCat.domain.member_temp.model.MemberTemp;
+import PetShop.BarkingCat.domain.member.member_temp.model.MemberTemp;
 
 public class MemberFixture {
     public static MemberTemp.MemberTempBuilder aMemberTemp() {

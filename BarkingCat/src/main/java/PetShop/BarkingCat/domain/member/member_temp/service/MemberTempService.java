@@ -1,12 +1,12 @@
-package PetShop.BarkingCat.domain.member_temp.service;
+package PetShop.BarkingCat.domain.member.member_temp.service;
 
+import PetShop.BarkingCat.domain.member.member_temp.dto.MemberForm;
+import PetShop.BarkingCat.domain.member.member_temp.repository.query.MemberTempQueryRepository;
 import PetShop.BarkingCat.domain.member.model.Member;
 import PetShop.BarkingCat.domain.member.repository.MemberRepository;
 import PetShop.BarkingCat.domain.member.service.MemberValidator;
-import PetShop.BarkingCat.domain.member_temp.dto.MemberForm;
-import PetShop.BarkingCat.domain.member_temp.model.MemberTemp;
-import PetShop.BarkingCat.domain.member_temp.repository.MemberTempRepository;
-import PetShop.BarkingCat.domain.member_temp.repository.query.MemberTempQueryRepository;
+import PetShop.BarkingCat.domain.member.member_temp.model.MemberTemp;
+import PetShop.BarkingCat.domain.member.member_temp.repository.MemberTempRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,6 +1,6 @@
-package PetShop.BarkingCat.domain.member_temp.repository.query;
+package PetShop.BarkingCat.domain.member.member_temp.repository.query;
 
-import PetShop.BarkingCat.domain.member_temp.model.MemberTemp;
+import PetShop.BarkingCat.domain.member.member_temp.model.MemberTemp;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;

@@ -1,7 +1,7 @@
-package PetShop.BarkingCat.domain.member_temp;
+package PetShop.BarkingCat.domain.member.member_temp;
 
-import PetShop.BarkingCat.domain.member_temp.dto.MemberForm;
-import PetShop.BarkingCat.domain.member_temp.service.MemberTempService;
+import PetShop.BarkingCat.domain.member.member_temp.dto.MemberForm;
+import PetShop.BarkingCat.domain.member.member_temp.service.MemberTempService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

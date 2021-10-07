@@ -4,8 +4,7 @@ import PetShop.BarkingCat.common.security.JwtService;
 import PetShop.BarkingCat.domain.member.dto.LoginForm;
 import PetShop.BarkingCat.domain.member.model.Member;
 import PetShop.BarkingCat.domain.member.repository.MemberRepository;
-import PetShop.BarkingCat.domain.member_temp.repository.MemberTempRepository;
-import PetShop.BarkingCat.domain.member_temp.repository.query.MemberTempQueryRepository;
+import PetShop.BarkingCat.domain.member.member_temp.repository.query.MemberTempQueryRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

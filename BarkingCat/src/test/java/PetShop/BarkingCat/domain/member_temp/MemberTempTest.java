@@ -1,7 +1,7 @@
 package PetShop.BarkingCat.domain.member_temp;
 
 import PetShop.BarkingCat.domain.member.model.Member;
-import PetShop.BarkingCat.domain.member_temp.model.MemberTemp;
+import PetShop.BarkingCat.domain.member.member_temp.model.MemberTemp;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

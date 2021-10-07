@@ -1,4 +1,4 @@
-package PetShop.BarkingCat.domain.member_temp.model;
+package PetShop.BarkingCat.domain.member.member_temp.model;
 
 import PetShop.BarkingCat.common.base.model.Base;
 import PetShop.BarkingCat.domain.member.model.Member;
