@@ -3,6 +3,7 @@ package PetShop.BarkingCat.domain.member_temp.model;
 import PetShop.BarkingCat.common.base.model.Base;
 import PetShop.BarkingCat.domain.member.model.Member;
 import lombok.Builder;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -38,6 +39,7 @@ public class MemberTemp extends Base {
         this.memberType = memberType;
         this.name = name;
         this.businessNumber = businessNumber;
+        validateBusinessNumber();
     }
 
     public Member createMember() {
@@ -49,5 +51,23 @@ public class MemberTemp extends Base {
                 .name(name)
                 .businessNumber(businessNumber)
                 .build();
+    }
+
+    private void validateBusinessNumber() {
+        if (isNormalMember()) {
+            return;
+        }
+
+        if (businessNumber.isBlank()) {
+            throw new RuntimeException("사업자번호를 입력하여야 합니다");
+        }
+    }
+
+    private boolean isNormalMember() {
+        return memberType == Member.MemberType.NORMAL;
+    }
+
+    public Member.MemberType type() {
+        return memberType;
     }
 }

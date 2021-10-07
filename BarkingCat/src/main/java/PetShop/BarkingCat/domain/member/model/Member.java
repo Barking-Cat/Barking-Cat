@@ -28,14 +28,11 @@ public class Member extends Base {
 
     private String businessNumber;
 
-    @Enumerated(EnumType.STRING)
-    private AuthStatus authStatus;
-
     protected Member() {
     }
 
     @Builder
-    public Member(Long id, String email, String password, String phone, MemberType memberType, String name, String businessNumber, AuthStatus authStatus) {
+    public Member(Long id, String email, String password, String phone, MemberType memberType, String name, String businessNumber) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -43,7 +40,7 @@ public class Member extends Base {
         this.memberType = memberType;
         this.name = name;
         this.businessNumber = businessNumber;
-        this.authStatus = authStatus;
+        validateBusinessNumber();
     }
 
     public void checkPassword(String password, PasswordEncoder passwordEncoder) {
@@ -54,6 +51,20 @@ public class Member extends Base {
 
     private boolean passwordIsNotEqual(String password, PasswordEncoder passwordEncoder) {
         return !passwordEncoder.matches(password, this.password);
+    }
+
+    private void validateBusinessNumber() {
+        if (isNormalMember()) {
+            return;
+        }
+
+        if (businessNumber.isBlank()) {
+            throw new RuntimeException("사업자번호를 입력하여야 합니다");
+        }
+    }
+
+    private boolean isNormalMember() {
+        return memberType == Member.MemberType.NORMAL;
     }
 
     public enum MemberType {

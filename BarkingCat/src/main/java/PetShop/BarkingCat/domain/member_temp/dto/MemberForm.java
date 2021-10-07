@@ -1,7 +1,8 @@
-package PetShop.BarkingCat.domain.member.dto;
+package PetShop.BarkingCat.domain.member_temp.dto;
 
 import PetShop.BarkingCat.domain.member.model.Member;
 import PetShop.BarkingCat.domain.member.service.MemberValidator;
+import PetShop.BarkingCat.domain.member_temp.model.MemberTemp;
 import lombok.Data;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -22,8 +23,10 @@ public class MemberForm {
 
     private Member.AuthStatus authStatus;
 
-    public Member entity() {
-        return Member
+    public MemberTemp entity(MemberValidator memberValidator, PasswordEncoder passwordEncoder) {
+        validate(memberValidator);
+        encryptPassword(passwordEncoder);
+        return MemberTemp
                 .builder()
                 .email(email)
                 .password(password)
@@ -31,13 +34,11 @@ public class MemberForm {
                 .memberType(memberType)
                 .name(name)
                 .businessNumber(businessNumber)
-                .authStatus(authStatus)
                 .build();
     }
 
-    public void validate(MemberValidator memberValidator) {
-        memberValidator.validateDuplicateMember(email);
-        memberValidator.validateAuthPhoneNumber(authStatus);
+    private void validate(MemberValidator memberValidator) {
+        memberValidator.validateEmail(email);
     }
 
     public void encryptPassword(PasswordEncoder passwordEncoder) {

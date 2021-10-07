@@ -1,6 +1,6 @@
 package PetShop.BarkingCat.domain.member;
 
-import PetShop.BarkingCat.domain.member.dto.MemberForm;
+import PetShop.BarkingCat.domain.member_temp.dto.MemberForm;
 import PetShop.BarkingCat.domain.member.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +19,4 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @PostMapping("/join")
-    public ResponseEntity<?> joinMember(@RequestBody MemberForm memberForm) {
-        memberService.joinMember(memberForm);
-        return ResponseEntity.ok(HttpStatus.CREATED);
-    }
 }
