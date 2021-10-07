@@ -5,8 +5,8 @@ import PetShop.BarkingCat.domain.member.repository.MemberRepository;
 import PetShop.BarkingCat.domain.member.service.MemberValidator;
 import PetShop.BarkingCat.domain.member_temp.dto.MemberForm;
 import PetShop.BarkingCat.domain.member_temp.model.MemberTemp;
-import PetShop.BarkingCat.domain.member_temp.repository.query.MemberTempQueryRepository;
 import PetShop.BarkingCat.domain.member_temp.repository.MemberTempRepository;
+import PetShop.BarkingCat.domain.member_temp.repository.query.MemberTempQueryRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,7 +57,8 @@ public class MemberTempService {
 
     @Transactional
     public void auth(Long memberTempId) {
-        MemberTemp memberTemp = memberTempQueryRepository.findByIdNotDeleted(memberTempId);
+        MemberTemp memberTemp = memberTempQueryRepository.findByIdNotDeleted(memberTempId)
+                .orElseThrow(() -> new RuntimeException("존재하지 않은 사용자입니다."));
 
         saveMember(memberTemp);
         memberTemp.delete();

@@ -5,6 +5,8 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 import static PetShop.BarkingCat.domain.member_temp.model.QMemberTemp.memberTemp;
 
 @Repository
@@ -15,22 +17,26 @@ public class MemberTempQueryRepository {
         this.query = query;
     }
 
-    public MemberTemp findByIdNotDeleted(Long memberTempId) {
-        return query.selectFrom(memberTemp)
-                .where(
-                        memberTempIdEq(memberTempId),
-                        notDeleted()
-                )
-                .fetchFirst();
+    public Optional<MemberTemp> findByIdNotDeleted(Long memberTempId) {
+        return Optional.ofNullable(
+                query.selectFrom(memberTemp)
+                        .where(
+                                memberTempIdEq(memberTempId),
+                                notDeleted()
+                        )
+                        .fetchFirst()
+        );
     }
 
-    public MemberTemp findByEmailNotDeleted(String email) {
-        return query.selectFrom(memberTemp)
-                .where(
-                        emailEq(email),
-                        notDeleted()
-                )
-                .fetchFirst();
+    public Optional<MemberTemp> findByEmailNotDeleted(String email) {
+        return Optional.ofNullable(
+                query.selectFrom(memberTemp)
+                        .where(
+                                emailEq(email),
+                                notDeleted()
+                        )
+                        .fetchOne()
+        );
     }
 
     private BooleanExpression emailEq(String email) {
