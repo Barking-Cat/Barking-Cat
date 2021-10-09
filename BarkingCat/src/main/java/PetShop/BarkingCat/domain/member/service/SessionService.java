@@ -3,6 +3,7 @@ package PetShop.BarkingCat.domain.member.service;
 import PetShop.BarkingCat.common.security.JwtService;
 import PetShop.BarkingCat.domain.member.dto.LoginForm;
 import PetShop.BarkingCat.domain.member.member_temp.repository.query.MemberTempQueryRepository;
+import PetShop.BarkingCat.domain.member.model.objects.Email;
 import PetShop.BarkingCat.domain.member.model.Member;
 import PetShop.BarkingCat.domain.member.repository.MemberRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,7 +30,7 @@ public class SessionService {
     }
 
     public String login(LoginForm loginForm, int duration) {
-        Optional<Member> memberOptional = memberRepository.findByEmail(loginForm.getEmail());
+        Optional<Member> memberOptional = memberRepository.findByEmail(new Email(loginForm.getEmail()));
 
         if (memberOptional.isEmpty()) {
             findMemberTemp(loginForm.getEmail());

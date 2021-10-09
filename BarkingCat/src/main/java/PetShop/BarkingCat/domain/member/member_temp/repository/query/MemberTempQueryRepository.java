@@ -1,13 +1,14 @@
 package PetShop.BarkingCat.domain.member.member_temp.repository.query;
 
 import PetShop.BarkingCat.domain.member.member_temp.model.MemberTemp;
+import PetShop.BarkingCat.domain.member.model.objects.Email;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-import static PetShop.BarkingCat.domain.member_temp.model.QMemberTemp.memberTemp;
+import static PetShop.BarkingCat.domain.member.member_temp.model.QMemberTemp.memberTemp;
 
 @Repository
 public class MemberTempQueryRepository {
@@ -39,7 +40,7 @@ public class MemberTempQueryRepository {
     }
 
     private BooleanExpression emailEq(String email) {
-        return memberTemp.email.eq(email);
+        return memberTemp.email.eq(new Email(email));
     }
 
     private BooleanExpression notDeleted() {

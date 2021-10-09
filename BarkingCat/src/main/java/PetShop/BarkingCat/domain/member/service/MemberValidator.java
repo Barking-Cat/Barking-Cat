@@ -1,10 +1,9 @@
 package PetShop.BarkingCat.domain.member.service;
 
 import PetShop.BarkingCat.domain.member.member_temp.repository.query.MemberTempQueryRepository;
+import PetShop.BarkingCat.domain.member.model.objects.Email;
 import PetShop.BarkingCat.domain.member.repository.MemberRepository;
 import org.springframework.stereotype.Component;
-
-import java.util.regex.Pattern;
 
 @Component
 public class MemberValidator {
@@ -18,17 +17,12 @@ public class MemberValidator {
         this.memberTempQueryRepository = memberTempQueryRepository;
     }
 
-    private static final String REGEX = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
-
-    private static final Pattern PATTERN = Pattern.compile(REGEX);
-
     public void validateEmail(String email) {
         validateDuplicateEmail(email);
-        validateEmailPatter(email);
     }
 
     private void validateDuplicateEmail(String email) {
-        Long count = memberRepository.countByEmail(email);
+        Long count = memberRepository.countByEmail(new Email(email));
 
         if (memberIsPresent(count)) {
             throw new RuntimeException("이미 등록된 회원이메일 입니다");
@@ -39,17 +33,6 @@ public class MemberValidator {
         if (exists) {
             throw new RuntimeException("승인 대기중인 이메일입니다");
         }
-    }
-
-    private void validateEmailPatter(String email) {
-        if (emailNotMatchWithPattern(email)) {
-            throw new RuntimeException("이메일 형식이 맞지 않습니다");
-        }
-    }
-
-    private boolean emailNotMatchWithPattern(String email) {
-        return !PATTERN.matcher(email)
-                .matches();
     }
 
     private boolean memberIsPresent(Long count) {

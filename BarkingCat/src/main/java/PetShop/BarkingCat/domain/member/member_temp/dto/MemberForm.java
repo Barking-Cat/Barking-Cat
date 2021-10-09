@@ -1,8 +1,9 @@
 package PetShop.BarkingCat.domain.member.member_temp.dto;
 
+import PetShop.BarkingCat.domain.member.member_temp.model.MemberTemp;
+import PetShop.BarkingCat.domain.member.model.objects.Email;
 import PetShop.BarkingCat.domain.member.model.Member;
 import PetShop.BarkingCat.domain.member.service.MemberValidator;
-import PetShop.BarkingCat.domain.member.member_temp.model.MemberTemp;
 import lombok.Data;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -28,7 +29,7 @@ public class MemberForm {
         encryptPassword(passwordEncoder);
         return MemberTemp
                 .builder()
-                .email(email)
+                .email(new Email(email))
                 .password(password)
                 .phone(phone)
                 .memberType(memberType)

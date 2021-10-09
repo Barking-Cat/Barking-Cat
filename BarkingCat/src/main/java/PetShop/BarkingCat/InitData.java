@@ -12,6 +12,7 @@ import PetShop.BarkingCat.domain.board.model.Category;
 import PetShop.BarkingCat.domain.board.model.Comment;
 import PetShop.BarkingCat.domain.board.model.objects.Tags;
 import PetShop.BarkingCat.domain.board.model.objects.Title;
+import PetShop.BarkingCat.domain.member.model.objects.Email;
 import PetShop.BarkingCat.domain.member.model.Member;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -51,7 +52,7 @@ public class InitData {
         @Transactional
         public void init() {
             Member member = Member.builder()
-                    .email("test@naver.com")
+                    .email(new Email("test@naver.com"))
                     .password(passwordEncoder.encode("1q2w3e4r"))
                     .name("Tester")
                     .phone("010-0000-1111")
