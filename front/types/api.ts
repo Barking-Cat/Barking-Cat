@@ -1,20 +1,7 @@
+import type { Post } from './post';
+
 export interface BoardResponse {
-  content: [
-    {
-      boardId: number;
-      categoryId: number;
-      memberId: number;
-      title: string;
-      content: string;
-      region: string;
-      animalType: string;
-      sex: string;
-      age: 3;
-      price: 50000;
-      dueDate: string;
-      tags: string[];
-    }
-  ];
+  content: Post[];
   pageable: {
     sort: {
       sorted: boolean;
@@ -40,16 +27,4 @@ export interface BoardResponse {
   numberOfElements: number;
   first: boolean;
   empty: boolean;
-}
-
-export interface PostElement {
-  id: number;
-  img: string;
-  title: string;
-  tags: string[];
-  reads: number;
-  likes: number;
-  comments: number;
-  createdDate: string;
-  dueDate: string;
 }

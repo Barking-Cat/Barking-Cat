@@ -1,14 +1,14 @@
 import PostItem from './PostItem';
-import { PostElement } from 'types/api';
+import type { Post } from 'types/post';
 
 interface PostListProps {
-  items: PostElement[];
+  items: Post[];
 }
 function PostList({ items }: PostListProps) {
   return (
     <ul>
       {items.map((item) => (
-        <PostItem key={item.id} {...item} />
+        <PostItem key={item.boardId} {...item} />
       ))}
     </ul>
   );

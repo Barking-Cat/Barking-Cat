@@ -1,52 +1,42 @@
 import { render, screen } from '@testing-library/react';
-import type { PostElement } from 'types/api';
 import PostItem from './PostItem';
+import { mockData } from './PostList.test';
 
-const mockData: PostElement = {
-  id: 1,
-  img: 'http://sample-image.com',
-  title: '사지말고 입양하세요.',
-  tags: ['3살', '서울', '여아'],
-  reads: 42,
-  likes: 12,
-  comments: 5,
-  createdDate: '2021-10-02',
-  dueDate: '2021-11-02',
-};
+const data = mockData[0];
 
 describe('PostCard', () => {
   it('should render pet image', () => {
-    render(<PostItem {...mockData} />);
+    render(<PostItem {...data} />);
     expect(screen.getByRole('img', { name: 'pet-image' })).toBeInTheDocument();
   });
 
   it('should render post title', () => {
-    render(<PostItem {...mockData} />);
+    render(<PostItem {...data} />);
     expect(screen.getByRole('heading')).toBeInTheDocument();
   });
 
   it('should render post tags', () => {
-    render(<PostItem {...mockData} />);
-    expect(screen.getAllByRole('button')).toHaveLength(mockData.tags.length);
+    render(<PostItem {...data} />);
+    expect(screen.getAllByRole('button')).toHaveLength(data.tags.length);
   });
 
   it('should render post dates', () => {
-    render(<PostItem {...mockData} />);
+    render(<PostItem {...data} />);
     expect(
-      screen.getByText(`${mockData.createdDate} ~ ${mockData.dueDate}`)
+      screen.getByText(`${data.createdAt} ~ ${data.dueDate}`)
     ).toBeInTheDocument();
   });
 
   it('should render post numeric info', () => {
-    render(<PostItem {...mockData} />);
-    expect(screen.getByLabelText('reads')).toHaveTextContent(
-      mockData.reads.toString()
+    render(<PostItem {...data} />);
+    expect(screen.getByLabelText('hits')).toHaveTextContent(
+      data.hits.toString()
     );
     expect(screen.getByLabelText('likes')).toHaveTextContent(
-      mockData.likes.toString()
+      data.likes?.toString() ?? '0'
     );
     expect(screen.getByLabelText('comments')).toHaveTextContent(
-      mockData.comments.toString()
+      data.comments?.toString() ?? '0'
     );
   });
 });

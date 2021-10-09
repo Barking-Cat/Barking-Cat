@@ -1,28 +1,30 @@
-import { PostElement } from 'types/api';
+import moment from 'moment';
+import { Post } from 'types/post';
 
-interface PostItemProps extends PostElement {}
+interface PostItemProps extends Post {
+  likes?: number;
+  comments?: number;
+}
 
 function PostItem({
-  img,
   title,
   tags,
-  reads,
+  hits,
+  dueDate,
   likes,
   comments,
-  createdDate,
-  dueDate,
+  createdAt,
+  imgs,
 }: PostItemProps) {
   return (
     <li>
-      <img src={img} alt="pet-image" />
+      <img alt="pet-image" />
       <h3>{title}</h3>
-      {tags.map((tag) => (
-        <button key={tag}>{tag}</button>
-      ))}
-      <p>{`${createdDate} ~ ${dueDate}`}</p>
-      <span aria-label="reads">{reads}</span>
-      <span aria-label="likes">{likes}</span>
-      <span aria-label="comments">{comments}</span>
+      {tags && tags.map((tag) => <button key={tag}>{tag}</button>)}
+      <p>{`${createdAt ?? moment().format('YYYY-MM-DD')} ~ ${dueDate}`}</p>
+      <span aria-label="hits">{hits}</span>
+      <span aria-label="likes">{likes ?? 0}</span>
+      <span aria-label="comments">{comments ?? 0}</span>
     </li>
   );
 }

@@ -1,33 +1,21 @@
-import { PostElement } from 'types/api';
 import { PostList } from '@/components/board/post';
 import axios from 'axios';
-import type { NextPage } from 'next';
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
-import { BoardResponse } from 'types/api';
 import styles from '../styles/Home.module.css';
 import { useRouter } from 'next/router';
+import type { NextPage } from 'next';
+import type { BoardResponse } from 'types/api';
+import type { Post } from 'types/post';
 
 const Home: NextPage = () => {
-  const [data, setData] = useState<PostElement[]>([]);
+  const [data, setData] = useState<Post[]>([]);
 
   const router = useRouter();
 
   async function fetch() {
     const { data } = await axios.get<BoardResponse>('/api/board');
-    setData(
-      data.content.map((e) => ({
-        id: e.boardId,
-        createdDate: '2021-10-02',
-        dueDate: e.dueDate,
-        title: e.title,
-        tags: e.tags,
-        img: 'img',
-        likes: 1,
-        comments: 2,
-        reads: 3,
-      }))
-    );
+    setData(data.content);
   }
 
   useEffect(() => {
