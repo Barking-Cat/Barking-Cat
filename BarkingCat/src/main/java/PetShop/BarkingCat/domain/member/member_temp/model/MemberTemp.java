@@ -1,9 +1,9 @@
-package PetShop.BarkingCat.domain.member_temp.model;
+package PetShop.BarkingCat.domain.member.member_temp.model;
 
 import PetShop.BarkingCat.common.base.model.Base;
+import PetShop.BarkingCat.domain.member.model.objects.Email;
 import PetShop.BarkingCat.domain.member.model.Member;
 import lombok.Builder;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -15,7 +15,7 @@ public class MemberTemp extends Base {
     @Column(name = "member_id")
     private Long id;
 
-    private String email;
+    private Email email;
 
     private String password;
 
@@ -31,7 +31,7 @@ public class MemberTemp extends Base {
     }
 
     @Builder
-    public MemberTemp(Long id, String email, String password, String phone, Member.MemberType memberType, String name, String businessNumber) {
+    public MemberTemp(Long id, Email email, String password, String phone, Member.MemberType memberType, String name, String businessNumber) {
         this.id = id;
         this.email = email;
         this.password = password;

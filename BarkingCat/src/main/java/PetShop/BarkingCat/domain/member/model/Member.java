@@ -2,6 +2,7 @@ package PetShop.BarkingCat.domain.member.model;
 
 import PetShop.BarkingCat.common.base.model.Base;
 import PetShop.BarkingCat.domain.member.dto.MemberPayload;
+import PetShop.BarkingCat.domain.member.model.objects.Email;
 import lombok.Builder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -15,7 +16,7 @@ public class Member extends Base {
     @Column(name = "member_id")
     private Long id;
 
-    private String email;
+    private Email email;
 
     private String password;
 
@@ -32,7 +33,7 @@ public class Member extends Base {
     }
 
     @Builder
-    public Member(Long id, String email, String password, String phone, MemberType memberType, String name, String businessNumber) {
+    public Member(Long id, Email email, String password, String phone, MemberType memberType, String name, String businessNumber) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -76,6 +77,6 @@ public class Member extends Base {
     }
 
     public MemberPayload createPayload() {
-        return new MemberPayload(id, email);
+        return new MemberPayload(id, email.content());
     }
 }

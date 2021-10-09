@@ -1,11 +1,8 @@
 package PetShop.BarkingCat.domain.member.service;
 
-import PetShop.BarkingCat.domain.member_temp.dto.MemberForm;
-import PetShop.BarkingCat.domain.member.model.Member;
 import PetShop.BarkingCat.domain.member.repository.MemberRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MemberService {
