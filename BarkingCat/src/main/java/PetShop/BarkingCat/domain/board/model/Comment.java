@@ -29,8 +29,34 @@ public class Comment extends Base {
 
     @Builder
     public Comment(Board board, Long memberId, String content) {
+        validate(content);
         this.board = board;
         this.memberId = memberId;
         this.content = content;
+    }
+
+    private void validate(String content) {
+        if(isEmptyContent(content)){
+            throw new RuntimeException("내용을 입력해주세요.");
+        }
+        if(contentLengthIsOverTheMax(content)){
+            throw new RuntimeException("500자 이내로 입력해주세요.");
+        }
+    }
+
+    private boolean contentLengthIsOverTheMax(String content) {
+        return content.length() > 500;
+    }
+
+    private boolean isEmptyContent(String content) {
+        return content.length() == 0;
+    }
+
+    public Comment mapWriter(Long memberId) {
+        this.memberId = memberId;
+        return this;
+    }
+    public Long id() {
+        return this.id;
     }
 }
