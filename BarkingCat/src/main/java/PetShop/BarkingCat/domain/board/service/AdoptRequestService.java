@@ -26,8 +26,6 @@ public class AdoptRequestService {
         AdoptRequest adoptRequest = adoptRequestForm.entity()
                 .mapBoard(board);
 
-        System.out.println(adoptRequest);
-
         return adoptRequestRepository.save(adoptRequest).id();
     }
 }
