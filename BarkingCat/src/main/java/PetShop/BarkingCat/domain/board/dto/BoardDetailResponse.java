@@ -7,6 +7,7 @@ import PetShop.BarkingCat.common.base.model.constants.Sex;
 import PetShop.BarkingCat.domain.board.model.objects.Tag;
 import PetShop.BarkingCat.domain.board.model.objects.Tags;
 import PetShop.BarkingCat.domain.board.model.objects.Title;
+import PetShop.BarkingCat.domain.member.model.objects.Email;
 import lombok.Getter;
 
 import java.math.BigDecimal;
@@ -28,12 +29,14 @@ public class BoardDetailResponse {
     private final Money price;
     private final LocalDateTime dueDate;
     private final Tags tags;
-    private final String memberEmail;
+    private final Long hits;
+    private final Long likes;
+    private final LocalDateTime createDateTime;
+    private final Email memberEmail;
     private final String memberPhone;
     private final String memberName;
-    private final Long hits;
 
-    public BoardDetailResponse(Long boardId, Long categoryId, Long memberId, Title title, String content, Region region, AnimalType animalType, Sex sex, Integer age, Money price, LocalDateTime dueDate, Tags tags, Long hits, String memberEmail, String memberPhone, String memberName) {
+    public BoardDetailResponse(Long boardId, Long categoryId, Long memberId, Title title, String content, Region region, AnimalType animalType, Sex sex, Integer age, Money price, LocalDateTime dueDate, Tags tags, Long hits, Long likes, LocalDateTime createDateTime, Email memberEmail, String memberPhone, String memberName) {
         this.boardId = boardId;
         this.categoryId = categoryId;
         this.memberId = memberId;
@@ -47,13 +50,15 @@ public class BoardDetailResponse {
         this.dueDate = dueDate;
         this.tags = tags;
         this.hits = hits;
+        this.likes = likes;
+        this.createDateTime = createDateTime;
         this.memberEmail = memberEmail;
         this.memberPhone = memberPhone;
         this.memberName = memberName;
     }
 
     public String getTitle() {
-        return title.title();
+        return title.content();
     }
 
     public BigDecimal getPrice() {
@@ -65,5 +70,9 @@ public class BoardDetailResponse {
                 .stream()
                 .map(Tag::content)
                 .collect(Collectors.toList());
+    }
+
+    public String getMemberEmail() {
+        return memberEmail.content();
     }
 }
