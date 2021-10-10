@@ -17,9 +17,6 @@ public class CommentTest {
                 -> {
             aComment().content("").build();
         }).isInstanceOf(RuntimeException.class);
-
-
-
     }
 
     @Test
@@ -32,6 +29,5 @@ public class CommentTest {
             aComment().content(given).build();
         }).isInstanceOf(RuntimeException.class);
     }
-
 
 }

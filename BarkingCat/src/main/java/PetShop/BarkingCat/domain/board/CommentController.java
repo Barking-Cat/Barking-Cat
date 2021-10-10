@@ -6,10 +6,7 @@ import PetShop.BarkingCat.domain.board.dto.CommentForm;
 import PetShop.BarkingCat.domain.board.service.CommentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/comment")
@@ -22,12 +19,12 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @PostMapping("/board")
-    public ResponseEntity<?> registerComment(@RequestBody CommentForm commentForm, @JwtClaim("info.id") Long memberId){
+    @PostMapping("/board/{boardId}")
+    public ResponseEntity<?> registerComment(@RequestBody CommentForm commentForm, @JwtClaim("info.id") Long memberId, @PathVariable Long boardId){
 
-        Long commentId = commentService.registerComment(commentForm, memberId);
+        commentService.registerComment(commentForm, memberId, boardId);
 
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(commentId);
+        return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
 }
