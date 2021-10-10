@@ -4,11 +4,16 @@ import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css';
 import { useRouter } from 'next/router';
-import type { NextPage } from 'next';
+import type { NextPage, NextPageContext } from 'next';
 import type { BoardResponse } from 'types/api';
 import type { Post } from 'types/post';
+import { deleteCookie, getCookie } from 'utils';
 
-const Home: NextPage = () => {
+interface HomeProps {
+  isLogin: boolean;
+}
+
+const Home: NextPage<HomeProps> = ({ isLogin }) => {
   const [data, setData] = useState<Post[]>([]);
 
   const router = useRouter();
@@ -29,6 +34,18 @@ const Home: NextPage = () => {
     router.push('/signup');
   }
 
+  async function handleLogoutClick() {
+    if (getCookie('login')) {
+      deleteCookie('login');
+      await axios.post('/api/session/logout');
+      router.push('/');
+    }
+  }
+
+  function handleNewPostClick() {
+    router.push('/post/new');
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -38,12 +55,19 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <button onClick={handleSignInClick}>로그인</button>
-        <button onClick={handleSignUpClick}>회원가입</button>
+        {!isLogin && <button onClick={handleSignInClick}>로그인</button>}
+        {!isLogin && <button onClick={handleSignUpClick}>회원가입</button>}
+        <button onClick={handleNewPostClick}>글쓰기</button>
+        {isLogin && <button onClick={handleLogoutClick}>로그아웃</button>}
         <PostList items={data} />
       </main>
     </div>
   );
 };
 
+Home.getInitialProps = (ctx: NextPageContext) => {
+  const isLogin = getCookie('login', ctx);
+
+  return { isLogin: !!isLogin };
+};
 export default Home;
