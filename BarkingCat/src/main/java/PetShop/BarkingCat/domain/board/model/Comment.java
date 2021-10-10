@@ -39,6 +39,7 @@ public class Comment extends Base {
         if(isEmptyContent(content)){
             throw new RuntimeException("내용을 입력해주세요.");
         }
+        
         if(contentLengthIsOverTheMax(content)){
             throw new RuntimeException("500자 이내로 입력해주세요.");
         }
@@ -56,6 +57,7 @@ public class Comment extends Base {
         this.memberId = memberId;
         return this;
     }
+    
     public Comment mapBoard(Board board){
         this.board = board;
         return this;
