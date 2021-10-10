@@ -25,8 +25,11 @@ public class CommentService {
 
     @Transactional
     public void registerComment(CommentForm commentForm, Long memberId, Long boardId){
-        memberRepository.findById(memberId).orElseThrow(() -> new RuntimeException("등록된 사용자가 없습니다."));
-        Board board = boardRepository.findById(boardId).orElseThrow(() -> new RuntimeException("없거나 삭제된 게시물 입니다."));
+        memberRepository.findById(memberId)
+            .orElseThrow(() -> new RuntimeException("등록된 사용자가 없습니다."));
+        
+        Board board = boardRepository.findById(boardId)
+            .orElseThrow(() -> new RuntimeException("없거나 삭제된 게시물 입니다."));
 
         Comment comment = commentForm.entity()
                 .mapWriter(memberId)
