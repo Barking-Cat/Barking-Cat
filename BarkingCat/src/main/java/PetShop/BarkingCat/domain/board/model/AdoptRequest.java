@@ -1,9 +1,9 @@
 package PetShop.BarkingCat.domain.board.model;
 
 import PetShop.BarkingCat.common.base.model.Base;
+import PetShop.BarkingCat.common.base.model.Residence;
 import PetShop.BarkingCat.common.base.model.constants.Earning;
 import PetShop.BarkingCat.common.base.model.constants.Region;
-import PetShop.BarkingCat.common.base.model.Residence;
 import lombok.Builder;
 
 import javax.persistence.*;
@@ -25,30 +25,39 @@ public class AdoptRequest extends Base {
     @Enumerated(EnumType.STRING)
     private Earning earning;
 
-    @Embedded
     private Residence residence;
 
-    private int roommateNumber;
+    private Integer roommateNumber;
 
-    private boolean petExist;
+    private Integer petCount;
 
     private String adoptReason;
 
+    @Enumerated(EnumType.STRING)
     private Region region;
 
     public AdoptRequest() {
     }
 
     @Builder
-    public AdoptRequest(Long id, Board board, Long writerId, Earning earning, Residence residence, int roommateNumber, boolean petExist, String adoptReason, Region region) {
+    public AdoptRequest(Long id, Board board, Long writerId, Earning earning, Residence residence, Integer roommateNumber, Integer petCount, String adoptReason, Region region) {
         this.id = id;
         this.board = board;
         this.writerId = writerId;
         this.earning = earning;
         this.residence = residence;
         this.roommateNumber = roommateNumber;
-        this.petExist = petExist;
+        this.petCount = petCount;
         this.adoptReason = adoptReason;
         this.region = region;
+    }
+
+    public AdoptRequest mapBoard(Board board) {
+        this.board = board;
+        return this;
+    }
+
+    public Long id() {
+        return id;
     }
 }

@@ -19,6 +19,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import static PetShop.BarkingCat.domain.board.model.QBoard.board;
+import static PetShop.BarkingCat.domain.board.model.QLikes.likes;
 import static PetShop.BarkingCat.domain.member.model.QMember.member;
 
 @Repository
@@ -42,18 +43,20 @@ public class BoardQueryRepository {
                                 board.category.id,
                                 board.memberId,
                                 board.title,
-                                board.content,
                                 board.region,
                                 board.animalType,
-                                board.sex,
-                                board.age,
-                                board.price,
-                                board.dueDate,
                                 board.tags,
-                                board.hits
+                                board.hits,
+                                likes.count(),
+                                board.createdDateTime,
+                                member.name
                         )
                 )
                 .from(board)
+                .join(member)
+                .on(board.memberId.eq(member.id))
+                .leftJoin(likes)
+                .on(likes.board.id.eq(board.id), likes.deletedDateTime.isNull())
                 .where(
                         isNotDeleted(),
                         animalTypeEq(findBoardCondition.getAnimalType()),
@@ -82,6 +85,8 @@ public class BoardQueryRepository {
                                 board.dueDate,
                                 board.tags,
                                 board.hits,
+                                likes.count(),
+                                board.createdDateTime,
                                 member.email,
                                 member.phone,
                                 member.name
@@ -90,6 +95,9 @@ public class BoardQueryRepository {
                 .from(board)
                 .join(member)
                 .on(board.memberId.eq(member.id))
+                .leftJoin(likes)
+                .on(likes.board.id.eq(board.id))
+                .on(likes.deletedDateTime.isNull())
                 .where(
                         isNotDeleted(),
                         boardIdEq(boardId)

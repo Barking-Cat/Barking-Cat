@@ -38,7 +38,7 @@ public class Title implements Serializable {
         return title.length() > MAX_LENGTH;
     }
 
-    public String title() {
+    public String content() {
         return this.title;
     }
 
