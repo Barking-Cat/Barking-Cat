@@ -30,10 +30,15 @@ public class CommentQueryRepository {
                 .join(member)
                 .on(comment.memberId.eq(member.id))
                 .where(
-                        boardIdEq(boardId)
+                        boardIdEq(boardId),
+                        isNotDeleted()
                 )
                 .orderBy(comment.createdDateTime.desc())
                 .fetch();
+    }
+
+    private BooleanExpression isNotDeleted() {
+        return comment.deletedDateTime.isNull();
     }
 
     private BooleanExpression boardIdEq(Long boardId) {
