@@ -24,7 +24,8 @@ public class CommentQueryRepository {
 
         return query.select(Projections.constructor(CommentResponse.class,
                 comment.content,
-                member.name))
+                member.name,
+                comment.createdDateTime))
                 .from(comment)
                 .join(member)
                 .on(comment.memberId.eq(member.id))
