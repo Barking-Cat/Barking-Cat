@@ -16,11 +16,11 @@ public class AdoptRequestForm {
 
     private Residence.ResidenceType residenceType;
 
-    private int area;
+    private Integer area;
 
-    private int roommateNumber;
+    private Integer roommateNumber;
 
-    private boolean petExist;
+    private Integer petCount;
 
     private String adoptReason;
 
@@ -32,7 +32,7 @@ public class AdoptRequestForm {
                 .earning(earning)
                 .residence(new Residence(residenceType, area))
                 .roommateNumber(roommateNumber)
-                .petExist(petExist)
+                .petCount(petCount)
                 .adoptReason(adoptReason)
                 .region(region)
                 .build();

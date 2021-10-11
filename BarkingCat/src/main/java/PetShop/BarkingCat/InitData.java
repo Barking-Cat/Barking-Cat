@@ -94,7 +94,7 @@ public class InitData {
                     .earning(Earning.FOUR_HUNDRED)
                     .residence(new Residence(Residence.ResidenceType.OWNER, 40))
                     .roommateNumber(3)
-                    .petExist(true)
+                    .petCount(3)
                     .adoptReason("Test Reason")
                     .region(Region.SEOUL)
                     .build();

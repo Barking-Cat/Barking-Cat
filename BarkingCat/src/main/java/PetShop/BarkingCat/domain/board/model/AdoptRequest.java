@@ -27,26 +27,27 @@ public class AdoptRequest extends Base {
 
     private Residence residence;
 
-    private int roommateNumber;
+    private Integer roommateNumber;
 
-    private boolean petExist;
+    private Integer petCount;
 
     private String adoptReason;
 
+    @Enumerated(EnumType.STRING)
     private Region region;
 
     public AdoptRequest() {
     }
 
     @Builder
-    public AdoptRequest(Long id, Board board, Long writerId, Earning earning, Residence residence, int roommateNumber, boolean petExist, String adoptReason, Region region) {
+    public AdoptRequest(Long id, Board board, Long writerId, Earning earning, Residence residence, Integer roommateNumber, Integer petCount, String adoptReason, Region region) {
         this.id = id;
         this.board = board;
         this.writerId = writerId;
         this.earning = earning;
         this.residence = residence;
         this.roommateNumber = roommateNumber;
-        this.petExist = petExist;
+        this.petCount = petCount;
         this.adoptReason = adoptReason;
         this.region = region;
     }

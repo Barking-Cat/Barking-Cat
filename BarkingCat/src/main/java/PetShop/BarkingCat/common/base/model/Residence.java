@@ -11,13 +11,13 @@ public class Residence {
     @Enumerated(EnumType.STRING)
     private ResidenceType residenceType;
 
-    private int area;
+    private Integer area;
 
     public Residence() {
 
     }
 
-    public Residence(ResidenceType residenceType, int area) {
+    public Residence(ResidenceType residenceType, Integer area) {
         this.residenceType = residenceType;
         this.area = area;
     }
