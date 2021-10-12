@@ -3,7 +3,6 @@ package PetShop.BarkingCat.domain.board.dto;
 import PetShop.BarkingCat.common.base.model.Residence;
 import PetShop.BarkingCat.common.base.model.constants.Earning;
 import PetShop.BarkingCat.common.base.model.constants.Region;
-import PetShop.BarkingCat.domain.board.model.objects.Title;
 import PetShop.BarkingCat.domain.member.model.objects.Email;
 import lombok.Getter;
 
