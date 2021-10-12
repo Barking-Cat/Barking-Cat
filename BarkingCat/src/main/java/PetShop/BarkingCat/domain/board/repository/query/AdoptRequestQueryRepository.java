@@ -33,9 +33,7 @@ public class AdoptRequestQueryRepository {
                         adoptRequest.createdDateTime
                 ))
                 .from(adoptRequest)
-                .where(
-                        memberIdEq(memberId)
-                )
+                .where(memberIdEq(memberId))
                 .groupBy(adoptRequest.id)
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -44,7 +42,7 @@ public class AdoptRequestQueryRepository {
         return new PageImpl<>(responses, pageable, responses.size());
     }
 
-    public MyAdoptRequestResponseDetail findDetailByMemberId(Long memberId, Long adoptRequestId) {
+    public MyAdoptRequestResponseDetail findDetailByMemberId(Long adoptRequestId) {
         return query.select(Projections.constructor(MyAdoptRequestResponseDetail.class,
                         adoptRequest.id,
                         adoptRequest.board.id,
@@ -63,14 +61,11 @@ public class AdoptRequestQueryRepository {
                 .from(adoptRequest)
                 .join(member)
                 .on(adoptRequest.writerId.eq(member.id))
-                .where(
-                        adoptRequestIdEq(adoptRequestId),
-                        memberIdEq(memberId)
-                )
+                .where(adoptRequestIdEq(adoptRequestId))
                 .fetchFirst();
     }
 
-    public Page<AdoptRequestResponse> findByBoardId(Long boardWriterId, Long boardId, Pageable pageable) {
+    public Page<AdoptRequestResponse> findByBoardId(Long boardId, Pageable pageable) {
         List<AdoptRequestResponse> responses = query.select(Projections.constructor(AdoptRequestResponse.class,
                         adoptRequest.id,
                         adoptRequest.createdDateTime,
@@ -79,10 +74,7 @@ public class AdoptRequestQueryRepository {
                 .from(adoptRequest)
                 .join(member)
                 .on(adoptRequest.writerId.eq(member.id))
-                .where(
-                        boardIdEq(boardId),
-                        boardWriterIdEq(boardWriterId)
-                )
+                .where(boardIdEq(boardId))
                 .groupBy(adoptRequest.id)
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -91,7 +83,7 @@ public class AdoptRequestQueryRepository {
         return new PageImpl<>(responses, pageable, responses.size());
     }
 
-    public AdoptRequestDetailResponse findDetail(Long boardWriterId, Long boardId, Long adoptRequestId) {
+    public AdoptRequestDetailResponse findDetail(Long adoptRequestId) {
         return query.select(Projections.constructor(AdoptRequestDetailResponse.class,
                         adoptRequest.id,
                         adoptRequest.board.id,
@@ -110,16 +102,8 @@ public class AdoptRequestQueryRepository {
                 .from(adoptRequest)
                 .join(member)
                 .on(adoptRequest.writerId.eq(member.id))
-                .where(
-                        boardWriterIdEq(boardWriterId),
-                        boardIdEq(boardId),
-                        adoptRequestIdEq(adoptRequestId)
-                )
+                .where(adoptRequestIdEq(adoptRequestId))
                 .fetchFirst();
-    }
-
-    private BooleanExpression boardWriterIdEq(Long memberId) {
-        return adoptRequest.board.memberId.eq(memberId);
     }
 
     private BooleanExpression adoptRequestIdEq(Long adoptRequestId) {

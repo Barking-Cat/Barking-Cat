@@ -30,8 +30,8 @@ public class AdoptRequestController {
 
     @GetMapping("/request/{adoptRequestId}")
     @Authenticated
-    public ResponseEntity<?> findMyRequestDetail(@JwtClaim("info.id") Long memberId, @PathVariable Long adoptRequestId) {
-        return ResponseEntity.ok(adoptRequestQueryService.findDetail(memberId, adoptRequestId));
+    public ResponseEntity<?> findMyRequestDetail(@PathVariable Long adoptRequestId) {
+        return ResponseEntity.ok(adoptRequestQueryService.findByRequestsDetail(adoptRequestId));
     }
 
     @GetMapping("/board/{boardId}")
