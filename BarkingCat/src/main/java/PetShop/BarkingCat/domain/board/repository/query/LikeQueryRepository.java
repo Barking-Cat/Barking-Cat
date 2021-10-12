@@ -27,6 +27,17 @@ public class LikeQueryRepository {
                 .fetchFirst() != null;
     }
 
+    public Likes findRecentLike(Long boardId, Long memberId) {
+        return query.selectFrom(likes)
+                .where(
+                        boardIdEq(boardId),
+                        memberIdEq(memberId),
+                        isNotDeleted()
+                )
+                .orderBy(likes.id.desc())
+                .fetchFirst();
+    }
+
     private BooleanExpression isNotDeleted() {
         return likes.deletedDateTime.isNull();
     }
@@ -37,16 +48,5 @@ public class LikeQueryRepository {
 
     private BooleanExpression boardIdEq(Long boardId) {
         return likes.board.id.eq(boardId);
-    }
-
-    public Likes findRecentLike(Long boardId, Long memberId) {
-        return query.selectFrom(likes)
-                .where(
-                        boardIdEq(boardId),
-                        memberIdEq(memberId),
-                        isNotDeleted()
-                )
-                .orderBy(likes.id.desc())
-                .fetchFirst();
     }
 }
