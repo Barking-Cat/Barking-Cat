@@ -6,13 +6,11 @@ import java.time.LocalDateTime;
 
 @Getter
 public class AdoptRequestResponse {
-    private final Long id;
-    private final LocalDateTime createDateTime;
-    private final String writerName;
+    private Long id;
+    private LocalDateTime createDateTime;
 
-    public AdoptRequestResponse(Long id, LocalDateTime createDateTime, String writerName) {
+    public AdoptRequestResponse(Long id, LocalDateTime createDateTime) {
         this.id = id;
         this.createDateTime = createDateTime;
-        this.writerName = writerName;
     }
 }

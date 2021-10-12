@@ -90,7 +90,7 @@ public class Board extends Base {
         hits += 1;
     }
 
-    public boolean writerIsNotEqual(Long memberId) {
-        return !this.memberId.equals(memberId);
+    public boolean writerIsEqual(Long memberId) {
+        return this.memberId.equals(memberId);
     }
 }

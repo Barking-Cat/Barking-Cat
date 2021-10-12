@@ -28,12 +28,6 @@ public class AdoptRequestController {
         return ResponseEntity.ok(adoptRequestQueryService.findByBoardId(memberId, boardId, pageable));
     }
 
-    @GetMapping("/board/{boardId}/request/{adoptRequestId}")
-    @Authenticated
-    public ResponseEntity<?> findDetail(@JwtClaim("info.id") Long memberId, @PathVariable Long boardId, @PathVariable Long adoptRequestId, Pageable pageable) {
-        return ResponseEntity.ok(adoptRequestQueryService.findDetail(memberId, boardId, adoptRequestId));
-    }
-
     @PostMapping
     @Authenticated
     public ResponseEntity<?> registerAdoptRequest(@JwtClaim("info.id") Long memberId, @RequestBody AdoptRequestForm adoptRequestForm) {
