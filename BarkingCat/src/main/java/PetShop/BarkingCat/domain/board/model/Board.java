@@ -89,8 +89,4 @@ public class Board extends Base {
     public void hit() {
         hits += 1;
     }
-
-    public boolean writerIsEqual(Long memberId) {
-        return this.memberId.equals(memberId);
-    }
 }

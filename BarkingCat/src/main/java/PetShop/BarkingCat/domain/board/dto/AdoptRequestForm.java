@@ -10,6 +10,8 @@ import lombok.Data;
 public class AdoptRequestForm {
     private Long boardId;
 
+    private Long writerId;
+
     private Earning earning;
 
     private Residence.ResidenceType residenceType;
@@ -26,6 +28,7 @@ public class AdoptRequestForm {
 
     public AdoptRequest entity() {
         return AdoptRequest.builder()
+                .writerId(writerId)
                 .earning(earning)
                 .residence(new Residence(residenceType, area))
                 .roommateNumber(roommateNumber)

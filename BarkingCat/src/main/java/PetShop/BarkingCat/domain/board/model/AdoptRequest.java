@@ -57,11 +57,6 @@ public class AdoptRequest extends Base {
         return this;
     }
 
-    public AdoptRequest mapWriter(Long memberId) {
-        this.writerId = memberId;
-        return this;
-    }
-
     public Long id() {
         return id;
     }
