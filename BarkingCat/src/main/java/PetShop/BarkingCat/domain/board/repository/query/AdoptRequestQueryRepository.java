@@ -1,5 +1,6 @@
 package PetShop.BarkingCat.domain.board.repository.query;
 
+import PetShop.BarkingCat.domain.board.dto.AdoptRequestDetailResponse;
 import PetShop.BarkingCat.domain.board.dto.AdoptRequestResponse;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -25,7 +26,8 @@ public class AdoptRequestQueryRepository {
     public Page<AdoptRequestResponse> findByBoardId(Long boardId, Pageable pageable) {
         List<AdoptRequestResponse> responses = query.select(Projections.constructor(AdoptRequestResponse.class,
                         adoptRequest.id,
-                        adoptRequest.createdDateTime
+                        adoptRequest.createdDateTime,
+                        member.name
                 ))
                 .from(adoptRequest)
                 .join(member)
@@ -37,6 +39,29 @@ public class AdoptRequestQueryRepository {
                 .fetch();
 
         return new PageImpl<>(responses, pageable, responses.size());
+    }
+
+    public AdoptRequestDetailResponse findDetail(Long adoptRequestId) {
+        return query.select(Projections.constructor(AdoptRequestDetailResponse.class,
+                        adoptRequest.id,
+                        adoptRequest.board.id,
+                        adoptRequest.earning,
+                        adoptRequest.residence.residenceType,
+                        adoptRequest.residence.area,
+                        adoptRequest.roommateNumber,
+                        adoptRequest.petCount,
+                        adoptRequest.adoptReason,
+                        adoptRequest.region,
+                        adoptRequest.createdDateTime,
+                        member.name,
+                        member.email,
+                        member.phone
+                ))
+                .from(adoptRequest)
+                .join(member)
+                .on(adoptRequest.writerId.eq(member.id))
+                .where(adoptRequest.id.eq(adoptRequestId))
+                .fetchFirst();
     }
 
     private BooleanExpression boardIdEq(Long boardId) {

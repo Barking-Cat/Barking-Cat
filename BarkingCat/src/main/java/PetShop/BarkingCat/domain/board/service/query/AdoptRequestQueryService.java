@@ -1,5 +1,6 @@
 package PetShop.BarkingCat.domain.board.service.query;
 
+import PetShop.BarkingCat.domain.board.dto.AdoptRequestDetailResponse;
 import PetShop.BarkingCat.domain.board.dto.AdoptRequestResponse;
 import PetShop.BarkingCat.domain.board.model.Board;
 import PetShop.BarkingCat.domain.board.repository.BoardRepository;
@@ -19,13 +20,21 @@ public class AdoptRequestQueryService {
     }
 
     public Page<AdoptRequestResponse> findByBoardId(Long memberId, Long boardId, Pageable pageable) {
+        checkWriter(memberId, boardId);
+        return adoptRequestQueryRepository.findByBoardId(boardId, pageable);
+    }
+
+    public AdoptRequestDetailResponse findDetail(Long memberId, Long boardId, Long adoptRequestId) {
+        checkWriter(memberId, boardId);
+        return adoptRequestQueryRepository.findDetail(adoptRequestId);
+    }
+
+    private void checkWriter(Long memberId, Long boardId) {
         Board board = boardRepository.findById(boardId)
                 .orElseThrow(() -> new RuntimeException("게시글이 존재하지 않습니다"));
 
-        if (!board.writerIsEqual(memberId)) {
+        if (board.writerIsNotEqual(memberId)) {
             throw new RuntimeException("게시글을 작성한 사람이 아닙니다");
         }
-
-        return adoptRequestQueryRepository.findByBoardId(boardId, pageable);
     }
 }
