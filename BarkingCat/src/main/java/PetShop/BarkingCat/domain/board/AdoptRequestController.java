@@ -1,5 +1,7 @@
 package PetShop.BarkingCat.domain.board;
 
+import PetShop.BarkingCat.common.security.annotations.Authenticated;
+import PetShop.BarkingCat.common.security.annotations.JwtClaim;
 import PetShop.BarkingCat.domain.board.dto.AdoptRequestForm;
 import PetShop.BarkingCat.domain.board.service.AdoptRequestService;
 import PetShop.BarkingCat.domain.board.service.query.AdoptRequestQueryService;
@@ -21,13 +23,15 @@ public class AdoptRequestController {
     }
 
     @GetMapping("/board/{boardId}")
-    public ResponseEntity<?> findByBoardId(@PathVariable Long boardId, Pageable pageable) {
-        return ResponseEntity.ok(adoptRequestQueryService.findByBoardId(boardId, pageable));
+    @Authenticated
+    public ResponseEntity<?> findByBoardId(@JwtClaim("info.id") Long memberId, @PathVariable Long boardId, Pageable pageable) {
+        return ResponseEntity.ok(adoptRequestQueryService.findByBoardId(memberId, boardId, pageable));
     }
 
     @PostMapping
-    public ResponseEntity<?> registerAdoptRequest(@RequestBody AdoptRequestForm adoptRequestForm) {
-        Long adoptRequestId = adoptRequestService.registerAdoptRequest(adoptRequestForm);
+    @Authenticated
+    public ResponseEntity<?> registerAdoptRequest(@JwtClaim("info.id") Long memberId, @RequestBody AdoptRequestForm adoptRequestForm) {
+        Long adoptRequestId = adoptRequestService.registerAdoptRequest(memberId, adoptRequestForm);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(adoptRequestId);
     }
