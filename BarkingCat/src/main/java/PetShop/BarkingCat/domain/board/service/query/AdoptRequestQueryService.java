@@ -2,6 +2,8 @@ package PetShop.BarkingCat.domain.board.service.query;
 
 import PetShop.BarkingCat.domain.board.dto.AdoptRequestDetailResponse;
 import PetShop.BarkingCat.domain.board.dto.AdoptRequestResponse;
+import PetShop.BarkingCat.domain.board.dto.MyAdoptRequestResponse;
+import PetShop.BarkingCat.domain.board.dto.MyAdoptRequestResponseDetail;
 import PetShop.BarkingCat.domain.board.model.Board;
 import PetShop.BarkingCat.domain.board.repository.BoardRepository;
 import PetShop.BarkingCat.domain.board.repository.query.AdoptRequestQueryRepository;
@@ -17,6 +19,14 @@ public class AdoptRequestQueryService {
     public AdoptRequestQueryService(AdoptRequestQueryRepository adoptRequestQueryRepository, BoardRepository boardRepository) {
         this.adoptRequestQueryRepository = adoptRequestQueryRepository;
         this.boardRepository = boardRepository;
+    }
+
+    public Page<MyAdoptRequestResponse> findByRequests(Long memberId, Pageable pageable) {
+        return adoptRequestQueryRepository.findByMemberId(memberId, pageable);
+    }
+
+    public MyAdoptRequestResponseDetail findByRequestsDetail(Long memberId) {
+        return adoptRequestQueryRepository.findDetailByMemberId(memberId);
     }
 
     public Page<AdoptRequestResponse> findByBoardId(Long memberId, Long boardId, Pageable pageable) {
