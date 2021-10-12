@@ -1,10 +1,12 @@
 import { NextPageContext } from 'next';
 import cookie from 'cookie';
 
-export function getCookie(key: string, ctx?: NextPageContext) {
-  return cookie.parse(
-    ctx && ctx.req ? ctx.req.headers.cookie ?? '' : document.cookie
-  )[key];
+const CookieKeys = {
+  loginToken: 'barking.cat',
+} as const;
+
+export function getCookie(key: keyof typeof CookieKeys, ctx: NextPageContext) {
+  return cookie.parse(ctx.req?.headers.cookie ?? '')[CookieKeys[key]] ?? '';
 }
 
 export function deleteCookie(key: string) {

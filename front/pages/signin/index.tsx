@@ -33,7 +33,6 @@ const SignIn: NextPage = () => {
         { ...formData }
       );
       if (data === 'ACCEPTED') {
-        document.cookie = 'login=true';
         router.push('/');
       }
     } catch (e) {

@@ -17,10 +17,9 @@ const Post: NextPage<PostProps> = ({ isLogin }) => {
   return <PostCreateForm />;
 };
 
-Post.getInitialProps = (ctx: NextPageContext) => {
-  const isLogin = getCookie('login', ctx);
-
-  return { isLogin: !!isLogin };
-};
+export async function getServerSideProps(ctx: NextPageContext) {
+  const isLogin = getCookie('loginToken', ctx);
+  return { props: { isLogin: !!isLogin } };
+}
 
 export default Post;

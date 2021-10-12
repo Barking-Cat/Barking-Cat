@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import type { NextPage, NextPageContext } from 'next';
 import type { BoardResponse } from 'types/api';
 import type { Post } from 'types/post';
-import { deleteCookie, getCookie } from 'utils';
+import { getCookie } from 'utils';
 
 interface HomeProps {
   isLogin: boolean;
@@ -35,11 +35,8 @@ const Home: NextPage<HomeProps> = ({ isLogin }) => {
   }
 
   async function handleLogoutClick() {
-    if (getCookie('login')) {
-      deleteCookie('login');
-      await axios.post('/api/session/logout');
-      router.push('/');
-    }
+    await axios.post('/api/session/logout');
+    router.push('/');
   }
 
   function handleNewPostClick() {
@@ -65,9 +62,14 @@ const Home: NextPage<HomeProps> = ({ isLogin }) => {
   );
 };
 
-Home.getInitialProps = (ctx: NextPageContext) => {
-  const isLogin = getCookie('login', ctx);
+export async function getServerSideProps(ctx: NextPageContext) {
+  const isLogin = getCookie('loginToken', ctx) !== '';
 
-  return { isLogin: !!isLogin };
-};
+  return {
+    props: {
+      isLogin,
+    },
+  };
+}
+
 export default Home;
