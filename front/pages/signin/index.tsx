@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import type { NextPage, NextPageContext } from 'next';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './signin.module.css';
 import axios from 'axios';

@@ -1,31 +1,21 @@
 import { PostList } from '@/components/board/post';
-import axios from 'axios';
 import Head from 'next/head';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from '../styles/Home.module.css';
 import { useRouter } from 'next/router';
 import type { NextPage, NextPageContext } from 'next';
 import type { BoardResponse } from 'types/api';
 import type { Post } from 'types/post';
-import { getCookie } from 'utils';
+import { apiServer, getCookie } from 'utils';
+import axios from 'axios';
 
 interface HomeProps {
   isLogin: boolean;
+  posts: Post[];
 }
 
-const Home: NextPage<HomeProps> = ({ isLogin }) => {
-  const [data, setData] = useState<Post[]>([]);
-
+const Home: NextPage<HomeProps> = ({ isLogin, posts }) => {
   const router = useRouter();
-
-  async function fetch() {
-    const { data } = await axios.get<BoardResponse>('/api/board');
-    setData(data.content);
-  }
-
-  useEffect(() => {
-    fetch();
-  }, []);
 
   function handleSignInClick() {
     router.push('/signin');
@@ -56,7 +46,7 @@ const Home: NextPage<HomeProps> = ({ isLogin }) => {
         {!isLogin && <button onClick={handleSignUpClick}>회원가입</button>}
         <button onClick={handleNewPostClick}>글쓰기</button>
         {isLogin && <button onClick={handleLogoutClick}>로그아웃</button>}
-        <PostList items={data} />
+        <PostList items={posts} />
       </main>
     </div>
   );
@@ -64,10 +54,12 @@ const Home: NextPage<HomeProps> = ({ isLogin }) => {
 
 export async function getServerSideProps(ctx: NextPageContext) {
   const isLogin = getCookie('loginToken', ctx) !== '';
+  const { data } = await apiServer.get<BoardResponse>('/api/board');
 
   return {
     props: {
       isLogin,
+      posts: data.content,
     },
   };
 }
