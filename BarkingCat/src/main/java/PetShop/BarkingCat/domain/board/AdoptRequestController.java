@@ -22,18 +22,6 @@ public class AdoptRequestController {
         this.adoptRequestQueryService = adoptRequestQueryService;
     }
 
-    @GetMapping
-    @Authenticated
-    public ResponseEntity<?> findMyRequests(@JwtClaim("info.id") Long memberId, Pageable pageable) {
-        return ResponseEntity.ok(adoptRequestQueryService.findByRequests(memberId, pageable));
-    }
-
-    @GetMapping("/request/{adoptRequestId}")
-    @Authenticated
-    public ResponseEntity<?> findMyRequestDetail(@PathVariable Long adoptRequestId) {
-        return ResponseEntity.ok(adoptRequestQueryService.findByRequestsDetail(adoptRequestId));
-    }
-
     @GetMapping("/board/{boardId}")
     @Authenticated
     public ResponseEntity<?> findByBoardId(@JwtClaim("info.id") Long memberId, @PathVariable Long boardId, Pageable pageable) {
@@ -42,7 +30,7 @@ public class AdoptRequestController {
 
     @GetMapping("/board/{boardId}/request/{adoptRequestId}")
     @Authenticated
-    public ResponseEntity<?> findDetail(@JwtClaim("info.id") Long memberId, @PathVariable Long boardId, @PathVariable Long adoptRequestId) {
+    public ResponseEntity<?> findDetail(@JwtClaim("info.id") Long memberId, @PathVariable Long boardId, @PathVariable Long adoptRequestId, Pageable pageable) {
         return ResponseEntity.ok(adoptRequestQueryService.findDetail(memberId, boardId, adoptRequestId));
     }
 
