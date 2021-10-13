@@ -3,7 +3,7 @@ package PetShop.BarkingCat.domain.board.repository.query;
 import PetShop.BarkingCat.domain.board.dto.AdoptRequestDetailResponse;
 import PetShop.BarkingCat.domain.board.dto.AdoptRequestResponse;
 import PetShop.BarkingCat.domain.board.dto.MyAdoptRequestResponse;
-import PetShop.BarkingCat.domain.board.dto.MyAdoptRequestResponseDetail;
+import PetShop.BarkingCat.domain.board.dto.MyAdoptRequestDetailResponse;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -44,8 +44,8 @@ public class AdoptRequestQueryRepository {
         return new PageImpl<>(responses, pageable, responses.size());
     }
 
-    public MyAdoptRequestResponseDetail findDetailByMemberId(Long memberId, Long adoptRequestId) {
-        return query.select(Projections.constructor(MyAdoptRequestResponseDetail.class,
+    public MyAdoptRequestDetailResponse findDetailByMemberId(Long memberId, Long adoptRequestId) {
+        return query.select(Projections.constructor(MyAdoptRequestDetailResponse.class,
                         adoptRequest.id,
                         adoptRequest.board.id,
                         adoptRequest.earning,

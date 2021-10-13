@@ -9,7 +9,7 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 @Getter
-public class MyAdoptRequestResponseDetail {
+public class MyAdoptRequestDetailResponse {
     private final Long id;
     private final Long boardId;
     private final Earning earning;
@@ -24,7 +24,7 @@ public class MyAdoptRequestResponseDetail {
     private final Email writerEmail;
     private final String writerPhone;
 
-    public MyAdoptRequestResponseDetail(Long id, Long boardId, Earning earning, Residence.ResidenceType residenceType, Integer area, Integer roommateNumber, Integer petCount, String adoptReason, Region region, LocalDateTime createDateTime, String writerName, Email writerEmail, String writerPhone) {
+    public MyAdoptRequestDetailResponse(Long id, Long boardId, Earning earning, Residence.ResidenceType residenceType, Integer area, Integer roommateNumber, Integer petCount, String adoptReason, Region region, LocalDateTime createDateTime, String writerName, Email writerEmail, String writerPhone) {
         this.id = id;
         this.boardId = boardId;
         this.earning = earning;
