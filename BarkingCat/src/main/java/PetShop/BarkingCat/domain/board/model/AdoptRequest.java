@@ -36,6 +36,9 @@ public class AdoptRequest extends Base {
     @Enumerated(EnumType.STRING)
     private Region region;
 
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.RECEIVED;
+
     public AdoptRequest() {
     }
 
@@ -62,7 +65,35 @@ public class AdoptRequest extends Base {
         return this;
     }
 
+    public void progress() {
+        if (statusIsNotReceived()) {
+            throw new RuntimeException("접수중인 요청만 진행할 수 있습니다");
+        }
+
+        this.status = Status.PROGRESS;
+    }
+
+    private boolean statusIsNotReceived() {
+        return this.status != Status.RECEIVED;
+    }
+
+    public void cancel() {
+        this.status = Status.CANCELED;
+    }
+
+    public boolean writerIsNotEqual(Long writerId) {
+        return !this.writerId.equals(writerId);
+    }
+
+    public boolean boardWriterIsNotEqual(Long writerId) {
+        return this.board.writerIsNotEqual(writerId);
+    }
+
     public Long id() {
         return id;
+    }
+
+    public enum Status {
+        RECEIVED, PROGRESS, CANCELED, TERMINATED
     }
 }

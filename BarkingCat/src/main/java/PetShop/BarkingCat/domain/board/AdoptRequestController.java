@@ -53,4 +53,20 @@ public class AdoptRequestController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(adoptRequestId);
     }
+
+    @PutMapping("/request/{adoptRequestId}/progress")
+    @Authenticated
+    public ResponseEntity<?> progressAdoptRequest(@JwtClaim("info.id") Long memberId, @PathVariable Long adoptRequestId) {
+        adoptRequestService.progressAdoptRequest(memberId, adoptRequestId);
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .build();
+    }
+
+    @PutMapping("/request/{adoptRequestId}/cancel")
+    @Authenticated
+    public ResponseEntity<?> cancelAdoptRequest(@JwtClaim("info.id") Long memberId, @PathVariable Long adoptRequestId) {
+        adoptRequestService.cancelAdoptRequest(memberId, adoptRequestId);
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .build();
+    }
 }
