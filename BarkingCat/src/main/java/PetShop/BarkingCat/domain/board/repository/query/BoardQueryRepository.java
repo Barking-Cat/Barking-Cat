@@ -65,6 +65,9 @@ public class BoardQueryRepository {
                         sexEq(findBoardCondition.getSex()),
                         priceLoe(findBoardCondition.getPrice())
                 )
+                .groupBy(board.id)
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .fetch();
 
         return new PageImpl<>(responses, pageable, responses.size());
