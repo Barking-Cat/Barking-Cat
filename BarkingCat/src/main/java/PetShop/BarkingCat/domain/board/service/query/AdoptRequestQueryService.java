@@ -3,9 +3,7 @@ package PetShop.BarkingCat.domain.board.service.query;
 import PetShop.BarkingCat.domain.board.dto.AdoptRequestDetailResponse;
 import PetShop.BarkingCat.domain.board.dto.AdoptRequestResponse;
 import PetShop.BarkingCat.domain.board.dto.MyAdoptRequestResponse;
-import PetShop.BarkingCat.domain.board.dto.MyAdoptRequestResponseDetail;
-import PetShop.BarkingCat.domain.board.model.Board;
-import PetShop.BarkingCat.domain.board.repository.BoardRepository;
+import PetShop.BarkingCat.domain.board.dto.MyAdoptRequestDetailResponse;
 import PetShop.BarkingCat.domain.board.repository.query.AdoptRequestQueryRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +21,7 @@ public class AdoptRequestQueryService {
         return adoptRequestQueryRepository.findByMemberId(memberId, pageable);
     }
 
-    public MyAdoptRequestResponseDetail findDetail(Long memberId, Long adoptRequestId) {
+    public MyAdoptRequestDetailResponse findDetail(Long memberId, Long adoptRequestId) {
         return adoptRequestQueryRepository.findDetailByMemberId(memberId, adoptRequestId);
     }
 
