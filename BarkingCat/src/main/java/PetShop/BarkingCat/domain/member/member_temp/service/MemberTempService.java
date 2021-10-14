@@ -1,5 +1,7 @@
 package PetShop.BarkingCat.domain.member.member_temp.service;
 
+import PetShop.BarkingCat.common.exception.BarkingCatException;
+import PetShop.BarkingCat.common.exception.ErrorCode;
 import PetShop.BarkingCat.domain.member.member_temp.dto.MemberForm;
 import PetShop.BarkingCat.domain.member.member_temp.repository.query.MemberTempQueryRepository;
 import PetShop.BarkingCat.domain.member.model.Member;
@@ -59,7 +61,7 @@ public class MemberTempService {
     @Transactional
     public void auth(Long memberTempId) {
         MemberTemp memberTemp = memberTempQueryRepository.findByIdNotDeleted(memberTempId)
-                .orElseThrow(() -> new RuntimeException("존재하지 않은 사용자입니다."));
+                .orElseThrow(() -> new BarkingCatException(ErrorCode.MEMBER_NOT_FOUND));
 
         saveMember(memberTemp);
         memberTemp.delete();

@@ -1,5 +1,7 @@
 package PetShop.BarkingCat.domain.board.service;
 
+import PetShop.BarkingCat.common.exception.ErrorCode;
+import PetShop.BarkingCat.common.exception.BarkingCatException;
 import PetShop.BarkingCat.domain.board.dto.BoardForm;
 import PetShop.BarkingCat.domain.board.model.Board;
 import PetShop.BarkingCat.domain.board.model.Category;
@@ -24,10 +26,10 @@ public class BoardService {
     @Transactional
     public Long registerBoard(BoardForm boardForm, Long memberId) {
         Category category = categoryRepository.findById(boardForm.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("카테고리가 없습니다."));
+                .orElseThrow(() -> new BarkingCatException(ErrorCode.CATEGORY_NOT_FOUND));
 
         memberRepository.findById(memberId)
-                .orElseThrow(() -> new RuntimeException("등록된 사용자가 없습니다."));
+                .orElseThrow(() -> new BarkingCatException(ErrorCode.MEMBER_NOT_FOUND));
 
         Board board = boardForm.entity()
                 .mapCategory(category)
@@ -40,7 +42,7 @@ public class BoardService {
     @Transactional
     public void hit(Long boardId) {
         boardRepository.findById(boardId)
-                .orElseThrow(() -> new RuntimeException("게시글이 존재하지 않습니다"))
+                .orElseThrow(() -> new BarkingCatException(ErrorCode.BOARD_NOT_FOUND))
                 .hit();
     }
 }

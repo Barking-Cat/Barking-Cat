@@ -1,5 +1,7 @@
 package PetShop.BarkingCat.domain.board.service;
 
+import PetShop.BarkingCat.common.exception.BarkingCatException;
+import PetShop.BarkingCat.common.exception.ErrorCode;
 import PetShop.BarkingCat.domain.board.dto.CommentForm;
 import PetShop.BarkingCat.domain.board.model.Board;
 import PetShop.BarkingCat.domain.board.model.Comment;
@@ -26,10 +28,10 @@ public class CommentService {
     @Transactional
     public void registerComment(CommentForm commentForm, Long memberId, Long boardId) {
         memberRepository.findById(memberId)
-                .orElseThrow(() -> new RuntimeException("등록된 사용자가 없습니다."));
+                .orElseThrow(() -> new BarkingCatException(ErrorCode.MEMBER_NOT_FOUND));
 
         Board board = boardRepository.findById(boardId)
-                .orElseThrow(() -> new RuntimeException("없거나 삭제된 게시물 입니다."));
+                .orElseThrow(() -> new BarkingCatException(ErrorCode.BOARD_NOT_FOUND));
 
         Comment comment = commentForm.entity()
                 .mapWriter(memberId)
@@ -37,6 +39,4 @@ public class CommentService {
 
         commentRepository.save(comment);
     }
-
-
 }

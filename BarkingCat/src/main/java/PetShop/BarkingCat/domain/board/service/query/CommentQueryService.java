@@ -18,8 +18,6 @@ public class CommentQueryService {
     }
 
     public List<CommentResponse> findAllByBoardId(Long boardId) {
-
         return commentQueryRepository.findAllByBoardId(boardId);
-
     }
 }
