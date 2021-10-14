@@ -1,6 +1,7 @@
 package PetShop.BarkingCat.domain.member;
 
-import PetShop.BarkingCat.common.base.exception.AuthenticationException;
+import PetShop.BarkingCat.common.exception.BarkingCatException;
+import PetShop.BarkingCat.common.exception.ErrorCode;
 import PetShop.BarkingCat.common.security.CookieFactory;
 import PetShop.BarkingCat.domain.member.dto.LoginForm;
 import PetShop.BarkingCat.domain.member.service.SessionService;
@@ -34,7 +35,7 @@ public class SessionController {
         String jwt = sessionService.login(loginForm, duration);
 
         if (jwt.isBlank()) {
-            throw new AuthenticationException("토큰 생성에 실패했습니다");
+            throw new BarkingCatException(ErrorCode.CREATE_TOKEN_FAIL);
         }
 
         httpServletResponse.addCookie(createCookie(jwt, httpServletRequest));

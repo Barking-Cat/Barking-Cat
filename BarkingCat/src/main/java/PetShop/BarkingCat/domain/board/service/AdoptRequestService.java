@@ -1,5 +1,7 @@
 package PetShop.BarkingCat.domain.board.service;
 
+import PetShop.BarkingCat.common.exception.BarkingCatException;
+import PetShop.BarkingCat.common.exception.ErrorCode;
 import PetShop.BarkingCat.domain.board.dto.AdoptRequestForm;
 import PetShop.BarkingCat.domain.board.model.AdoptRequest;
 import PetShop.BarkingCat.domain.board.model.Board;
@@ -27,10 +29,10 @@ public class AdoptRequestService {
     @Transactional
     public Long registerAdoptRequest(Long memberId, AdoptRequestForm adoptRequestForm) {
         Board board = boardRepository.findById(adoptRequestForm.getBoardId())
-                .orElseThrow(() -> new RuntimeException("존재하지 않는 게시물입니다"));
+                .orElseThrow(() -> new BarkingCatException(ErrorCode.BOARD_NOT_FOUND));
 
         memberRepository.findById(memberId)
-                .orElseThrow(() -> new RuntimeException("존재하지 않는 사용자입니다"));
+                .orElseThrow(() -> new BarkingCatException(ErrorCode.MEMBER_NOT_FOUND));
 
         AdoptRequest adoptRequest = adoptRequestForm.entity()
                 .mapWriter(memberId)
@@ -43,10 +45,10 @@ public class AdoptRequestService {
     @Transactional
     public void progressAdoptRequest(Long memberId, Long adoptRequestId) {
         AdoptRequest adoptRequest = adoptRequestRepository.findById(adoptRequestId)
-                .orElseThrow(() -> new RuntimeException("존재하지 않은 요청입니다"));
+                .orElseThrow(() -> new BarkingCatException(ErrorCode.ADOPT_REQUEST_NOT_FOUND));
 
         if (adoptRequest.boardWriterIsNotEqual(memberId)) {
-            throw new RuntimeException("본인의 게시물의 요청만 진행할 수 있습니다");
+            throw new BarkingCatException(ErrorCode.UNAUTHORIZED_MEMBER);
         }
 
         adoptRequest.progress();
@@ -55,10 +57,10 @@ public class AdoptRequestService {
     @Transactional
     public void cancelAdoptRequest(Long memberId, Long adoptRequestId) {
         AdoptRequest adoptRequest = adoptRequestRepository.findById(adoptRequestId)
-                .orElseThrow(() -> new RuntimeException("존재하지 않은 요청입니다"));
+                .orElseThrow(() -> new BarkingCatException(ErrorCode.ADOPT_REQUEST_NOT_FOUND));
 
         if (adoptRequest.writerIsNotEqual(memberId)) {
-            throw new RuntimeException("본인의 요청이 아니면 취소할 수 없습니다");
+            throw new BarkingCatException(ErrorCode.UNAUTHORIZED_MEMBER);
         }
 
         adoptRequest.cancel();

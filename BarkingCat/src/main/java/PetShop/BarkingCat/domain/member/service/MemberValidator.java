@@ -1,5 +1,7 @@
 package PetShop.BarkingCat.domain.member.service;
 
+import PetShop.BarkingCat.common.exception.BarkingCatException;
+import PetShop.BarkingCat.common.exception.ErrorCode;
 import PetShop.BarkingCat.domain.member.member_temp.repository.query.MemberTempQueryRepository;
 import PetShop.BarkingCat.domain.member.model.objects.Email;
 import PetShop.BarkingCat.domain.member.repository.MemberRepository;
@@ -25,13 +27,13 @@ public class MemberValidator {
         Long count = memberRepository.countByEmail(new Email(email));
 
         if (memberIsPresent(count)) {
-            throw new RuntimeException("이미 등록된 회원이메일 입니다");
+            throw new BarkingCatException(ErrorCode.DUPLICATE_EMAIL);
         }
 
         boolean exists = memberTempQueryRepository.existsByEmailNotDeleted(email);
 
         if (exists) {
-            throw new RuntimeException("승인 대기중인 이메일입니다");
+            throw new BarkingCatException(ErrorCode.TEMP_EMAIL_EXIST);
         }
     }
 
