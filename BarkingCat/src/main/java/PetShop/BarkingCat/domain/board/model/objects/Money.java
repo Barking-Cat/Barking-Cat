@@ -1,4 +1,4 @@
-package PetShop.BarkingCat.common.base.infra;
+package PetShop.BarkingCat.domain.board.model.objects;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;

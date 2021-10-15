@@ -1,6 +1,6 @@
 package PetShop.BarkingCat;
 
-import PetShop.BarkingCat.common.base.infra.Money;
+import PetShop.BarkingCat.domain.board.model.objects.Money;
 import PetShop.BarkingCat.common.base.model.Residence;
 import PetShop.BarkingCat.common.base.model.constants.AnimalType;
 import PetShop.BarkingCat.common.base.model.constants.Earning;
