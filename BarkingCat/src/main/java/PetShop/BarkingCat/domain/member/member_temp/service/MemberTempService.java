@@ -35,7 +35,6 @@ public class MemberTempService {
 
     @Transactional
     public void join(MemberForm memberForm) {
-        System.out.println(memberForm.getEmail());
         MemberTemp memberTemp = memberForm.entity(memberValidator, passwordEncoder);
         saveMemberTemp(memberTemp);
     }

@@ -22,8 +22,6 @@ public class MemberForm {
 
     private String businessNumber;
 
-    private Member.AuthStatus authStatus;
-
     public MemberTemp entity(MemberValidator memberValidator, PasswordEncoder passwordEncoder) {
         validate(memberValidator);
         encryptPassword(passwordEncoder);
