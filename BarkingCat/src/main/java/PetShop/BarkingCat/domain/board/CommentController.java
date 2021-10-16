@@ -38,13 +38,8 @@ public class CommentController {
     @PutMapping("/board/{commentId}/delete")
     @Authenticated
     public ResponseEntity<?> deleteComment(@JwtClaim("info.id") Long memberId, @PathVariable Long commentId){
-
         commentService.deleteComment(memberId, commentId);
-
         return ResponseEntity.status(HttpStatus.ACCEPTED)
                 .build();
-
     }
-
-
 }
