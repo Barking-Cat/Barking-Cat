@@ -62,4 +62,8 @@ public class Comment extends Base {
         this.board = board;
         return this;
     }
+
+    public boolean writerIsNotEqual(Long memberId) {
+        return !this.memberId.equals(memberId);
+    }
 }
