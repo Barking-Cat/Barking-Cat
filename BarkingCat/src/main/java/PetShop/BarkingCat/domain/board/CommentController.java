@@ -41,7 +41,8 @@ public class CommentController {
 
         commentService.deleteComment(memberId, commentId);
 
-        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .build();
 
     }
 
