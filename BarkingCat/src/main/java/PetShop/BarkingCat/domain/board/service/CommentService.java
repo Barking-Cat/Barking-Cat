@@ -42,7 +42,6 @@ public class CommentService {
 
     @Transactional
     public void deleteComment(Long memberId, Long commentId){
-
         memberRepository.findById(memberId)
                 .orElseThrow(() -> new BarkingCatException(ErrorCode.MEMBER_NOT_FOUND));
 
