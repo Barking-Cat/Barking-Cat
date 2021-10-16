@@ -66,4 +66,8 @@ public class Comment extends Base {
     public boolean writerIsNotEqual(Long memberId) {
         return !this.memberId.equals(memberId);
     }
+
+    public void updateContent(String content){
+        this.content = content;
+    }
 }

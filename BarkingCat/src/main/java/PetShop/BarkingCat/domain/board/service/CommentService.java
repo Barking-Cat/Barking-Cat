@@ -55,4 +55,21 @@ public class CommentService {
 
         comment.delete();
     }
+
+    @Transactional
+    public void updateComment(CommentForm commentForm, Long memberId, Long commentId){
+
+        memberRepository.findById(memberId)
+                .orElseThrow(() -> new BarkingCatException(ErrorCode.MEMBER_NOT_FOUND));
+
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new BarkingCatException(ErrorCode.COMMENT_NOT_FOUND));
+
+        if (comment.writerIsNotEqual(memberId)) {
+            throw new BarkingCatException(ErrorCode.UNAUTHORIZED_MEMBER);
+        }
+
+        comment.updateContent(commentForm.getContent());
+
+    }
 }
