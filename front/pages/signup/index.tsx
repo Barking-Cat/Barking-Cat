@@ -4,9 +4,13 @@ import styles from './signup.module.css';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { KakaoOauth, KakaoUser } from 'types/kakao';
 
 const EMAIL_PATTERN =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+type AuthStatus = 'Y' | 'N';
+type MemberType = 'COMPANY' | 'NORMAL' | 'SHELTER';
 
 interface SignUpInput {
   name: string;
@@ -17,7 +21,8 @@ interface SignUpInput {
 }
 
 interface SignUpRequest extends SignUpInput {
-  authState: boolean;
+  authState: AuthStatus;
+  memberType: MemberType;
 }
 
 interface SignUpResponse {
@@ -30,6 +35,7 @@ const SignUp: NextPage = () => {
     handleSubmit,
     formState: { errors },
     getValues,
+    setValue,
   } = useForm<SignUpInput>({ mode: 'all' });
 
   const router = useRouter();
@@ -41,7 +47,8 @@ const SignUp: NextPage = () => {
         '/api/member/join',
         {
           ...formData,
-          authState: true,
+          authState: 'Y',
+          memberType: 'NORMAL',
         }
       );
 
@@ -53,10 +60,42 @@ const SignUp: NextPage = () => {
     }
   };
 
+  function handleKakaoClick() {
+    Kakao.Auth.login({
+      success: function (authObj: KakaoOauth) {
+        console.log({ authObj });
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: function ({
+            id,
+            kakao_account: { email },
+            properties: { nickname },
+          }: KakaoUser) {
+            setValue('email', email);
+            setValue('password', id.toString());
+            setValue('passwordRepeat', id.toString());
+            setValue('name', nickname);
+          },
+          fail: function (error: string) {
+            console.log(error);
+          },
+        });
+      },
+      fail: function (err: string) {
+        alert(JSON.stringify(err));
+      },
+    });
+  }
+
   return (
     <div>
       <h1>회원가입</h1>
-      <button>카카오로 계속하기</button>
+      <img
+        className={styles.snsButton}
+        src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
+        width="222"
+        onClick={handleKakaoClick}
+      />
       <button>Facebook으로 계속하기</button>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <input

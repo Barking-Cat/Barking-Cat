@@ -4,6 +4,7 @@ import styles from './signin.module.css';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { KakaoOauth, KakaoUser } from 'types/kakao';
 
 interface SignInInput {
   email: string;
@@ -18,6 +19,7 @@ const SignIn: NextPage = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
     getValues,
   } = useForm<SignInInput>({ mode: 'all' });
@@ -44,10 +46,39 @@ const SignIn: NextPage = () => {
     router.push('/signup');
   }
 
+  function handleKakaoClick() {
+    Kakao.Auth.login({
+      success: function (authObj: KakaoOauth) {
+        console.log({ authObj });
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: function ({
+            id,
+            kakao_account: { email },
+            properties: { nickname },
+          }: KakaoUser) {
+            onSubmit({ email, password: id.toString() });
+          },
+          fail: function (error: string) {
+            console.log(error);
+          },
+        });
+      },
+      fail: function (err: string) {
+        alert(JSON.stringify(err));
+      },
+    });
+  }
+
   return (
     <div>
       <h1>로그인</h1>
-      <button>카카오로 계속하기</button>
+      <img
+        className={styles.snsButton}
+        src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
+        width="222"
+        onClick={handleKakaoClick}
+      />
       <button>Facebook으로 계속하기</button>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
