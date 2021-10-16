@@ -2,7 +2,7 @@ import React from 'react';
 import { NextPage } from 'next';
 
 const Adoption: NextPage = () => {
-  return <div>adoption pages</div>;
+  return <div>adoption pagess</div>;
 };
 
 export default Adoption;
