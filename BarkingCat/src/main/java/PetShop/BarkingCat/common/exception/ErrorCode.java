@@ -7,6 +7,7 @@ public enum ErrorCode {
     /* 400 BAD_REQUEST : 잘못된 요청 */
     CREATE_TOKEN_FAIL(HttpStatus.BAD_REQUEST, "토큰 생성에 실패했습니다"),
     INVALID_TOKEN(HttpStatus.BAD_REQUEST, "토큰 정보가 유효하지 않습니다"),
+    TOKEN_NOT_FOUND(HttpStatus.BAD_REQUEST, "토큰이 존재하지 않습니다"),
 
     /* 401 UNAUTHORIZED : 인증되지 않은 사용자 */
     UNAUTHORIZED_MEMBER(HttpStatus.UNAUTHORIZED, "권한이 없는 사용자입니다"),

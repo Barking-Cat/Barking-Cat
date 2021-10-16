@@ -42,7 +42,7 @@ public class JwtSessionArgumentResolver implements HandlerMethodArgumentResolver
 
         String cookie = CookieFactory.getCookie(request, COOKIE_KEY)
                 .map(Cookie::getValue)
-                .orElseThrow(() -> new RuntimeException("토큰이 없습니다"));
+                .orElseThrow(() -> new BarkingCatException(ErrorCode.TOKEN_NOT_FOUND));
 
         return findClaimValue(parameter, cookie);
     }

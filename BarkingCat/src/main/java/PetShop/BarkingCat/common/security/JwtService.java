@@ -83,7 +83,7 @@ public class JwtService {
         try {
             return new ObjectMapper().writeValueAsString(claims.getBody());
         } catch (JsonProcessingException e) {
-            throw new BarkingCatException(ErrorCode.INTERNAL_ERROR);
+            throw new BarkingCatException(ErrorCode.JSON_PROCESSING_ERROR);
         }
     }
 }
