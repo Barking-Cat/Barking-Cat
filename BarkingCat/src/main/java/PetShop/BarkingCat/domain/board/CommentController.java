@@ -42,4 +42,15 @@ public class CommentController {
         return ResponseEntity.status(HttpStatus.ACCEPTED)
                 .build();
     }
+
+    @PutMapping("/board/{commentId}")
+    public ResponseEntity<?> updateComment(@RequestBody CommentForm commentForm, @JwtClaim("info.id") Long memberId, @PathVariable Long commentId){
+
+        commentService.updateComment(commentForm, memberId, commentId);
+
+        return ResponseEntity.ok(HttpStatus.CREATED);
+
+    }
+
+
 }
