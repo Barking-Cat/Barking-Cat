@@ -38,14 +38,6 @@ public enum ErrorCode {
         this.detail = detail;
     }
 
-    public int httpStatusValue() {
-        return this.httpStatus.value();
-    }
-
-    public String httpStatusName() {
-        return this.httpStatus.name();
-    }
-
     public String detail() {
         return this.detail;
     }
