@@ -17,13 +17,13 @@ public class BoardService {
     private final BoardRepository boardRepository;
     private final CategoryRepository categoryRepository;
     private final MemberRepository memberRepository;
-    private final BoardRegulationService boardRegulationService;
+    private final BoardRegulation boardRegulation;
 
-    public BoardService(BoardRepository boardRepository, CategoryRepository categoryRepository, MemberRepository memberRepository, BoardRegulationService boardRegulationService) {
+    public BoardService(BoardRepository boardRepository, CategoryRepository categoryRepository, MemberRepository memberRepository, BoardRegulation boardRegulation) {
         this.boardRepository = boardRepository;
         this.categoryRepository = categoryRepository;
         this.memberRepository = memberRepository;
-        this.boardRegulationService = boardRegulationService;
+        this.boardRegulation = boardRegulation;
     }
 
     @Transactional
@@ -34,7 +34,7 @@ public class BoardService {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new BarkingCatException(ErrorCode.MEMBER_NOT_FOUND));
 
-        boardRegulationService.checkMonthlyBoardCount(member);
+        boardRegulation.checkMonthlyBoardCount(member);
 
         Board board = boardForm.entity()
                 .mapCategory(category)
