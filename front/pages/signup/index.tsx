@@ -94,6 +94,7 @@ const SignUp: NextPage = () => {
         className={styles.snsButton}
         src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
         width="222"
+        alt="kakao"
         onClick={handleKakaoClick}
       />
       <button>Facebook으로 계속하기</button>

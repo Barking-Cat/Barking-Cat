@@ -13,7 +13,7 @@ describe('Signup Page', () => {
   it('should render kakao button', () => {
     render(<SignUp />);
 
-    const buttonEl = screen.getByRole('button', { name: /카카오로 계속하기/g });
+    const buttonEl = screen.getByRole('img', { name: /kakao/i });
     expect(buttonEl).toBeInTheDocument();
   });
 

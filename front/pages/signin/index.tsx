@@ -75,6 +75,7 @@ const SignIn: NextPage = () => {
       <h1>로그인</h1>
       <img
         className={styles.snsButton}
+        alt="kakao"
         src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
         width="222"
         onClick={handleKakaoClick}
