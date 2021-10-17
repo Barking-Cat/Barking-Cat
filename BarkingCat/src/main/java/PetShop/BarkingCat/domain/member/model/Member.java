@@ -1,6 +1,8 @@
 package PetShop.BarkingCat.domain.member.model;
 
 import PetShop.BarkingCat.common.base.model.Base;
+import PetShop.BarkingCat.common.exception.BarkingCatException;
+import PetShop.BarkingCat.common.exception.ErrorCode;
 import PetShop.BarkingCat.domain.member.dto.MemberPayload;
 import PetShop.BarkingCat.domain.member.model.objects.Email;
 import lombok.Builder;
@@ -68,15 +70,38 @@ public class Member extends Base {
         return memberType == Member.MemberType.NORMAL;
     }
 
-    public enum MemberType {
-        NORMAL, COMPANY, SHELTER
+    public void checkBoardLimit(Integer count) {
+        memberType.checkBoardLimit(count);
     }
 
-    public enum AuthStatus {
-        Y, N
+    public Long id() {
+        return this.id;
     }
 
     public MemberPayload createPayload() {
         return new MemberPayload(id, email.content());
+    }
+
+    public enum MemberType {
+        NORMAL(3), COMPANY(100), SHELTER(100);
+        private final int boardLimit;
+
+        MemberType(int boardLimit) {
+            this.boardLimit = boardLimit;
+        }
+
+        public void checkBoardLimit(Integer count) {
+            if (monthlyBoardCountIsOver(count)) {
+                throw new BarkingCatException(ErrorCode.BOARD_WRITE_LIMIT);
+            }
+        }
+
+        private boolean monthlyBoardCountIsOver(Integer count) {
+            return count >= boardLimit;
+        }
+    }
+
+    public enum AuthStatus {
+        Y, N;
     }
 }

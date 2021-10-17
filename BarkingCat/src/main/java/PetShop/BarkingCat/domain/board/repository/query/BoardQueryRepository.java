@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.time.Month;
 import java.util.List;
 
 import static PetShop.BarkingCat.domain.board.model.QBoard.board;
@@ -106,6 +107,26 @@ public class BoardQueryRepository {
                         boardIdEq(boardId)
                 )
                 .fetchFirst();
+    }
+
+    public int countMyMonthlyBoard(Long memberId, Month month) {
+        return query.selectOne()
+                .from(board)
+                .where(
+                        writerEq(memberId),
+                        createdMonthEq(month)
+                )
+                .fetch()
+                .size();
+    }
+
+    private BooleanExpression createdMonthEq(Month month) {
+        return board.createdDateTime.month()
+                .eq(month.getValue());
+    }
+
+    private BooleanExpression writerEq(Long memberId) {
+        return board.memberId.eq(memberId);
     }
 
     private BooleanExpression boardIdEq(Long boardId) {

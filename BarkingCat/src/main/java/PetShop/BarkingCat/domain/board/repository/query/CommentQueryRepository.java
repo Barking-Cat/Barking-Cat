@@ -21,11 +21,10 @@ public class CommentQueryRepository {
     }
 
     public List<CommentResponse> findAllByBoardId(Long boardId) {
-
         return query.select(Projections.constructor(CommentResponse.class,
-                comment.content,
-                member.name,
-                comment.createdDateTime))
+                        comment.content,
+                        member.name,
+                        comment.createdDateTime))
                 .from(comment)
                 .join(member)
                 .on(comment.memberId.eq(member.id))

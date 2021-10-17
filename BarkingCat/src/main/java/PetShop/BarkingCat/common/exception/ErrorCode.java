@@ -23,12 +23,12 @@ public enum ErrorCode {
     DUPLICATE_EMAIL(HttpStatus.CONFLICT, "이메일이 이미 존재합니다"),
     TEMP_EMAIL_EXIST(HttpStatus.CONFLICT, "이메일이 승인 대기중입니다"),
     ALREADY_LIKED(HttpStatus.CONFLICT, "이미 좋아요를 했습니다"),
+    BOARD_WRITE_LIMIT(HttpStatus.CONFLICT, "이번달 작성가능항 게시물을 모두 작성하였습니다"),
 
     /* 500 Internal Server Error : 서버 내부 문제 */
     INTERNAL_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "내부에 문제가 발생했습니다"),
     JWT_ALGORITHM_NOT_FOUND(HttpStatus.INTERNAL_SERVER_ERROR, "JWT 알고리즘이 존재하지 않습니다"),
-    JSON_PROCESSING_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "JSON 파싱에 실패했습니다")
-    ;
+    JSON_PROCESSING_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "JSON 파싱에 실패했습니다");
 
     private final HttpStatus httpStatus;
     private final String detail;
