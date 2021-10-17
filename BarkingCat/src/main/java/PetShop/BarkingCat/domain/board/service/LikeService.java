@@ -3,7 +3,7 @@ package PetShop.BarkingCat.domain.board.service;
 import PetShop.BarkingCat.common.exception.BarkingCatException;
 import PetShop.BarkingCat.common.exception.ErrorCode;
 import PetShop.BarkingCat.domain.board.model.Board;
-import PetShop.BarkingCat.domain.board.model.Likes;
+import PetShop.BarkingCat.domain.board.model.Liked;
 import PetShop.BarkingCat.domain.board.repository.BoardRepository;
 import PetShop.BarkingCat.domain.board.repository.LikeRepository;
 import PetShop.BarkingCat.domain.board.repository.query.LikeQueryRepository;
@@ -30,24 +30,24 @@ public class LikeService {
 
         checkDuplicatedLike(boardId, memberId);
 
-        Likes likes = Likes.builder()
+        Liked liked = Liked.builder()
                 .board(board)
                 .memberId(memberId)
                 .build();
 
-        likeRepository.save(likes);
+        likeRepository.save(liked);
     }
 
     private void checkDuplicatedLike(Long boardId, Long memberId) {
-        Likes recentLike = likeQueryRepository.findRecentLike(boardId, memberId);
+        Liked recentLiked = likeQueryRepository.findRecentLike(boardId, memberId);
 
-        if (alreadyLikedTheBoard(recentLike)) {
+        if (alreadyLikedTheBoard(recentLiked)) {
             throw new BarkingCatException(ErrorCode.ALREADY_LIKED);
         }
     }
 
-    private boolean alreadyLikedTheBoard(Likes recentLike) {
-        return recentLike != null;
+    private boolean alreadyLikedTheBoard(Liked recentLiked) {
+        return recentLiked != null;
     }
 
     @Transactional

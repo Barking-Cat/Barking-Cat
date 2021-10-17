@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Likes extends Base {
+public class Liked extends Base {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,11 +20,11 @@ public class Likes extends Base {
 
     private Long memberId;
 
-    public Likes() {
+    public Liked() {
     }
 
     @Builder
-    public Likes(Long id, Board board, Long memberId) {
+    public Liked(Long id, Board board, Long memberId) {
         this.id = id;
         this.board = board;
         this.memberId = memberId;

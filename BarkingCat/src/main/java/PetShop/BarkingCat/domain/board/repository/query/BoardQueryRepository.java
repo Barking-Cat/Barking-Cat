@@ -6,7 +6,7 @@ import PetShop.BarkingCat.common.base.model.constants.Sex;
 import PetShop.BarkingCat.domain.board.dto.BoardDetailResponse;
 import PetShop.BarkingCat.domain.board.dto.BoardResponse;
 import PetShop.BarkingCat.domain.board.dto.FindBoardCondition;
-import PetShop.BarkingCat.domain.board.model.Board;
+import PetShop.BarkingCat.domain.board.dto.TagResponse;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -20,7 +20,8 @@ import java.time.Month;
 import java.util.List;
 
 import static PetShop.BarkingCat.domain.board.model.QBoard.board;
-import static PetShop.BarkingCat.domain.board.model.QLikes.likes;
+import static PetShop.BarkingCat.domain.board.model.QLiked.liked;
+import static PetShop.BarkingCat.domain.board.model.QTag.tag;
 import static PetShop.BarkingCat.domain.member.model.QMember.member;
 
 @Repository
@@ -32,12 +33,6 @@ public class BoardQueryRepository {
         this.query = query;
     }
 
-    public List<Board> findAllNotDeleted() {
-        return query.selectFrom(board)
-                .where(isNotDeleted())
-                .fetch();
-    }
-
     public Page<BoardResponse> findByCondition(FindBoardCondition findBoardCondition, Pageable pageable) {
         List<BoardResponse> responses = query.select(Projections.constructor(BoardResponse.class,
                                 board.id,
@@ -46,25 +41,34 @@ public class BoardQueryRepository {
                                 board.title,
                                 board.region,
                                 board.animalType,
-                                board.tags,
                                 board.hits,
-                                likes.count(),
+                                liked.count(),
                                 board.createdDateTime,
-                                member.name
+                                member.name,
+                                Projections.list(Projections.constructor(TagResponse.class,
+                                                tag.id,
+                                                tag.board.id,
+                                                tag.tagContent.tag
+                                        )
+                                )
                         )
                 )
                 .from(board)
                 .join(member)
                 .on(board.memberId.eq(member.id))
-                .leftJoin(likes)
-                .on(likes.board.id.eq(board.id), likes.deletedDateTime.isNull())
+                .leftJoin(liked)
+                .on(liked.board.id.eq(board.id), liked.deletedDateTime.isNull())
+                .join(tag)
+                .on(tag.board.id.eq(board.id))
                 .where(
                         isNotDeleted(),
+                        titleContains(findBoardCondition.getTitle()),
                         animalTypeEq(findBoardCondition.getAnimalType()),
                         regionEq(findBoardCondition.getRegion()),
                         ageLoe(findBoardCondition.getAge()),
                         sexEq(findBoardCondition.getSex()),
-                        priceLoe(findBoardCondition.getPrice())
+                        priceLoe(findBoardCondition.getPrice()),
+                        tagContains(findBoardCondition.getTag())
                 )
                 .groupBy(board.id)
                 .offset(pageable.getOffset())
@@ -87,21 +91,28 @@ public class BoardQueryRepository {
                                 board.age,
                                 board.price,
                                 board.dueDate,
-                                board.tags,
                                 board.hits,
-                                likes.count(),
+                                liked.count(),
                                 board.createdDateTime,
                                 member.email,
                                 member.phone,
-                                member.name
+                                member.name,
+                                Projections.list(Projections.constructor(TagResponse.class,
+                                                tag.id,
+                                                tag.board.id,
+                                                tag.tagContent.tag
+                                        )
+                                )
                         )
                 )
                 .from(board)
                 .join(member)
                 .on(board.memberId.eq(member.id))
-                .leftJoin(likes)
-                .on(likes.board.id.eq(board.id))
-                .on(likes.deletedDateTime.isNull())
+                .leftJoin(liked)
+                .on(liked.board.id.eq(board.id))
+                .on(liked.deletedDateTime.isNull())
+                .join(tag)
+                .on(tag.board.id.eq(board.id))
                 .where(
                         isNotDeleted(),
                         boardIdEq(boardId)
@@ -118,6 +129,22 @@ public class BoardQueryRepository {
                 )
                 .fetch()
                 .size();
+    }
+
+    private BooleanExpression titleContains(String title) {
+        if (title == null || title.isBlank()) {
+            return null;
+        }
+
+        return board.title.title.contains(title);
+    }
+
+    private BooleanExpression tagContains(String tagContent) {
+        if (tagContent == null || tagContent.isBlank()) {
+            return null;
+        }
+
+        return tag.tagContent.tag.contains(tagContent);
     }
 
     private BooleanExpression createdMonthEq(Month month) {
