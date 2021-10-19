@@ -1,16 +1,19 @@
 package PetShop.BarkingCat.domain.board.model.objects;
 
+import javax.persistence.Embeddable;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Tag {
+@Embeddable
+public class TagContent implements Serializable {
     private String tag;
 
     private final static int MAX_LENGTH = 10;
 
-    private Tag() {
+    protected TagContent() {
     }
 
-    public Tag(String tag) {
+    public TagContent(String tag) {
         validate(tag);
         this.tag = tag;
     }
@@ -41,8 +44,8 @@ public class Tag {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Tag tag1 = (Tag) o;
-        return Objects.equals(tag, tag1.tag);
+        TagContent tagContent1 = (TagContent) o;
+        return Objects.equals(tag, tagContent1.tag);
     }
 
     @Override

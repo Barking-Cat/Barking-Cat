@@ -1,11 +1,12 @@
 package PetShop.BarkingCat.domain.board.repository.query;
 
-import PetShop.BarkingCat.domain.board.model.Likes;
+import PetShop.BarkingCat.domain.board.model.Liked;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 
-import static PetShop.BarkingCat.domain.board.model.QLikes.likes;
+import static PetShop.BarkingCat.domain.board.model.QLiked.liked;
+
 
 @Repository
 public class LikeQueryRepository {
@@ -18,7 +19,7 @@ public class LikeQueryRepository {
 
     public boolean existsByBoardAndMember(Long boardId, Long memberId) {
         return query.selectOne()
-                .from(likes)
+                .from(liked)
                 .where(
                         boardIdEq(boardId),
                         memberIdEq(memberId),
@@ -27,26 +28,26 @@ public class LikeQueryRepository {
                 .fetchFirst() != null;
     }
 
-    public Likes findRecentLike(Long boardId, Long memberId) {
-        return query.selectFrom(likes)
+    public Liked findRecentLike(Long boardId, Long memberId) {
+        return query.selectFrom(liked)
                 .where(
                         boardIdEq(boardId),
                         memberIdEq(memberId),
                         isNotDeleted()
                 )
-                .orderBy(likes.id.desc())
+                .orderBy(liked.id.desc())
                 .fetchFirst();
     }
 
     private BooleanExpression isNotDeleted() {
-        return likes.deletedDateTime.isNull();
+        return liked.deletedDateTime.isNull();
     }
 
     private BooleanExpression memberIdEq(Long memberId) {
-        return likes.memberId.eq(memberId);
+        return liked.memberId.eq(memberId);
     }
 
     private BooleanExpression boardIdEq(Long boardId) {
-        return likes.board.id.eq(boardId);
+        return liked.board.id.eq(boardId);
     }
 }

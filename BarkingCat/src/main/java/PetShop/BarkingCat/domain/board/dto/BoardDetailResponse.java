@@ -1,11 +1,9 @@
 package PetShop.BarkingCat.domain.board.dto;
 
-import PetShop.BarkingCat.domain.board.model.objects.Money;
 import PetShop.BarkingCat.common.base.model.constants.AnimalType;
 import PetShop.BarkingCat.common.base.model.constants.Region;
 import PetShop.BarkingCat.common.base.model.constants.Sex;
-import PetShop.BarkingCat.domain.board.model.objects.Tag;
-import PetShop.BarkingCat.domain.board.model.objects.Tags;
+import PetShop.BarkingCat.domain.board.model.objects.Money;
 import PetShop.BarkingCat.domain.board.model.objects.Title;
 import PetShop.BarkingCat.domain.member.model.objects.Email;
 import lombok.Getter;
@@ -13,7 +11,6 @@ import lombok.Getter;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 public class BoardDetailResponse {
@@ -28,15 +25,15 @@ public class BoardDetailResponse {
     private final Integer age;
     private final Money price;
     private final LocalDateTime dueDate;
-    private final Tags tags;
     private final Long hits;
     private final Long likes;
     private final LocalDateTime createDateTime;
     private final Email memberEmail;
     private final String memberPhone;
     private final String memberName;
+    private final List<TagResponse> tagContents;
 
-    public BoardDetailResponse(Long boardId, Long categoryId, Long memberId, Title title, String content, Region region, AnimalType animalType, Sex sex, Integer age, Money price, LocalDateTime dueDate, Tags tags, Long hits, Long likes, LocalDateTime createDateTime, Email memberEmail, String memberPhone, String memberName) {
+    public BoardDetailResponse(Long boardId, Long categoryId, Long memberId, Title title, String content, Region region, AnimalType animalType, Sex sex, Integer age, Money price, LocalDateTime dueDate, Long hits, Long likes, LocalDateTime createDateTime, Email memberEmail, String memberPhone, String memberName, List<TagResponse> tagContents) {
         this.boardId = boardId;
         this.categoryId = categoryId;
         this.memberId = memberId;
@@ -48,13 +45,13 @@ public class BoardDetailResponse {
         this.age = age;
         this.price = price;
         this.dueDate = dueDate;
-        this.tags = tags;
         this.hits = hits;
         this.likes = likes;
         this.createDateTime = createDateTime;
         this.memberEmail = memberEmail;
         this.memberPhone = memberPhone;
         this.memberName = memberName;
+        this.tagContents = tagContents;
     }
 
     public String getTitle() {
@@ -63,13 +60,6 @@ public class BoardDetailResponse {
 
     public BigDecimal getPrice() {
         return price.amount();
-    }
-
-    public List<String> getTags() {
-        return tags.content()
-                .stream()
-                .map(Tag::content)
-                .collect(Collectors.toList());
     }
 
     public String getMemberEmail() {

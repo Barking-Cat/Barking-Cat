@@ -1,19 +1,16 @@
 package PetShop.BarkingCat;
 
-import PetShop.BarkingCat.domain.board.model.objects.Money;
 import PetShop.BarkingCat.common.base.model.Residence;
 import PetShop.BarkingCat.common.base.model.constants.AnimalType;
 import PetShop.BarkingCat.common.base.model.constants.Earning;
 import PetShop.BarkingCat.common.base.model.constants.Region;
 import PetShop.BarkingCat.common.base.model.constants.Sex;
-import PetShop.BarkingCat.domain.board.model.AdoptRequest;
-import PetShop.BarkingCat.domain.board.model.Board;
-import PetShop.BarkingCat.domain.board.model.Category;
-import PetShop.BarkingCat.domain.board.model.Comment;
-import PetShop.BarkingCat.domain.board.model.objects.Tags;
+import PetShop.BarkingCat.domain.board.model.*;
+import PetShop.BarkingCat.domain.board.model.objects.Money;
+import PetShop.BarkingCat.domain.board.model.objects.TagContent;
 import PetShop.BarkingCat.domain.board.model.objects.Title;
-import PetShop.BarkingCat.domain.member.model.objects.Email;
 import PetShop.BarkingCat.domain.member.model.Member;
+import PetShop.BarkingCat.domain.member.model.objects.Email;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,10 +72,16 @@ public class InitData {
                     .age(3)
                     .price(Money.wons(50_000))
                     .dueDate(LocalDateTime.of(LocalDate.of(2021, 10, 1), LocalTime.of(0, 0, 0)))
-                    .tags(new Tags("tag1 | tag2 | tag3"))
                     .build();
 
             em.persist(board);
+
+            Tag tagContents = Tag.builder()
+                    .tagContent(new TagContent("tag1"))
+                    .board(board)
+                    .build();
+
+            em.persist(tagContents);
 
             Comment comment = Comment.builder()
                     .memberId(1L)

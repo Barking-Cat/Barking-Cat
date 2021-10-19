@@ -5,7 +5,6 @@ import PetShop.BarkingCat.common.base.model.Base;
 import PetShop.BarkingCat.common.base.model.constants.AnimalType;
 import PetShop.BarkingCat.common.base.model.constants.Region;
 import PetShop.BarkingCat.common.base.model.constants.Sex;
-import PetShop.BarkingCat.domain.board.model.objects.Tags;
 import PetShop.BarkingCat.domain.board.model.objects.Title;
 import lombok.Builder;
 
@@ -47,8 +46,6 @@ public class Board extends Base {
 
     private LocalDateTime dueDate;
 
-    private Tags tags;
-
     private Long hits;
 
     public Board() {
@@ -56,7 +53,7 @@ public class Board extends Base {
     }
 
     @Builder
-    public Board(Long id, Category category, Long memberId, Title title, String content, Region region, AnimalType animalType, Sex sex, Integer age, Money price, LocalDateTime dueDate, Tags tags) {
+    public Board(Long id, Category category, Long memberId, Title title, String content, Region region, AnimalType animalType, Sex sex, Integer age, Money price, LocalDateTime dueDate) {
         this.id = id;
         this.category = category;
         this.memberId = memberId;
@@ -68,7 +65,6 @@ public class Board extends Base {
         this.age = age;
         this.price = price;
         this.dueDate = dueDate;
-        this.tags = tags;
         this.hits = 0L;
     }
 
