@@ -4,7 +4,6 @@ import styles from './signin.module.css';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import Script from 'next/script';
 
 interface SignInInput {
   email: string;

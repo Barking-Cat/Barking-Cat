@@ -21,5 +21,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Insatll dependencies
         run: yarn install --frozen-lockfile
+
+      - name: create env file
+        run: |
+          echo NEXT_PUBLIC_API_URL=${{ secrets.API_URL }} &> .env
+          echo NEXT_PUBLIC_KAKAO_KEY=${{ secrets.KAKAO_KEY }} >> .env
       - run: yarn build
       - run: yarn test
