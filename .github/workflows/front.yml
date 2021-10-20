@@ -3,15 +3,23 @@ on:
   push:
     branches: ['feature-front-cicd']
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
     defaults:
       run:
         working-directory: ./front
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: '14'
-      - run: yarn install --frozen-lockfile
+          node-version: ${{ matrix.node-version }}
+      - name: Insatll dependencies
+        run: yarn install --frozen-lockfile
+      - run: yarn build
       - run: yarn test

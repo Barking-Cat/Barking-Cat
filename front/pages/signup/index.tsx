@@ -4,7 +4,6 @@ import styles from './signup.module.css';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { KakaoOauth, KakaoUser } from 'types/kakao';
 
 const EMAIL_PATTERN =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -62,7 +61,7 @@ const SignUp: NextPage = () => {
 
   function handleKakaoClick() {
     Kakao.Auth.login({
-      success: function (authObj: KakaoOauth) {
+      success: function (authObj) {
         console.log({ authObj });
         Kakao.API.request({
           url: '/v2/user/me',
@@ -70,19 +69,19 @@ const SignUp: NextPage = () => {
             id,
             kakao_account: { email },
             properties: { nickname },
-          }: KakaoUser) {
+          }) {
             setValue('email', email);
             setValue('password', id.toString());
             setValue('passwordRepeat', id.toString());
             setValue('name', nickname);
           },
-          fail: function (error: string) {
+          fail: function (error) {
             console.log(error);
           },
         });
       },
-      fail: function (err: string) {
-        alert(JSON.stringify(err));
+      fail: function (errorj) {
+        alert(JSON.stringify(error));
       },
     });
   }

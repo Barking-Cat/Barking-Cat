@@ -8,6 +8,7 @@ import type { BoardResponse } from 'types/api';
 import type { Post } from 'types/post';
 import { apiServer, getCookie } from 'utils';
 import axios from 'axios';
+import Script from 'next/script';
 
 interface HomeProps {
   isLogin: boolean;

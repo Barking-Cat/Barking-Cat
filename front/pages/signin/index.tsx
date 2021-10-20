@@ -1,10 +1,10 @@
-import type { NextPage, NextPageContext } from 'next';
+import type { NextPage } from 'next';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './signin.module.css';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { KakaoOauth, KakaoUser } from 'types/kakao';
+import Script from 'next/script';
 
 interface SignInInput {
   email: string;
@@ -48,19 +48,18 @@ const SignIn: NextPage = () => {
 
   function handleKakaoClick() {
     Kakao.Auth.login({
-      success: function (authObj: KakaoOauth) {
-        console.log({ authObj });
+      success: function (authObj) {
         Kakao.API.request({
           url: '/v2/user/me',
           success: function ({
             id,
             kakao_account: { email },
             properties: { nickname },
-          }: KakaoUser) {
+          }) {
             onSubmit({ email, password: id.toString() });
           },
           fail: function (error: string) {
-            console.log(error);
+            console.error(error);
           },
         });
       },
