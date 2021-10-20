@@ -15,5 +15,5 @@ export function deleteCookie(key: string) {
 }
 
 export const apiServer = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_SERVER_API,
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
