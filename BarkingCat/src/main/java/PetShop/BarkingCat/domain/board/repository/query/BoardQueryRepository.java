@@ -143,7 +143,6 @@ public class BoardQueryRepository {
                 .fetch();
 
         return new PageImpl<>(responses, pageable, responses.size());
-
     }
 
     private BooleanExpression titleContains(String title) {

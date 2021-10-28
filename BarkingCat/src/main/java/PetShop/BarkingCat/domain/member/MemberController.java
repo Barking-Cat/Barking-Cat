@@ -21,11 +21,6 @@ public class MemberController {
     }
 
     @GetMapping("/mypage")
-    public ResponseEntity<?> findMyPage(@JwtClaim("info.id") Long memberId){
-
-        return ResponseEntity.ok(memberQueryService.findMyPage(memberId));
-
-    }
-
+    public ResponseEntity<?> findMyPage(@JwtClaim("info.id") Long memberId){ return ResponseEntity.ok(memberQueryService.findMyPage(memberId)); }
 
 }

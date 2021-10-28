@@ -29,8 +29,6 @@ public class MemberQueryRepository {
                         isNotDeleted()
                 )
                 .fetchFirst();
-
-
     }
 
     private BooleanExpression isNotDeleted() {

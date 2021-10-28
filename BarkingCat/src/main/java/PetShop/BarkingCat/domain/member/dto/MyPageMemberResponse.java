@@ -1,5 +1,4 @@
 package PetShop.BarkingCat.domain.member.dto;
-import PetShop.BarkingCat.domain.board.model.objects.Title;
 import PetShop.BarkingCat.domain.member.model.objects.Email;
 import lombok.Getter;
 
@@ -10,8 +9,6 @@ public class MyPageMemberResponse {
     private Email email;
     private String phone;
 
-
-
     public MyPageMemberResponse(String name, Email email, String phone) {
         this.name = name;
         this.email = email;
@@ -21,6 +18,4 @@ public class MyPageMemberResponse {
     public String getEmail(){
         return email.content();
     }
-
-
 }
