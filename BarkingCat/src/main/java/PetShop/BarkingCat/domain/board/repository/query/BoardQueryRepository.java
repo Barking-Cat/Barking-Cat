@@ -3,10 +3,7 @@ package PetShop.BarkingCat.domain.board.repository.query;
 import PetShop.BarkingCat.common.base.model.constants.AnimalType;
 import PetShop.BarkingCat.common.base.model.constants.Region;
 import PetShop.BarkingCat.common.base.model.constants.Sex;
-import PetShop.BarkingCat.domain.board.dto.BoardDetailResponse;
-import PetShop.BarkingCat.domain.board.dto.BoardResponse;
-import PetShop.BarkingCat.domain.board.dto.FindBoardCondition;
-import PetShop.BarkingCat.domain.board.dto.TagResponse;
+import PetShop.BarkingCat.domain.board.dto.*;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -129,6 +126,24 @@ public class BoardQueryRepository {
                 )
                 .fetch()
                 .size();
+    }
+
+    public Page<MyPageBoardResponse> findMyPageBoardList (Long memberId, Pageable pageable){
+        List<MyPageBoardResponse> responses = query.select(Projections.constructor(MyPageBoardResponse.class,
+                board.title,
+                board.createdDateTime
+                )
+        )
+                .from(board)
+                .where(
+                        writerEq(memberId),
+                        isNotDeleted()
+                )
+                .orderBy(board.createdDateTime.desc())
+                .fetch();
+
+        return new PageImpl<>(responses, pageable, responses.size());
+
     }
 
     private BooleanExpression titleContains(String title) {
