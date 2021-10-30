@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+
+.sector {
+  display: flex;
+}
+
+.sectorLeft {
+  margin-right: 2rem;
+}
+
+/* input {
+  border: 0 solid #000000;
+  border-bottom: 0.063rem solid #000000;
+} */
