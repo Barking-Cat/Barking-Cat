@@ -1,5 +1,8 @@
 package PetShop.BarkingCat.common.security;
 
+import PetShop.BarkingCat.common.exception.BarkingCatException;
+import PetShop.BarkingCat.common.exception.ErrorCode;
+import PetShop.BarkingCat.domain.member.dto.MemberPayload;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
@@ -29,12 +32,12 @@ public class JwtService {
             md.update(JWT_KEY_SALT);
             return Keys.hmacShaKeyFor(md.digest());
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            throw new BarkingCatException(ErrorCode.JWT_ALGORITHM_NOT_FOUND);
         }
     }
 
-    public String createToken(LoginForm loginForm, ZonedDateTime expirationDateTime) {
-        Payload payload = new Payload(loginForm, expirationDateTime);
+    public String createToken(MemberPayload memberPayload, ZonedDateTime expirationDateTime) {
+        Payload payload = new Payload(memberPayload, expirationDateTime);
         return createToken(payload);
     }
 
@@ -80,7 +83,7 @@ public class JwtService {
         try {
             return new ObjectMapper().writeValueAsString(claims.getBody());
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("jwt 파싱에 실패했습니다.");
+            throw new BarkingCatException(ErrorCode.JSON_PROCESSING_ERROR);
         }
     }
 }

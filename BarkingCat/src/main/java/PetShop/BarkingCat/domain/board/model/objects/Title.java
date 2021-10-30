@@ -8,9 +8,9 @@ import java.util.Objects;
 public class Title implements Serializable {
     private String title;
 
-    private final static int BASE_LENGTH = 5;
+    private static final int BASE_LENGTH = 5;
 
-    private final static int MAX_LENGTH = 150;
+    private static final int MAX_LENGTH = 150;
 
     protected Title() {
     }
@@ -38,7 +38,7 @@ public class Title implements Serializable {
         return title.length() > MAX_LENGTH;
     }
 
-    public String title() {
+    public String content() {
         return this.title;
     }
 

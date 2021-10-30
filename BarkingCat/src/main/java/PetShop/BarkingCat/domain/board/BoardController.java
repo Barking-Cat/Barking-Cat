@@ -1,5 +1,7 @@
 package PetShop.BarkingCat.domain.board;
 
+import PetShop.BarkingCat.common.security.annotations.Authenticated;
+import PetShop.BarkingCat.common.security.annotations.JwtClaim;
 import PetShop.BarkingCat.domain.board.dto.BoardForm;
 import PetShop.BarkingCat.domain.board.dto.FindBoardCondition;
 import PetShop.BarkingCat.domain.board.service.BoardService;
@@ -27,12 +29,15 @@ public class BoardController {
 
     @GetMapping("/{boardId}")
     public ResponseEntity<?> findDetail(@PathVariable Long boardId) {
+        boardService.hit(boardId);
         return ResponseEntity.ok(boardQueryService.findDetail(boardId));
     }
 
     @PostMapping
-    public ResponseEntity<?> registerBoard(@RequestBody BoardForm boardForm) {
-        boardService.registerBoard(boardForm);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+    @Authenticated
+    public ResponseEntity<?> registerBoard(@RequestBody BoardForm boardForm, @JwtClaim("info.id") Long memberId) {
+        Long boardId = boardService.registerBoard(boardForm, memberId);
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body(boardId);
     }
 }

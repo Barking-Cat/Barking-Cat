@@ -1,6 +1,6 @@
 package PetShop.BarkingCat.domain.board.dto;
 
-import PetShop.BarkingCat.common.base.infra.Money;
+import PetShop.BarkingCat.domain.board.model.objects.Money;
 import PetShop.BarkingCat.common.base.model.constants.AnimalType;
 import PetShop.BarkingCat.common.base.model.constants.Region;
 import PetShop.BarkingCat.common.base.model.constants.Sex;
@@ -15,8 +15,6 @@ import java.time.LocalDateTime;
 public class BoardForm {
     private Long categoryId;
 
-    private Long memberId;
-
     private String title;
 
     private String content;
@@ -27,19 +25,21 @@ public class BoardForm {
 
     private Sex sex;
 
-    private int price;
+    private Integer age;
+
+    private Integer price;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dueDate;
 
     public Board entity() {
         return Board.builder()
-                .memberId(memberId)
                 .title(new Title(title))
                 .content(content)
                 .region(region)
                 .animalType(animalType)
                 .sex(sex)
+                .age(age)
                 .price(Money.wons(price))
                 .dueDate(dueDate)
                 .build();

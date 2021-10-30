@@ -1,5 +1,7 @@
 package PetShop.BarkingCat.common.security;
 
+import PetShop.BarkingCat.common.exception.BarkingCatException;
+import PetShop.BarkingCat.common.exception.ErrorCode;
 import PetShop.BarkingCat.common.security.annotations.JwtClaim;
 import com.jayway.jsonpath.JsonPath;
 import org.springframework.core.MethodParameter;
@@ -35,12 +37,12 @@ public class JwtSessionArgumentResolver implements HandlerMethodArgumentResolver
         HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
 
         if (requestIsNull(request)) {
-            throw new RuntimeException("Web Request Parsing Error");
+            throw new BarkingCatException(ErrorCode.INTERNAL_ERROR);
         }
 
         String cookie = CookieFactory.getCookie(request, COOKIE_KEY)
                 .map(Cookie::getValue)
-                .orElseThrow(() -> new RuntimeException("토큰이 없습니다"));
+                .orElseThrow(() -> new BarkingCatException(ErrorCode.TOKEN_NOT_FOUND));
 
         return findClaimValue(parameter, cookie);
     }
@@ -56,7 +58,7 @@ public class JwtSessionArgumentResolver implements HandlerMethodArgumentResolver
                 .findFirst()
                 .map(claim -> JsonPath.parse(claim)
                         .read(findPath(parameter), parameter.getParameterType()))
-                .orElseThrow(() -> new RuntimeException("Unavailable web token!!!"));
+                .orElseThrow(() -> new BarkingCatException(ErrorCode.INVALID_TOKEN));
     }
 
     private String findPath(MethodParameter parameter) {

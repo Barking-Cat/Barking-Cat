@@ -4,6 +4,7 @@ import PetShop.BarkingCat.common.base.model.constants.AnimalType;
 import PetShop.BarkingCat.common.base.model.constants.Region;
 import PetShop.BarkingCat.common.base.model.constants.Sex;
 import lombok.Data;
+import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
 
 import java.math.BigDecimal;
 
@@ -14,4 +15,6 @@ public class FindBoardCondition {
     private final Integer age;
     private final Sex sex;
     private final BigDecimal price;
+    private final String title;
+    private final String tag;
 }

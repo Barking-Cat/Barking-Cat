@@ -1,7 +1,8 @@
 package PetShop.BarkingCat.common;
 
 import PetShop.BarkingCat.common.security.JwtService;
-import PetShop.BarkingCat.common.security.LoginForm;
+import PetShop.BarkingCat.domain.member.dto.LoginForm;
+import PetShop.BarkingCat.domain.member.dto.MemberPayload;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ public class JwtServiceTest {
     class IsUsableTest {
         private final JwtService jwtService = new JwtService();
         private final int duration = 60 * 60 * 24;
-        private final ZonedDateTime expirationDateTime = ZonedDateTime.of(LocalDateTime.of(LocalDate.of(2021, 10, 1), LocalTime.of(0, 0, 0)), ZoneId.of("Asia/Seoul"))
+        private final ZonedDateTime expirationDateTime = ZonedDateTime.of(LocalDateTime.of(LocalDate.of(2022, 10, 1), LocalTime.of(0, 0, 0)), ZoneId.of("Asia/Seoul"))
                 .plusSeconds(duration);
 
         @Nested
@@ -27,7 +28,7 @@ public class JwtServiceTest {
             @DisplayName("true를 리턴한다")
             public void isUsableTrue() {
                 //given
-                String token = jwtService.createToken(new LoginForm(), expirationDateTime);
+                String token = jwtService.createToken(new MemberPayload(), expirationDateTime);
 
                 long expired = expirationDateTime
                         .toInstant()
@@ -48,7 +49,7 @@ public class JwtServiceTest {
             @DisplayName("false를 리턴한다")
             public void isUsableFalse() {
                 //given
-                String token = jwtService.createToken(new LoginForm(), expirationDateTime);
+                String token = jwtService.createToken(new MemberPayload(), expirationDateTime);
 
                 long expired = expirationDateTime
                         .plusSeconds(100)

@@ -1,11 +1,10 @@
 package PetShop.BarkingCat.domain.board.model;
 
-import PetShop.BarkingCat.common.base.infra.Money;
+import PetShop.BarkingCat.domain.board.model.objects.Money;
 import PetShop.BarkingCat.common.base.model.Base;
 import PetShop.BarkingCat.common.base.model.constants.AnimalType;
 import PetShop.BarkingCat.common.base.model.constants.Region;
 import PetShop.BarkingCat.common.base.model.constants.Sex;
-import PetShop.BarkingCat.domain.board.model.objects.Tags;
 import PetShop.BarkingCat.domain.board.model.objects.Title;
 import lombok.Builder;
 
@@ -47,14 +46,14 @@ public class Board extends Base {
 
     private LocalDateTime dueDate;
 
-    private Tags tags;
+    private Long hits;
 
     public Board() {
 
     }
 
     @Builder
-    public Board(Long id, Category category, Long memberId, Title title, String content, Region region, AnimalType animalType, Sex sex, Integer age, Money price, LocalDateTime dueDate, Tags tags) {
+    public Board(Long id, Category category, Long memberId, Title title, String content, Region region, AnimalType animalType, Sex sex, Integer age, Money price, LocalDateTime dueDate) {
         this.id = id;
         this.category = category;
         this.memberId = memberId;
@@ -66,11 +65,28 @@ public class Board extends Base {
         this.age = age;
         this.price = price;
         this.dueDate = dueDate;
-        this.tags = tags;
+        this.hits = 0L;
     }
 
     public Board mapCategory(Category category) {
         this.category = category;
         return this;
+    }
+
+    public Board mapWriter(Long memberId) {
+        this.memberId = memberId;
+        return this;
+    }
+
+    public Long id() {
+        return this.id;
+    }
+
+    public void hit() {
+        hits += 1;
+    }
+
+    public boolean writerIsNotEqual(Long memberId) {
+        return !this.memberId.equals(memberId);
     }
 }

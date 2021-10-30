@@ -2,9 +2,10 @@ package PetShop.BarkingCat;
 
 import PetShop.BarkingCat.common.security.CookieFactory;
 import PetShop.BarkingCat.common.security.JwtService;
-import PetShop.BarkingCat.common.security.LoginForm;
+import PetShop.BarkingCat.domain.member.dto.LoginForm;
 import PetShop.BarkingCat.common.security.annotations.Authenticated;
 import PetShop.BarkingCat.common.security.annotations.JwtClaim;
+import PetShop.BarkingCat.domain.member.dto.MemberPayload;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
@@ -30,7 +31,7 @@ public class TestController {
     }
 
     @PostMapping("/session")
-    public Map<String, Object> createSession(@RequestBody LoginForm loginForm, HttpServletRequest req, HttpServletResponse res) {
+    public Map<String, Object> createSession(@RequestBody MemberPayload loginForm, HttpServletRequest req, HttpServletResponse res) {
         int duration = 60 * 60 * 24;
         ZonedDateTime expirationDateTime = ZonedDateTime.now()
                 .plusSeconds(duration);

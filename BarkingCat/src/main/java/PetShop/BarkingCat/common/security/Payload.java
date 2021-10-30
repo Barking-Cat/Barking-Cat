@@ -1,5 +1,7 @@
 package PetShop.BarkingCat.common.security;
 
+import PetShop.BarkingCat.domain.member.dto.MemberPayload;
+
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.Map;
@@ -10,8 +12,8 @@ class Payload {
 
     private final ZonedDateTime expirationDateTime;
 
-    public Payload(LoginForm loginForm, ZonedDateTime expirationDateTime) {
-        addClaim("info", loginForm);
+    public Payload(MemberPayload memberPayload, ZonedDateTime expirationDateTime) {
+        addClaim("info", memberPayload);
         this.expirationDateTime = expirationDateTime;
     }
 

@@ -1,6 +1,6 @@
 //package PetShop.BarkingCat.common.base.converter;
 //
-//import PetShop.BarkingCat.common.base.infra.Money;
+//import PetShop.BarkingCat.domain.board.model.objects.Money;
 //
 //import javax.persistence.AttributeConverter;
 //import javax.persistence.Converter;
