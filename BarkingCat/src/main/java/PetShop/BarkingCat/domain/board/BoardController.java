@@ -45,7 +45,6 @@ public class BoardController {
     @GetMapping("/mypage")
     @Authenticated
     public ResponseEntity<?> findMyPageBoardList(@JwtClaim("info.id") Long memberId, Pageable pageable){
-
         return ResponseEntity.ok(boardQueryService.findMyPageBoardList(memberId, pageable));
     }
 

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/member")
 public class MemberController {
-
     private final MemberService memberService;
     private final MemberQueryService memberQueryService;
 
@@ -21,6 +20,7 @@ public class MemberController {
     }
 
     @GetMapping("/mypage")
-    public ResponseEntity<?> findMyPage(@JwtClaim("info.id") Long memberId){ return ResponseEntity.ok(memberQueryService.findMyPage(memberId)); }
-
+    public ResponseEntity<?> findMyPage(@JwtClaim("info.id") Long memberId) {
+        return ResponseEntity.ok(memberQueryService.findMyPage(memberId));
+    }
 }

@@ -17,12 +17,12 @@ public class MemberQueryRepository {
         this.query = query;
     }
 
-    public MyPageMemberResponse findMyPageById(Long memberId){
-
+    public MyPageMemberResponse findMyPageById(Long memberId) {
         return query.select(Projections.constructor(MyPageMemberResponse.class,
-                member.name,
-                member.email,
-                member.phone))
+                        member.name,
+                        member.email,
+                        member.phone)
+                )
                 .from(member)
                 .where(
                         memberEq(memberId),

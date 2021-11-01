@@ -15,8 +15,7 @@ public class MemberQueryService {
         this.memberQueryRepository = memberQueryRepository;
     }
 
-    public MyPageMemberResponse findMyPage(Long memberId){
-
+    public MyPageMemberResponse findMyPage(Long memberId) {
         return memberQueryRepository.findMyPageById(memberId);
     }
 }

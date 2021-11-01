@@ -31,7 +31,6 @@ public class BoardQueryService {
     }
 
     public Page<MyPageBoardResponse> findMyPageBoardList(Long memberId, Pageable pageable){
-
         return boardQueryRepository.findMyPageBoardList(memberId, pageable);
     }
 }

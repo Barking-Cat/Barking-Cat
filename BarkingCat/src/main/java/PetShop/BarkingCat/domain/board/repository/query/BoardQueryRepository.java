@@ -128,12 +128,12 @@ public class BoardQueryRepository {
                 .size();
     }
 
-    public Page<MyPageBoardResponse> findMyPageBoardList (Long memberId, Pageable pageable){
+    public Page<MyPageBoardResponse> findMyPageBoardList(Long memberId, Pageable pageable) {
         List<MyPageBoardResponse> responses = query.select(Projections.constructor(MyPageBoardResponse.class,
-                board.title,
-                board.createdDateTime
+                                board.title,
+                                board.createdDateTime
+                        )
                 )
-        )
                 .from(board)
                 .where(
                         writerEq(memberId),
