@@ -4,6 +4,7 @@ import PetShop.BarkingCat.common.security.annotations.Authenticated;
 import PetShop.BarkingCat.common.security.annotations.JwtClaim;
 import PetShop.BarkingCat.domain.board.dto.BoardForm;
 import PetShop.BarkingCat.domain.board.dto.FindBoardCondition;
+import PetShop.BarkingCat.domain.board.dto.ReportBoardForm;
 import PetShop.BarkingCat.domain.board.service.BoardService;
 import PetShop.BarkingCat.domain.board.service.query.BoardQueryService;
 import org.springframework.data.domain.Pageable;
@@ -39,5 +40,13 @@ public class BoardController {
         Long boardId = boardService.registerBoard(boardForm, memberId);
         return ResponseEntity.status(HttpStatus.ACCEPTED)
                 .body(boardId);
+    }
+
+    @PostMapping("/report")
+    @Authenticated
+    public ResponseEntity<?> reportBoard(@RequestBody ReportBoardForm reportBoardForm, @JwtClaim("info.id") Long memberId) {
+        boardService.reportBoard(reportBoardForm, memberId);
+        return ResponseEntity.ok()
+                .build();
     }
 }

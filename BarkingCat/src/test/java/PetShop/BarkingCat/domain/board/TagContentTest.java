@@ -27,7 +27,6 @@ public class TagContentTest {
         //given
 
         //when
-        String given = "t".repeat(11);
 
         //then
         assertThatThrownBy(() -> {
