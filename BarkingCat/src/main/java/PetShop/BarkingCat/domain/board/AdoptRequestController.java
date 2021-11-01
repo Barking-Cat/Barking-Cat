@@ -22,7 +22,7 @@ public class AdoptRequestController {
         this.adoptRequestQueryService = adoptRequestQueryService;
     }
 
-    @GetMapping
+    @GetMapping("/mypage")
     @Authenticated
     public ResponseEntity<?> findMyRequests(@JwtClaim("info.id") Long memberId, Pageable pageable) {
         return ResponseEntity.ok(adoptRequestQueryService.findByRequests(memberId, pageable));

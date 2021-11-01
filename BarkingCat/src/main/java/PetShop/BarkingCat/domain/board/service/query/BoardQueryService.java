@@ -3,6 +3,7 @@ package PetShop.BarkingCat.domain.board.service.query;
 import PetShop.BarkingCat.domain.board.dto.BoardDetailResponse;
 import PetShop.BarkingCat.domain.board.dto.BoardResponse;
 import PetShop.BarkingCat.domain.board.dto.FindBoardCondition;
+import PetShop.BarkingCat.domain.board.dto.MyPageBoardResponse;
 import PetShop.BarkingCat.domain.board.repository.query.BoardQueryRepository;
 import PetShop.BarkingCat.domain.board.repository.BoardRepository;
 import org.springframework.data.domain.Page;
@@ -27,5 +28,9 @@ public class BoardQueryService {
 
     public BoardDetailResponse findDetail(Long boardId) {
         return boardQueryRepository.findDetail(boardId);
+    }
+
+    public Page<MyPageBoardResponse> findMyPageBoardList(Long memberId, Pageable pageable){
+        return boardQueryRepository.findMyPageBoardList(memberId, pageable);
     }
 }

@@ -34,6 +34,12 @@ public class BoardController {
         return ResponseEntity.ok(boardQueryService.findDetail(boardId));
     }
 
+    @GetMapping("/myBoard")
+    @Authenticated
+    public ResponseEntity<?> findMyPageBoardList(@JwtClaim("info.id") Long memberId, Pageable pageable){
+        return ResponseEntity.ok(boardQueryService.findMyPageBoardList(memberId, pageable));
+    }
+
     @PostMapping
     @Authenticated
     public ResponseEntity<?> registerBoard(@RequestBody BoardForm boardForm, @JwtClaim("info.id") Long memberId) {
