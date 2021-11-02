@@ -6,9 +6,9 @@ import axios from 'axios';
 import styles from './adoption.module.css';
 
 interface AdoptionInput {
-  residence: string;
+  area: string; // 거주지
   phone: string;
-  income: string;
+  earning: string; // 월 수입
   residenceType: string;
   inmateNumber: string;
   pet: string;
@@ -29,12 +29,11 @@ const Adoption: NextPage = () => {
   const router = useRouter();
   const [error, setError] = useState<boolean>(false);
 
-  const onSubmit: SubmitHandler<AdoptionInput> = async (formData) => {
-    console.log('onSubmit 함수 실행');
+  const onSubmit: SubmitHandler<AdoptionInput> = async (formData: any) => {
     try {
       console.log('try');
       const { data } = await axios.post<AdoptionInput, AdoptionRequest>(
-        '/api/adoption)',
+        '/api/adop',
         { ...formData }
       );
       if (data === 'SUCCESS') {
@@ -44,6 +43,7 @@ const Adoption: NextPage = () => {
       }
     } catch (e) {
       setError(true);
+      console.log(e);
     }
   };
 
