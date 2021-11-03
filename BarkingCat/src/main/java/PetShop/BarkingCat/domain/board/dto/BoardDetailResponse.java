@@ -7,6 +7,7 @@ import PetShop.BarkingCat.domain.board.model.objects.Money;
 import PetShop.BarkingCat.domain.board.model.objects.Title;
 import PetShop.BarkingCat.domain.member.model.objects.Email;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -31,9 +32,10 @@ public class BoardDetailResponse {
     private final Email memberEmail;
     private final String memberPhone;
     private final String memberName;
-    private final List<TagResponse> tagContents;
+    @Setter
+    private List<TagResponse> tagContents;
 
-    public BoardDetailResponse(Long boardId, Long categoryId, Long memberId, Title title, String content, Region region, AnimalType animalType, Sex sex, Integer age, Money price, LocalDateTime dueDate, Long hits, Long likes, LocalDateTime createDateTime, Email memberEmail, String memberPhone, String memberName, List<TagResponse> tagContents) {
+    public BoardDetailResponse(Long boardId, Long categoryId, Long memberId, Title title, String content, Region region, AnimalType animalType, Sex sex, Integer age, Money price, LocalDateTime dueDate, Long hits, Long likes, LocalDateTime createDateTime, Email memberEmail, String memberPhone, String memberName) {
         this.boardId = boardId;
         this.categoryId = categoryId;
         this.memberId = memberId;
@@ -51,7 +53,6 @@ public class BoardDetailResponse {
         this.memberEmail = memberEmail;
         this.memberPhone = memberPhone;
         this.memberName = memberName;
-        this.tagContents = tagContents;
     }
 
     public String getTitle() {
