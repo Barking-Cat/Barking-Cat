@@ -14,7 +14,10 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.time.Month;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static PetShop.BarkingCat.domain.board.model.QBoard.board;
 import static PetShop.BarkingCat.domain.board.model.QLiked.liked;
@@ -31,7 +34,17 @@ public class BoardQueryRepository {
     }
 
     public Page<BoardResponse> findByCondition(FindBoardCondition findBoardCondition, Pageable pageable) {
-        List<BoardResponse> responses = query.select(Projections.constructor(BoardResponse.class,
+        List<BoardResponse> responses = findBoardsWithPagination(findBoardCondition, pageable);
+
+        Map<Long, List<TagResponse>> tagMap = findTagMap(toBoardId(responses));
+
+        responses.forEach(boardResponse -> boardResponse.setTagContents(tagMap.get(boardResponse.getBoardId())));
+
+        return new PageImpl<>(responses, pageable, responses.size());
+    }
+
+    private List<BoardResponse> findBoardsWithPagination(FindBoardCondition findBoardCondition, Pageable pageable) {
+        return query.select(Projections.constructor(BoardResponse.class,
                                 board.id,
                                 board.category.id,
                                 board.memberId,
@@ -41,13 +54,7 @@ public class BoardQueryRepository {
                                 board.hits,
                                 liked.count(),
                                 board.createdDateTime,
-                                member.name,
-                                Projections.list(Projections.constructor(TagResponse.class,
-                                                tag.id,
-                                                tag.board.id,
-                                                tag.tagContent.tag
-                                        )
-                                )
+                                member.name
                         )
                 )
                 .from(board)
@@ -55,7 +62,7 @@ public class BoardQueryRepository {
                 .on(board.memberId.eq(member.id))
                 .leftJoin(liked)
                 .on(liked.board.id.eq(board.id), liked.deletedDateTime.isNull())
-                .join(tag)
+                .leftJoin(tag)
                 .on(tag.board.id.eq(board.id))
                 .where(
                         isNotDeleted(),
@@ -71,11 +78,34 @@ public class BoardQueryRepository {
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
-
-        return new PageImpl<>(responses, pageable, responses.size());
     }
 
     public BoardDetailResponse findDetail(Long boardId) {
+        BoardDetailResponse board = findBoard(boardId);
+
+        Map<Long, List<TagResponse>> tagMap = findTagMap(Collections.singletonList(board.getBoardId()));
+
+        board.setTagContents(tagMap.get(board.getBoardId()));
+
+        return board;
+    }
+
+    private Map<Long, List<TagResponse>> findTagMap(List<Long> boardIds) {
+        List<TagResponse> tagResponses = query.select(Projections.constructor(TagResponse.class,
+                                tag.id,
+                                tag.board.id,
+                                tag.tagContent.tag
+                        )
+                )
+                .from(tag)
+                .where(tag.board.id.in(boardIds))
+                .fetch();
+
+        return tagResponses.stream()
+                .collect(Collectors.groupingBy(TagResponse::getBoardId));
+    }
+
+    private BoardDetailResponse findBoard(Long boardId) {
         return query.select(Projections.constructor(BoardDetailResponse.class,
                                 board.id,
                                 board.category.id,
@@ -93,13 +123,7 @@ public class BoardQueryRepository {
                                 board.createdDateTime,
                                 member.email,
                                 member.phone,
-                                member.name,
-                                Projections.list(Projections.constructor(TagResponse.class,
-                                                tag.id,
-                                                tag.board.id,
-                                                tag.tagContent.tag
-                                        )
-                                )
+                                member.name
                         )
                 )
                 .from(board)
@@ -109,12 +133,18 @@ public class BoardQueryRepository {
                 .on(liked.board.id.eq(board.id))
                 .on(liked.deletedDateTime.isNull())
                 .join(tag)
-                .on(tag.board.id.eq(board.id))
+                .on(boardIdEq())
                 .where(
                         isNotDeleted(),
                         boardIdEq(boardId)
                 )
                 .fetchFirst();
+    }
+
+    private List<Long> toBoardId(List<BoardResponse> result) {
+        return result.stream()
+                .map(BoardResponse::getBoardId)
+                .collect(Collectors.toList());
     }
 
     public int countMyMonthlyBoard(Long memberId, Month month) {
@@ -143,6 +173,10 @@ public class BoardQueryRepository {
                 .fetch();
 
         return new PageImpl<>(responses, pageable, responses.size());
+    }
+
+    private BooleanExpression boardIdEq() {
+        return tag.board.id.eq(board.id);
     }
 
     private BooleanExpression titleContains(String title) {

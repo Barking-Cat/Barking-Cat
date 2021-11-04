@@ -4,6 +4,7 @@ import PetShop.BarkingCat.common.base.model.constants.AnimalType;
 import PetShop.BarkingCat.common.base.model.constants.Region;
 import PetShop.BarkingCat.domain.board.model.objects.Title;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,9 +21,10 @@ public class BoardResponse {
     private final Long likes;
     private final LocalDateTime createDateTime;
     private final String memberName;
-    private final List<TagResponse> tagContents;
+    @Setter
+    private List<TagResponse> tagContents;
 
-    public BoardResponse(Long boardId, Long categoryId, Long memberId, Title title, Region region, AnimalType animalType, Long hits, Long likes, LocalDateTime createDateTime, String memberName, List<TagResponse> tagContents) {
+    public BoardResponse(Long boardId, Long categoryId, Long memberId, Title title, Region region, AnimalType animalType, Long hits, Long likes, LocalDateTime createDateTime, String memberName) {
         this.boardId = boardId;
         this.categoryId = categoryId;
         this.memberId = memberId;
@@ -33,7 +35,6 @@ public class BoardResponse {
         this.likes = likes;
         this.createDateTime = createDateTime;
         this.memberName = memberName;
-        this.tagContents = tagContents;
     }
 
     public String getTitle() {
