@@ -7,5 +7,5 @@ import java.time.Month;
 import java.util.Optional;
 
 public interface BillingRepository extends JpaRepository<Billing, Long> {
-    Optional<Billing> findByMemberIdAndYearAndAndMonth(Long memberId, int year, Month month);
+    Optional<Billing> findByMemberIdAndYearAndMonth(Long memberId, int year, Month month);
 }

@@ -49,7 +49,7 @@ public class BoardRegisterEventHandler {
     }
 
     private Billing findOrCreateBilling(Long writerId, LocalDateTime now) {
-        return billingRepository.findByMemberIdAndYearAndAndMonth(writerId, now.getYear(), now.getMonth())
+        return billingRepository.findByMemberIdAndYearAndMonth(writerId, now.getYear(), now.getMonth())
                 .orElse(Billing.builder()
                         .memberId(writerId)
                         .now(LocalDateTime.now())
