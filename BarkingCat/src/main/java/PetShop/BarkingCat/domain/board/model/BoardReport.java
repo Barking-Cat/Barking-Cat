@@ -11,6 +11,7 @@ public class BoardReport extends Base {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "board_report_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
