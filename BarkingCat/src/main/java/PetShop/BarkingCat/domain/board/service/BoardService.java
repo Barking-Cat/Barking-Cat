@@ -45,6 +45,8 @@ public class BoardService {
                 .mapCategory(category)
                 .mapWriter(memberId);
 
+        board.registerEvent();
+
         return boardRepository.save(board)
                 .id();
     }
