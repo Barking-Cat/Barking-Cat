@@ -48,18 +48,18 @@ public class BoardRegisterEventHandler {
         return billingRepository.save(billing);
     }
 
-    private void saveBillingLog(Long boardId, Billing billing) {
-        billingLogRepository.save(BillingLog.builder()
-                .billing(billing)
-                .boardId(boardId)
-                .build());
-    }
-
     private Billing findOrCreateBilling(Long writerId, LocalDateTime now) {
         return billingRepository.findByMemberIdAndYearAndAndMonth(writerId, now.getYear(), now.getMonth())
                 .orElse(Billing.builder()
                         .memberId(writerId)
                         .now(LocalDateTime.now())
                         .build());
+    }
+
+    private void saveBillingLog(Long boardId, Billing billing) {
+        billingLogRepository.save(BillingLog.builder()
+                .billing(billing)
+                .boardId(boardId)
+                .build());
     }
 }
