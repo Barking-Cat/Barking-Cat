@@ -38,24 +38,28 @@ public class BoardRegisterEventHandler {
             return;
         }
 
-        Money baseFee = member.baseFee();
+        Billing billing = addFeeInBilling(writerId, member.baseFee());
+        saveBillingLog(boardRegisterEvent.boardId(), billing);
+    }
 
-        LocalDateTime now = LocalDateTime.now();
+    private Billing addFeeInBilling(Long writerId, Money baseFee) {
+        Billing billing = findOrCreateBilling(writerId, LocalDateTime.now());
+        billing.addFee(baseFee);
+        return billingRepository.save(billing);
+    }
 
-        Billing billing = billingRepository.findByMemberIdAndYearAndAndMonth(writerId, now.getYear(), now.getMonth())
+    private void saveBillingLog(Long boardId, Billing billing) {
+        billingLogRepository.save(BillingLog.builder()
+                .billing(billing)
+                .boardId(boardId)
+                .build());
+    }
+
+    private Billing findOrCreateBilling(Long writerId, LocalDateTime now) {
+        return billingRepository.findByMemberIdAndYearAndAndMonth(writerId, now.getYear(), now.getMonth())
                 .orElse(Billing.builder()
                         .memberId(writerId)
                         .now(LocalDateTime.now())
                         .build());
-
-        billing.addFee(baseFee);
-
-        BillingLog billingLog = BillingLog.builder()
-                .billing(billing)
-                .boardId(boardRegisterEvent.boardId())
-                .build();
-
-        billingRepository.save(billing);
-        billingLogRepository.save(billingLog);
     }
 }
