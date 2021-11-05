@@ -38,12 +38,12 @@ public class BoardRegisterEventHandler {
             return;
         }
 
-        Billing billing = addFeeInBilling(writerId, member.baseFee());
+        Billing billing = addFeeInBilling(boardRegisterEvent, member.baseFee());
         saveBillingLog(boardRegisterEvent.boardId(), billing);
     }
 
-    private Billing addFeeInBilling(Long writerId, Money baseFee) {
-        Billing billing = findOrCreateBilling(writerId, LocalDateTime.now());
+    private Billing addFeeInBilling(BoardRegisterEvent boardRegisterEvent, Money baseFee) {
+        Billing billing = findOrCreateBilling(boardRegisterEvent.writerId(), boardRegisterEvent.createDateTime());
         billing.addFee(baseFee);
         return billingRepository.save(billing);
     }

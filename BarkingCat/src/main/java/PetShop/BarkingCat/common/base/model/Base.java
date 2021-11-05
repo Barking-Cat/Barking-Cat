@@ -24,4 +24,8 @@ abstract public class Base extends AbstractAggregateRoot<Base> implements Serial
     public void delete() {
         this.deletedDateTime = LocalDateTime.now();
     }
+
+    public LocalDateTime createDateTime() {
+        return createdDateTime;
+    }
 }
