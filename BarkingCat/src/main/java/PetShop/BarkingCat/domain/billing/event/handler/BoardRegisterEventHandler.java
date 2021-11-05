@@ -6,7 +6,7 @@ import PetShop.BarkingCat.domain.billing.model.Billing;
 import PetShop.BarkingCat.domain.billing.model.BillingLog;
 import PetShop.BarkingCat.domain.billing.repository.BillingLogRepository;
 import PetShop.BarkingCat.domain.billing.repository.BillingRepository;
-import PetShop.BarkingCat.domain.board.model.event.BoardRegisterEvent;
+import PetShop.BarkingCat.domain.board.event.BoardRegisterEvent;
 import PetShop.BarkingCat.domain.board.model.objects.Money;
 import PetShop.BarkingCat.domain.member.model.Member;
 import PetShop.BarkingCat.domain.member.repository.MemberRepository;

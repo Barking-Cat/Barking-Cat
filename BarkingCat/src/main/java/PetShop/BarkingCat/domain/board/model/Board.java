@@ -1,6 +1,6 @@
 package PetShop.BarkingCat.domain.board.model;
 
-import PetShop.BarkingCat.domain.board.model.event.BoardRegisterEvent;
+import PetShop.BarkingCat.domain.board.event.BoardRegisterEvent;
 import PetShop.BarkingCat.domain.board.model.objects.Money;
 import PetShop.BarkingCat.common.base.model.Base;
 import PetShop.BarkingCat.common.base.model.constants.AnimalType;

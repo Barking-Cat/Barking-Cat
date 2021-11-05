@@ -1,4 +1,4 @@
-package PetShop.BarkingCat.domain.board.model.event;
+package PetShop.BarkingCat.domain.board.event;
 
 import PetShop.BarkingCat.domain.board.model.Board;
 
