@@ -1,10 +1,7 @@
 package PetShop.BarkingCat;
 
 import PetShop.BarkingCat.common.base.model.Residence;
-import PetShop.BarkingCat.common.base.model.constants.AnimalType;
-import PetShop.BarkingCat.common.base.model.constants.Earning;
-import PetShop.BarkingCat.common.base.model.constants.Region;
-import PetShop.BarkingCat.common.base.model.constants.Sex;
+import PetShop.BarkingCat.common.base.model.constants.*;
 import PetShop.BarkingCat.domain.board.model.*;
 import PetShop.BarkingCat.domain.board.model.objects.Money;
 import PetShop.BarkingCat.domain.board.model.objects.TagContent;
@@ -103,6 +100,15 @@ public class InitData {
                     .build();
 
             em.persist(adoptRequest);
+
+            BoardReport boardReport = BoardReport.builder()
+                    .board(board)
+                    .reporterId(1L)
+                    .reportCategory(ReportCategory.ETC)
+                    .detail("test BoardReport")
+                    .build();
+
+            em.persist(boardReport);
         }
     }
 }
