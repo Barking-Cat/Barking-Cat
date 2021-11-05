@@ -55,4 +55,14 @@ public class BoardController {
         return ResponseEntity.ok()
                 .build();
     }
+
+    @GetMapping("/report")
+    public ResponseEntity<?> findReportBoard(Pageable pageable){
+        return ResponseEntity.ok(boardQueryService.findReportBoard(pageable));
+    }
+
+    @GetMapping("/report/{boardReportId}")
+    public ResponseEntity<?> findDetailReportBoard(@PathVariable Long boardReportId){
+        return ResponseEntity.ok(boardQueryService.findDetailReportBoard(boardReportId));
+    }
 }
