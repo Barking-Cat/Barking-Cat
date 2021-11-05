@@ -1,5 +1,6 @@
 package PetShop.BarkingCat.domain.board.model;
 
+import PetShop.BarkingCat.domain.board.model.event.BoardRegisterEvent;
 import PetShop.BarkingCat.domain.board.model.objects.Money;
 import PetShop.BarkingCat.common.base.model.Base;
 import PetShop.BarkingCat.common.base.model.constants.AnimalType;
@@ -82,11 +83,19 @@ public class Board extends Base {
         return this.id;
     }
 
+    public Long writerId() {
+        return this.memberId;
+    }
+
     public void hit() {
         hits += 1;
     }
 
     public boolean writerIsNotEqual(Long memberId) {
         return !this.memberId.equals(memberId);
+    }
+
+    public void registerEvent() {
+        registerEvent(new BoardRegisterEvent(this));
     }
 }
