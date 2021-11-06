@@ -53,7 +53,8 @@ public class InitData {
                     .password(passwordEncoder.encode("1q2w3e4r"))
                     .name("Tester")
                     .phone("010-0000-1111")
-                    .memberType(Member.MemberType.NORMAL)
+                    .memberType(Member.MemberType.COMPANY)
+                    .businessNumber("q3t1q3tefga")
                     .build();
 
             em.persist(member);

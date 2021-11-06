@@ -39,7 +39,7 @@ public class BoardRegisterEventHandler {
         }
 
         Billing billing = addFeeInBilling(boardRegisterEvent, member.baseFee());
-        saveBillingLog(boardRegisterEvent.boardId(), billing);
+        saveBillingLog(boardRegisterEvent.boardId(), billing, member.baseFee());
     }
 
     private Billing addFeeInBilling(BoardRegisterEvent boardRegisterEvent, Money baseFee) {
@@ -56,10 +56,11 @@ public class BoardRegisterEventHandler {
                         .build());
     }
 
-    private void saveBillingLog(Long boardId, Billing billing) {
+    private void saveBillingLog(Long boardId, Billing billing, Money fee) {
         billingLogRepository.save(BillingLog.builder()
                 .billing(billing)
                 .boardId(boardId)
+                .fee(fee)
                 .build());
     }
 }

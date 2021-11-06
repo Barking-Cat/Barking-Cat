@@ -1,6 +1,7 @@
 package PetShop.BarkingCat.domain.billing.model;
 
 import PetShop.BarkingCat.common.base.model.Base;
+import PetShop.BarkingCat.domain.board.model.objects.Money;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
@@ -18,10 +19,13 @@ public class BillingLog extends Base {
 
     private Long boardId;
 
+    private Money fee;
+
     @Builder
-    public BillingLog(Long id, Billing billing, Long boardId) {
+    public BillingLog(Long id, Billing billing, Long boardId, Money fee) {
         this.id = id;
         this.billing = billing;
         this.boardId = boardId;
+        this.fee = fee;
     }
 }

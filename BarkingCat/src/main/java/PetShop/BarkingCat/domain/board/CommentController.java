@@ -24,9 +24,7 @@ public class CommentController {
     @PostMapping("/board/{boardId}")
     @Authenticated
     public ResponseEntity<?> registerComment(@RequestBody CommentForm commentForm, @JwtClaim("info.id") Long memberId, @PathVariable Long boardId) {
-
         commentService.registerComment(commentForm, memberId, boardId);
-
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
@@ -45,9 +43,7 @@ public class CommentController {
 
     @PutMapping("/board/{commentId}")
     public ResponseEntity<?> updateComment(@RequestBody CommentForm commentForm, @JwtClaim("info.id") Long memberId, @PathVariable Long commentId){
-
         commentService.updateComment(commentForm, memberId, commentId);
-
         return ResponseEntity.ok(HttpStatus.CREATED);
 
     }
