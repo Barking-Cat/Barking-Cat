@@ -1,4 +1,4 @@
-package PetShop.BarkingCat.domain.board.dto;
+package PetShop.BarkingCat.domain.admin.dto;
 
 import PetShop.BarkingCat.common.base.model.constants.ReportCategory;
 import PetShop.BarkingCat.domain.board.model.objects.Title;

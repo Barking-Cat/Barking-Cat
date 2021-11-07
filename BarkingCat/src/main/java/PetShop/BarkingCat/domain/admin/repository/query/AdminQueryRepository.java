@@ -1,7 +1,7 @@
-package PetShop.BarkingCat.domain.board.repository.query;
+package PetShop.BarkingCat.domain.admin.repository.query;
 
-import PetShop.BarkingCat.domain.board.dto.ReportBoardDetailResponse;
-import PetShop.BarkingCat.domain.board.dto.ReportBoardResponse;
+import PetShop.BarkingCat.domain.admin.dto.ReportBoardDetailResponse;
+import PetShop.BarkingCat.domain.admin.dto.ReportBoardResponse;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -15,10 +15,11 @@ import java.util.List;
 import static PetShop.BarkingCat.domain.board.model.QBoardReport.boardReport;
 
 @Repository
-public class BoardReportQueryRepository {
+public class AdminQueryRepository {
+
     private final JPAQueryFactory query;
 
-    public BoardReportQueryRepository(JPAQueryFactory query) {
+    public AdminQueryRepository(JPAQueryFactory query) {
         this.query = query;
     }
 
