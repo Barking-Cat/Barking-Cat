@@ -8,7 +8,7 @@
     "start": "next start",
     "start:production": "docker run -p 3000:3000 barking-cat-web",
     "lint": "next lint",
-    "docker": "docker build . -t barking-cat-web",
+    "docker": "docker build . -t lifeboat/barking-cat-web:latest",
     "test": "jest",
     "test:watch": "jest --watch"
   },

@@ -9,9 +9,7 @@ describe('SignIn Page', () => {
 
   it('should render kakao button', () => {
     render(<SignIn />);
-    expect(
-      screen.getByRole('button', { name: /카카오로 계속하기/ })
-    ).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: /kakao/i })).toBeInTheDocument();
   });
 
   it('should render facebook button', () => {
