@@ -31,11 +31,10 @@ function PostCreateForm() {
 
   const onSubmit: SubmitHandler<PostCreate> = async (formData) => {
     try {
-      const { data } = await axios.post<PostCreate, any>('/api/board', {
+      await axios.post<PostCreate, any>('/api/board', {
         ...formData,
       });
 
-      console.log({ data });
       router.push('/');
     } catch (e) {
       setError(true);
