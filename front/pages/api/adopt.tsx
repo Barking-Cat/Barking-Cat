@@ -9,7 +9,7 @@ export const postAdopts = async ({ adoptForm }: any) => {
     },
     body: JSON.stringify({
       adoptReason: 'soso',
-      area: 'seoul',
+      area: 3,
       boardId: 0,
       earning: 'FIVE_HUNDRED',
       petCount: 1,
@@ -26,11 +26,19 @@ export const postAdopts = async ({ adoptForm }: any) => {
 };
 
 export const getAdoptById = async (boardId: Number) => {
-  const response = await axios.put(`/api/adopt/${boardId}`, {
+  const response = await axios.get(`/api/adopt/board/${boardId}`, {
     headers: {
       'Content-Type': 'application/json',
     },
   });
-  console.log(response);
+  return response;
+};
+
+export const getMyPage = async () => {
+  const response = await axios.get(`/api/adopt/mypage`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
   return response;
 };

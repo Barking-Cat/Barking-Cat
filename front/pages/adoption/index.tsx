@@ -1,19 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NextPage } from 'next';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import styles from './adoption.module.css';
 
+type EarningType =
+  | 'FIVE_HUNDRED'
+  | 'FOUR_HUNDRED'
+  | 'ONE_HUNDRED'
+  | 'THREE_HUNDRED'
+  | 'TWO_HUNDRED ';
+
+type RegionType = 'BUSAN' | 'DAEGU' | 'GWANGJU' | 'INCHEON' | 'SEOUL ';
+
+type ResidenceType = 'LEASE' | 'MONTHLY_RENT' | 'OWNER ';
+
 interface AdoptionInput {
-  area: string; // 거주지
-  phone: string;
-  earning: string; // 월 수입
-  residenceType: string;
-  inmateNumber: string;
-  pet: string;
-  experience: string;
-  adoptReason: string;
+  adoptReason: number;
+  area: number;
+  earning: EarningType;
+  petCount: number;
+  region: RegionType;
+  residenceType: ResidenceType;
+  roommateNumber: number;
 }
 
 interface AdoptionRequest extends AdoptionInput {
@@ -28,13 +38,14 @@ const Adoption: NextPage = () => {
   } = useForm<AdoptionInput>({ mode: 'all' });
   const router = useRouter();
   const [error, setError] = useState<boolean>(false);
+  const PUBLIC_API = process.env.NEXT_PUBLIC_API_URL;
 
   const onSubmit: SubmitHandler<AdoptionInput> = async (formData: any) => {
     try {
       console.log('try');
       const { data } = await axios.post<AdoptionInput, AdoptionRequest>(
-        '/api/adop',
-        { ...formData }
+        `${PUBLIC_API}/api/adopt`,
+        { ...formData, boardId: 0 }
       );
       if (data === 'SUCCESS') {
         console.log('success');
@@ -46,7 +57,6 @@ const Adoption: NextPage = () => {
       console.log(e);
     }
   };
-
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit(onSubmit)}>
