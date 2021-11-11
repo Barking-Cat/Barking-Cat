@@ -36,7 +36,7 @@ public class BoardController {
 
     @GetMapping("/myBoard")
     @Authenticated
-    public ResponseEntity<?> findMyPageBoardList(@JwtClaim("info.id") Long memberId, Pageable pageable){
+    public ResponseEntity<?> findMyPageBoardList(@JwtClaim("info.id") Long memberId, Pageable pageable) {
         return ResponseEntity.ok(boardQueryService.findMyPageBoardList(memberId, pageable));
     }
 
@@ -52,6 +52,14 @@ public class BoardController {
     @Authenticated
     public ResponseEntity<?> reportBoard(@RequestBody ReportBoardForm reportBoardForm, @JwtClaim("info.id") Long memberId) {
         boardService.reportBoard(reportBoardForm, memberId);
+        return ResponseEntity.ok()
+                .build();
+    }
+
+    @DeleteMapping("/{boardId}")
+    @Authenticated
+    public ResponseEntity<?> deleteBoard(@PathVariable Long boardId, @JwtClaim("info.id") Long memberId) {
+        boardService.deleteBoard(boardId, memberId);
         return ResponseEntity.ok()
                 .build();
     }
