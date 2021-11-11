@@ -72,4 +72,14 @@ public class BoardService {
 
         boardReportRepository.save(boardReport);
     }
+
+    @Transactional
+    public void deleteBoard(Long boardId, Long memberId) {
+        memberRepository.findById(memberId)
+                .orElseThrow(() -> new BarkingCatException(ErrorCode.MEMBER_NOT_FOUND));
+
+        boardRepository.findById(boardId)
+                .orElseThrow(() -> new BarkingCatException(ErrorCode.BOARD_NOT_FOUND))
+                .delete();
+    }
 }
