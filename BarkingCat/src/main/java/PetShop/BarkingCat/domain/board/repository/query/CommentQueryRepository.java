@@ -22,6 +22,7 @@ public class CommentQueryRepository {
 
     public List<CommentResponse> findAllByBoardId(Long boardId) {
         return query.select(Projections.constructor(CommentResponse.class,
+                        comment.id,
                         comment.content,
                         member.name,
                         comment.createdDateTime))
