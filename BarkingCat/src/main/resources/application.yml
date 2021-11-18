@@ -21,3 +21,8 @@ server:
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
+
+aws:
+  sns:
+    accessKey: ENC(PFNCpx/A2dtS4GLjJLuGKi9fZEp9yZKAxxEYXPvN/oY=)
+    secretKey: ENC(rx+vv2egm62JzzYkWs1WS/xChkiVoeajExosDfbkOLxilh7kaA81J5lE6d2Nl1pbwjaEZZXURhU=)
