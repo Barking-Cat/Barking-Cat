@@ -106,8 +106,9 @@ public class MemberTempService {
 
     @Transactional
     public void certifyAuthNumber(Certify certify) {
-        phoneAuthRepository.findByPhoneNumberAndAuthCodeAndCertifiedFalse(certify.getPhoneNumber(), certify.getAuthCode())
-                .orElseThrow(() -> new BarkingCatException(ErrorCode.CERTIFICATION_NOT_FOUND))
-                .certified();
+        PhoneAuth phoneAuth = memberTempQueryRepository.findPhoneAuthByPhone(certify.getPhoneNumber())
+                .orElseThrow(() -> new BarkingCatException(ErrorCode.CERTIFICATION_NOT_FOUND));
+
+        phoneAuth.certify(certify.getAuthCode());
     }
 }

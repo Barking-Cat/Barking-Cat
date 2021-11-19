@@ -1,6 +1,8 @@
 package PetShop.BarkingCat.domain.member.member_temp.model;
 
 import PetShop.BarkingCat.common.base.model.Base;
+import PetShop.BarkingCat.common.exception.BarkingCatException;
+import PetShop.BarkingCat.common.exception.ErrorCode;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
@@ -28,7 +30,11 @@ public class PhoneAuth extends Base {
         this.certified = certified;
     }
 
-    public void certified() {
-        this.certified = true;
+    public void certify(String authCode) {
+        if (!this.authCode.equals(authCode)) {
+            throw new BarkingCatException(ErrorCode.CERTIFICATION_NOT_FOUND);
+        }
+
+        certified = true;
     }
 }
