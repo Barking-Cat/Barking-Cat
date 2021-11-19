@@ -4,6 +4,7 @@ import PetShop.BarkingCat.common.exception.BarkingCatException;
 import PetShop.BarkingCat.common.exception.ErrorCode;
 import PetShop.BarkingCat.common.sns.Message;
 import PetShop.BarkingCat.common.sns.Sns;
+import PetShop.BarkingCat.common.utils.AuthUtil;
 import PetShop.BarkingCat.domain.member.member_temp.dto.Certify;
 import PetShop.BarkingCat.domain.member.member_temp.dto.MemberForm;
 import PetShop.BarkingCat.domain.member.member_temp.dto.Phone;
@@ -85,7 +86,7 @@ public class MemberTempService {
 
     @Transactional
     public void sendAuthNumber(Phone phone) {
-        String authCode = createAuthCode();
+        String authCode = AuthUtil.createAuthCode();
 
         PhoneAuth phoneAuth = PhoneAuth.builder()
                 .phoneNumber(phone.getPhoneNumber())
@@ -95,13 +96,6 @@ public class MemberTempService {
         phoneAuthRepository.save(phoneAuth);
 
         sns.send(new Message(phone.getPhoneNumber(), authCode));
-    }
-
-    private String createAuthCode() {
-        return Stream.generate(() -> new Random().nextInt(10))
-                .limit(4)
-                .map(Objects::toString)
-                .collect(Collectors.joining());
     }
 
     @Transactional
