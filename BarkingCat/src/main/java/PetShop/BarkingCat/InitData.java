@@ -49,7 +49,7 @@ public class InitData {
                     .email(new Email("test@naver.com"))
                     .password(passwordEncoder.encode("1q2w3e4r"))
                     .name("Tester")
-                    .phone("010-0000-1111")
+                    .phone("01071331775")
                     .memberType(Member.MemberType.COMPANY)
                     .businessNumber("q3t1q3tefga")
                     .build();

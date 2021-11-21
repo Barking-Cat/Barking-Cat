@@ -87,6 +87,20 @@ public class Member extends Base {
         return memberType.fee();
     }
 
+    public void updatePassword(String password, PasswordEncoder passwordEncoder) {
+        this.password = passwordEncoder.encode(password);
+    }
+
+    public void checkPhoneNumber(String phoneNumber) {
+        if (phoneNumberNotEqual(phoneNumber)) {
+            throw new BarkingCatException(ErrorCode.PHONE_NUMBER_NOT_EQUAL);
+        }
+    }
+
+    private boolean phoneNumberNotEqual(String phoneNumber) {
+        return !phone.equals(phoneNumber);
+    }
+
     public enum MemberType {
         NORMAL(3, Money.ZERO), COMPANY(100, Money.wons(20_000)), SHELTER(100, Money.wons(10_000));
         private final int boardLimit;

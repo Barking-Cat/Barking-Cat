@@ -1,6 +1,7 @@
 package PetShop.BarkingCat.domain.member.member_temp.repository.query;
 
 import PetShop.BarkingCat.domain.member.member_temp.model.MemberTemp;
+import PetShop.BarkingCat.domain.member.member_temp.model.PhoneAuth;
 import PetShop.BarkingCat.domain.member.model.objects.Email;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 import static PetShop.BarkingCat.domain.member.member_temp.model.QMemberTemp.memberTemp;
+import static PetShop.BarkingCat.domain.member.member_temp.model.QPhoneAuth.phoneAuth;
 
 @Repository
 public class MemberTempQueryRepository {
@@ -37,6 +39,16 @@ public class MemberTempQueryRepository {
                         notDeleted()
                 )
                 .fetchFirst() != null;
+    }
+
+    public Optional<PhoneAuth> findPhoneAuthByPhone(String phoneNumber) {
+        return Optional.ofNullable(
+                query.selectFrom(phoneAuth)
+                        .where(phoneAuth.phoneNumber.eq(phoneNumber))
+                        .where(phoneAuth.certified.isFalse())
+                        .orderBy(phoneAuth.id.desc())
+                        .fetchFirst()
+        );
     }
 
     private BooleanExpression emailEq(String email) {
