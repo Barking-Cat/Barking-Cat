@@ -24,5 +24,5 @@ jasypt:
 
 aws:
   sns:
-    accessKey: ENC(PFNCpx/A2dtS4GLjJLuGKi9fZEp9yZKAxxEYXPvN/oY=)
-    secretKey: ENC(rx+vv2egm62JzzYkWs1WS/xChkiVoeajExosDfbkOLxilh7kaA81J5lE6d2Nl1pbwjaEZZXURhU=)
+    accessKey: ENC(KfNNrA8GqM4B9XoqWbV0ZICp3xD5bpD/gqAcK7LvE9A=)
+    secretKey: ENC(/kTt6VuTkcxL0HYPAJr5eP+QDmJk3pRy3CoO7E+RQvFXB3UgFYm8qdlVjJ0VriP6J20IL2be/Ls=)
