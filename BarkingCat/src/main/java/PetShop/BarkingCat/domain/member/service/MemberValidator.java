@@ -24,20 +24,16 @@ public class MemberValidator {
     }
 
     private void validateDuplicateEmail(String email) {
-        Long count = memberRepository.countByEmail(new Email(email));
+        boolean exists = memberRepository.existsByEmail(new Email(email));
 
-        if (memberIsPresent(count)) {
+        if (exists) {
             throw new BarkingCatException(ErrorCode.DUPLICATE_EMAIL);
         }
 
-        boolean exists = memberTempQueryRepository.existsByEmailNotDeleted(email);
+        boolean existsTemp = memberTempQueryRepository.existsByEmailNotDeleted(email);
 
-        if (exists) {
+        if (existsTemp) {
             throw new BarkingCatException(ErrorCode.TEMP_EMAIL_EXIST);
         }
-    }
-
-    private boolean memberIsPresent(Long count) {
-        return count == 1;
     }
 }
